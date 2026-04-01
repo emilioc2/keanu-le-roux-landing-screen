@@ -1,0 +1,186 @@
+/* ===================================================================
+ * Blog.module.css — Styles for the Blog / Insights landing page section.
+ *
+ * Implements the featured article (two-column) and blog card grid layout.
+ * Visual source of truth: prototype/styles.css (.blog-* rules)
+ *
+ * Requirements: 5.1–5.9, 11.2, 11.3, 12.1, 12.2
+ * =================================================================== */
+
+/* ----- Section wrapper -----
+ * Off-white background (#f9f9f9) with 100px vertical padding.
+ * Matches the design document's section spacing table.
+ */
+.blog {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+
+/* ----- Featured article -----
+ * Two-column grid: image left, content right (Req 5 AC 2).
+ * Aligns items vertically centred with 48px gap (matches prototype).
+ */
+.blogFeatured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+  align-items: center;
+}
+
+/* Featured image container — fixed 340px height with grey fallback
+ * background for posts without a mainImage (Req 5 AC 3). */
+.blogFeaturedImage {
+  width: 100%;
+  height: 340px;
+  background: var(--gray-100);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-400);
+  font-size: 0.9rem;
+}
+
+/* Featured image fills container using cover fit to prevent distortion */
+.blogFeaturedImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Featured content column — vertically centred flex layout */
+.blogFeaturedContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Date label — small uppercase grey text shared by featured and cards.
+ * Matches prototype: 0.75rem, uppercase, letter-spacing 0.05em. */
+.blogDate {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Featured article title — Playfair Display heading (Req 5 AC 3) */
+.blogFeaturedContent h3 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--navy);
+  margin: 12px 0 16px;
+  line-height: 1.3;
+}
+
+/* Featured article excerpt paragraph */
+.blogFeaturedContent p {
+  font-size: 0.93rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* ----- Read more / Read full article links -----
+ * Navy text with accent hover colour transition.
+ * Used for both the featured article "Read Full Article →" and
+ * card-level "Read More →" links. Matches prototype .blog-link styles.
+ */
+.blogLink {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: 0.03em;
+  transition: color var(--transition);
+}
+
+.blogLink:hover {
+  color: var(--accent);
+}
+
+/* ----- Blog card grid -----
+ * Two-column grid for remaining posts below the featured article (Req 5 AC 4).
+ * Fixed 2-column layout with 32px gap matches the prototype exactly.
+ */
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+/* ----- Individual blog card -----
+ * White background card with hover lift effect (Req 5 AC 6, Req 12 AC 2).
+ * translateY(-3px) + box-shadow on hover creates subtle depth/elevation.
+ * border-radius: 8px matches the prototype's rounded card corners.
+ */
+.blogCard {
+  background: var(--white);
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* Hover state: lift card 3px and add shadow for interactive feedback */
+.blogCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Card image area — 200px tall with grey fallback for missing images (Req 5 AC 5).
+ * Flex centering is used for the placeholder text when no image exists. */
+.blogCardImage {
+  width: 100%;
+  height: 200px;
+  background: var(--gray-100);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-400);
+  font-size: 0.85rem;
+}
+
+/* Card image fills container with cover fit to prevent distortion */
+.blogCardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card content area — 24px padding matches prototype .blog-content */
+.blogCardContent {
+  padding: 24px;
+}
+
+/* Card title — Playfair Display, smaller than featured heading (1.15rem vs 1.8rem) */
+.blogCardContent h4 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 10px 0;
+  color: var(--navy);
+  line-height: 1.4;
+}
+
+/* Card excerpt — slightly smaller font than featured excerpt for visual hierarchy */
+.blogCardContent p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+/* ----- Responsive: tablet/mobile (≤900px) -----
+ * Stacks featured article and card grid to single column (Req 11 AC 3).
+ * Matches prototype @media (max-width: 900px) breakpoint.
+ */
+@media (max-width: 900px) {
+  .blogFeatured {
+    grid-template-columns: 1fr;
+  }
+
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+}

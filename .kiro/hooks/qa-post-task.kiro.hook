@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "QA on Task Completion",
+  "description": "Invokes the QA engineer agent to execute relevant test cases whenever an implementation task is marked as completed, ensuring new code is validated against requirements.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A spec task has just been completed. Invoke the @qa-engineer agent to execute the relevant test cases from quality-assurance/test-cases.md that relate to the completed task. Report any bugs or gaps found to quality-assurance/bugs.csv."
+  }
+}

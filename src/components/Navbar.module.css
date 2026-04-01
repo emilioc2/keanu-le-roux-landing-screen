@@ -1,0 +1,184 @@
+/* ===================================================================
+ * Navbar.module.css — Styles for the fixed top navigation bar.
+ *
+ * Implements two visual states:
+ *   1. Transparent (over hero): clear background, white text
+ *   2. Scrolled (past 50px): white background, navy text, box shadow
+ *
+ * Mobile breakpoint at 768px swaps inline links for a hamburger menu
+ * with a full-width dropdown panel.
+ *
+ * Visual source of truth: prototype/styles.css (.navbar section)
+ * Requirements: 1.1–1.8, 11.4, 12.4, 13.3
+ * =================================================================== */
+
+/* ----- Navbar Container (fixed bar) -----
+ * Always fixed to viewport top. Transparent by default;
+ * the .scrolled class adds white background + shadow.
+ * Transition matches design spec: 0.3s ease on all properties.
+ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+/* ----- Scrolled State -----
+ * Applied when scrollY > 50px OR when alwaysScrolled prop is true.
+ * White background with subtle shadow per prototype.
+ */
+.scrolled {
+  background: var(--white);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* ----- Inner Container -----
+ * Constrains nav content to --max-width, centres it,
+ * and spaces logo/links with flexbox. Height matches prototype (72px).
+ */
+.navContainer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+/* ----- Logo -----
+ * "KEANU LE ROUX" text on the left.
+ * White in transparent state, navy in scrolled state.
+ * Uses body font (Inter) per prototype, not heading font.
+ */
+.logo {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--white);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+/* Logo turns navy when navbar is scrolled */
+.scrolled .logo {
+  color: var(--navy);
+}
+
+
+/* ----- Nav Links (desktop) -----
+ * Horizontal list of anchor links on the right side.
+ * Full white (#ffffff) in transparent state (BUG-018 fix — was rgba 0.85).
+ * Navy in scrolled state, accent blue on hover.
+ */
+.navLinks {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* BUG-055 fix: removed text-transform: uppercase — the prototype displays
+ * nav links in title-case (e.g. "Home", "About"), not all-uppercase. */
+.navLink {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  /* BUG-018 fix: full white, not semi-transparent rgba(255,255,255,0.85) */
+  color: var(--white);
+  transition: color var(--transition);
+  text-decoration: none;
+}
+
+/* Hover state for transparent navbar — stays white */
+.navLink:hover {
+  color: var(--white);
+}
+
+/* Scrolled state: links turn navy */
+.scrolled .navLink {
+  color: var(--navy);
+}
+
+/* Scrolled hover: accent blue for visual feedback */
+.scrolled .navLink:hover {
+  color: var(--accent);
+}
+
+/* ----- Hamburger Toggle Button -----
+ * Hidden on desktop (>768px). Shown on mobile as a 3-line icon.
+ * Lines are CSS spans, not SVG — per task requirements.
+ */
+.navToggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* Each hamburger line: 25px wide, 2px tall */
+.navToggle span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: var(--white);
+  transition: background var(--transition);
+}
+
+/* Hamburger lines turn navy in scrolled state */
+.scrolled .navToggle span {
+  background: var(--navy);
+}
+
+/* ----- Mobile Breakpoint (≤768px) -----
+ * Hides inline links, shows hamburger toggle.
+ * Dropdown panel slides in below the navbar bar.
+ */
+@media (max-width: 768px) {
+  /* Hide desktop link row */
+  .navLinks {
+    display: none;
+  }
+
+  /* Show hamburger button */
+  .navToggle {
+    display: flex;
+  }
+
+  /* ----- Mobile Dropdown Panel -----
+   * Full-width white panel positioned below the 72px navbar.
+   * Links stack vertically with padding. Only visible when .open is applied.
+   */
+  .navLinks.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 20px 24px;
+    gap: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Mobile dropdown links are always navy (white background) */
+  .navLinks.open .navLink {
+    color: var(--navy);
+  }
+
+  /* Hover accent on mobile dropdown links */
+  .navLinks.open .navLink:hover {
+    color: var(--accent);
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "QA on Spec Update",
+  "description": "Invokes the QA engineer agent to execute relevant test cases whenever requirements or design documents are updated, catching regressions or gaps introduced by spec changes.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/requirements.md",
+      "**/design.md",
+      "source/*.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A requirements or design document has been updated. Invoke the @qa-engineer agent to execute the relevant test cases from quality-assurance/test-cases.md that relate to the changed document. Check for any regressions, gaps, or inconsistencies introduced by the update and report findings to quality-assurance/bugs.csv."
+  }
+}

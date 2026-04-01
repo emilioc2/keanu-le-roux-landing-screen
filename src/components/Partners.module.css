@@ -1,0 +1,66 @@
+/**
+ * Partners.module.css — Styles for the Trusted Partners logo section.
+ *
+ * White background section with a grey top border, centred heading,
+ * and a flex row of partner logo placeholders. All colour and font
+ * values reference design tokens from globals.css (BUG-047).
+ *
+ * Visual source of truth: prototype/styles.css (.partners block)
+ * Requirements: 8.1–8.6
+ */
+
+/* ----- Section wrapper -----
+ * White background with 80px vertical padding and a 1px grey top border.
+ * Matches prototype .partners exactly (Req 8.1).
+ */
+.partners {
+  padding: 80px 0;
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+}
+
+/* ----- Logo grid -----
+ * Horizontally centred flex row with wrap for the 5 partner logos.
+ * 48px gap on desktop, reduced to 24px on mobile (Req 8.4).
+ * Matches prototype .partners-grid.
+ */
+.partnersGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+/* ----- Individual partner logo -----
+ * 160×70px container with object-fit: contain so logos scale without
+ * distortion. Reduces opacity on hover for subtle interactivity (Req 8.5).
+ * Matches prototype .partner-logo sizing.
+ *
+ * BUG-128 fix: Changed from placeholder div styling to img-compatible styling.
+ * Removed background/color/font-size (placeholder-only properties) and added
+ * object-fit: contain for proper image scaling within the fixed dimensions.
+ */
+.partnerLogo {
+  width: 160px;
+  height: 70px;
+  object-fit: contain;
+  transition: opacity var(--transition);
+  border-radius: 4px;
+}
+
+/* Hover state — slight opacity reduction (Req 8.5) */
+.partnerLogo:hover {
+  opacity: 0.6;
+}
+
+/* ----- Mobile responsive (≤768px) -----
+ * Reduce gap from 48px to 24px on small screens.
+ * Uses 768px breakpoint per design spec (BUG-046 fix —
+ * prototype incorrectly uses 900px).
+ */
+@media (max-width: 768px) {
+  .partnersGrid {
+    gap: 24px;
+  }
+}

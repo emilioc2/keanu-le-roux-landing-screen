@@ -1,0 +1,104 @@
+/**
+ * Accordion.module.css — Scoped styles for the reusable Accordion component.
+ *
+ * Faithfully reproduces the prototype's .accordion-* classes using CSS Modules.
+ * All colour, font, and transition values reference globals.css design tokens.
+ *
+ * Requirements: 3.6, 3.7, 4.5, 12.3
+ * Visual source: prototype/styles.css (.accordion-* rules)
+ */
+
+/* Top border separates the accordion from content above */
+.accordion {
+  border-top: 1px solid var(--gray-200);
+}
+
+/* Each item has a bottom border for visual separation */
+.item {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+/* Header button — full-width, flex layout with title left and icon right.
+ * Uses native <button> for keyboard accessibility (Req 13.5). */
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--navy);
+  text-align: left;
+  transition: color var(--transition);
+}
+
+/* Accent colour on hover matches prototype behaviour */
+.header:hover {
+  color: var(--accent);
+}
+
+/* "+" text icon — rotates 45° when active to visually form "×".
+ * flex-shrink: 0 prevents the icon from collapsing on long titles. */
+.icon {
+  font-size: 1.4rem;
+  font-weight: 300;
+  transition: transform var(--transition);
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+/* Rotated state applied when the parent item is expanded (Req 3.7) */
+.iconActive {
+  transform: rotate(45deg);
+}
+
+/* Content panel — hidden by default via max-height: 0 with overflow hidden.
+ * The 0.4s ease transition animates the expand/collapse (Req 12.3).
+ * Actual max-height value is set dynamically via inline style in the component. */
+.body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+/* Inner padding for the revealed content area.
+ * Matches prototype's .accordion-body-inner spacing exactly. */
+.bodyInner {
+  padding: 0 0 28px 0;
+  font-size: 0.93rem;
+  line-height: 1.85;
+  color: var(--text-body);
+}
+
+/*
+ * BUG-049 fix: Add nested p/ul/li styles that were missing from .bodyInner.
+ *
+ * The prototype defines these rules inside .accordion-body-inner to provide
+ * proper spacing for multi-paragraph content (e.g. the "My approach" panel)
+ * and any list content within accordion panels. Without these rules,
+ * paragraphs render flush against each other (also fixes BUG-063).
+ *
+ * Values taken directly from prototype/styles.css:
+ *   .accordion-body-inner p { margin-bottom: 12px }
+ *   .accordion-body-inner ul { list-style: disc; padding-left: 20px; margin: 12px 0 }
+ *   .accordion-body-inner ul li { margin-bottom: 6px; font-size: 0.93rem }
+ */
+.bodyInner p {
+  margin-bottom: 12px;
+}
+
+.bodyInner ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 12px 0;
+}
+
+.bodyInner ul li {
+  margin-bottom: 6px;
+  font-size: 0.93rem;
+}

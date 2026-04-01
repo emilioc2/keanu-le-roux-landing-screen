@@ -1,0 +1,79 @@
+/**
+ * About.module.css — Scoped styles for the About section component.
+ *
+ * Reproduces the prototype's .about, .about-portrait-row, .about-portrait,
+ * .about-intro-block, and .about-cta classes using CSS Modules.
+ * All values reference globals.css design tokens.
+ *
+ * Requirements: 3.1–3.9
+ * Visual source: prototype/styles.css (.about-* rules)
+ */
+
+/* Section wrapper — white background with 100px vertical padding (Req 3.1) */
+.about {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+/* Two-column grid: 320px portrait left + flexible text column right.
+ * 60px gap between columns, vertically centred (Req 3.1). */
+.portraitRow {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+/* Portrait container — constrained width, subtle border-radius */
+.portrait {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* Portrait image fills its container; object-fit cover for consistent aspect ratio */
+.portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Heading — Playfair Display at 2.4rem, navy colour (Req 3.2) */
+.introBlock h2 {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+/* Bio paragraphs — body font, comfortable line-height for readability (Req 3.3) */
+.introBlock p {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--text-body);
+  margin-bottom: 16px;
+}
+
+/* Centred CTA button below the accordion (Req 3.8) */
+.cta {
+  text-align: center;
+  margin-top: 60px;
+}
+
+/* ===== Responsive: tablet/mobile (≤900px) =====
+ * Portrait stacks above text in a single column, centred (Req 3.9) */
+@media (max-width: 900px) {
+  .portraitRow {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .portrait {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}

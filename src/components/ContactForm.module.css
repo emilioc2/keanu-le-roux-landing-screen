@@ -1,0 +1,217 @@
+/* ===================================================================
+ * ContactForm.module.css — Styles for the Contact Form section.
+ *
+ * Matches the prototype's .contact section layout and styling exactly.
+ * All colour/font values reference design tokens from globals.css.
+ *
+ * Section: off-white background, 100px vertical padding.
+ * Form: max-width 700px, centred, bottom-border-only inputs.
+ * Success state: centred confirmation with green checkmark.
+ *
+ * Requirements: 9.1–9.8, 13.7
+ * Visual source: prototype/styles.css (.contact, .contact-form, etc.)
+ * =================================================================== */
+
+/* ----- Section wrapper -----
+ * Off-white background with 100px vertical padding (design doc spec).
+ */
+.contact {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+
+/* ----- Section header -----
+ * Centred heading + subtitle above the form (Req 9.1).
+ */
+.contactHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* Heading: italic serif, 3rem, navy (Req 9.1) */
+.contactHeader h2 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+/* Subtitle paragraph below heading */
+.contactHeader p {
+  font-size: 0.95rem;
+  color: var(--text-body);
+}
+
+/* ----- Form container -----
+ * Constrains form width to 700px and centres it (prototype spec).
+ */
+.contactForm {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ----- Name row -----
+ * Side-by-side firstName + lastName on desktop with 40px gap (Req 9.3).
+ * Stacks to single column on mobile (<=768px).
+ */
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 36px;
+}
+
+/* ----- Individual form group -----
+ * Wraps label + input/textarea with consistent bottom margin.
+ */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 36px;
+}
+
+/* Remove bottom margin from groups inside .formRow — row handles spacing */
+.formRow .formGroup {
+  margin-bottom: 0;
+}
+
+/* ----- Labels -----
+ * Navy text, small size, above each input (Req 13.7).
+ */
+.formGroup label {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--navy);
+}
+
+/* Required/optional indicator text beside label */
+.required,
+.optional {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  font-weight: 300;
+  margin-left: 4px;
+}
+
+
+/* ----- Input and textarea base styles -----
+ * Bottom-border-only styling with no box borders (Req 9.2).
+ * Transparent background keeps the off-white section colour visible.
+ * Navy border appears on focus for clear visual feedback.
+ */
+.formGroup input,
+.formGroup textarea {
+  padding: 12px 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border: none;
+  border-bottom: 1px solid var(--gray-200);
+  background: transparent;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+/* Focus state — navy bottom border signals active input */
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: var(--navy);
+}
+
+/* Textarea — resizable vertically only, min 100px height (Req 9.2) */
+.formGroup textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ----- Honeypot field -----
+ * Visually hidden spam trap positioned off-screen (BUG-025/039).
+ * tabindex="-1" and autocomplete="off" are set in JSX.
+ * Uses position:absolute instead of display:none so bots still see it.
+ */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  height: 0;
+  overflow: hidden;
+}
+
+/* ----- Privacy note -----
+ * Centred small text below the submit button (Req 9.5).
+ */
+.formPrivacy {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+/* ----- Error message -----
+ * Inline error displayed below submit button on server failure.
+ * Red text clearly indicates an issue; form stays visible for retry.
+ */
+.errorMessage {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #dc2626;
+  margin-top: 12px;
+}
+
+/* ----- Success confirmation -----
+ * Replaces the form after successful submission (Req 9.6).
+ * Centred layout with green checkmark, heading, and message.
+ */
+.contactSuccess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px 0;
+  text-align: center;
+}
+
+/* Green checkmark icon — uses --success (#4ade80) token (Req 9.6) */
+.successIcon {
+  font-size: 3rem;
+  color: var(--success);
+  margin-bottom: 16px;
+}
+
+/* Success heading — serif font, 1.8rem, navy */
+.contactSuccess h3 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--navy);
+}
+
+/* Success body text — standard body colour */
+.contactSuccess p {
+  font-size: 0.95rem;
+  color: var(--text-body);
+}
+
+/* ----- Responsive: mobile (<=768px) -----
+ * Stack name fields vertically and scale down heading.
+ */
+@media (max-width: 768px) {
+  /* Stack firstName + lastName into single column */
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Restore bottom margin on stacked form groups within the row */
+  .formRow .formGroup {
+    margin-bottom: 36px;
+  }
+
+  /* Scale down section heading for smaller screens */
+  .contactHeader h2 {
+    font-size: 2.2rem;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "QA Coverage Check",
+  "description": "After each implementation task completes, reminds the QA engineer to verify test coverage meets the 80% minimum threshold. Checks that new code has corresponding tests and that overall coverage hasn't dropped below target.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A task has been completed. As the @qa-engineer, verify that test coverage remains at or above 80%. Run the test suite with coverage reporting if available (npx vitest --run --coverage). If coverage has dropped below 80%, flag which files or components need additional tests. Record any coverage gaps in quality-assurance/bugs.csv."
+  }
+}

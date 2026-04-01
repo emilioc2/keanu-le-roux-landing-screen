@@ -1,0 +1,100 @@
+/* ===================================================================
+ * Footer.module.css — Styles for the site footer component.
+ *
+ * Matches the prototype's footer section exactly (prototype/styles.css).
+ * All values reference design tokens from globals.css (BUG-047).
+ *
+ * Requirements: 10.1–10.5, 13.3
+ * =================================================================== */
+
+/* Footer wrapper — white background with grey top border (Req 10.1) */
+.footer {
+  padding: 60px 0 0;
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+  text-align: center;
+}
+
+/* Constrained content area matching site-wide max-width */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* "KEANU LE ROUX" logo text — uppercase, letter-spaced, navy (Req 10.2) */
+.footerLogo {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--navy);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* "Financial Advisor" tagline — italic serif, grey (Req 10.2) */
+.footerTagline {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  margin-bottom: 28px;
+}
+
+/* Social icon row — centred flex layout with gap between icons (Req 10.2, 10.3) */
+.footerSocial {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+/* Individual social icon link — navy by default, transitions to accent blue on hover */
+.footerSocial a {
+  color: var(--navy);
+  transition: color var(--transition);
+}
+
+.footerSocial a:hover {
+  color: var(--accent);
+}
+
+/* SVG icons sized to 20×20px matching the prototype footer */
+.footerSocial svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Email mailto: link wrapper — provides spacing between social icons and details */
+.footerEmail {
+  margin-bottom: 28px;
+}
+
+/* Email link — italic serif with underline offset for visual separation (Req 10.2, 10.5) */
+.footerEmailLink {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--navy);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color var(--transition);
+}
+
+.footerEmailLink:hover {
+  color: var(--accent);
+}
+
+/* Details block — small grey text for phone, authorisation statement, and copyright */
+.footerDetails {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  line-height: 1.8;
+  padding-bottom: 40px;
+}
+
+/* Minimal spacing between detail lines */
+.footerDetails p {
+  margin-bottom: 4px;
+}

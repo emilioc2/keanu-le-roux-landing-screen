@@ -1,0 +1,234 @@
+/**
+ * SocialFeed.module.css — Styles for the Social Media Content Feed section.
+ *
+ * Displays a three-column grid of clickable platform cards (YouTube, LinkedIn,
+ * Instagram) with platform-specific preview areas, badge rows, and hover effects.
+ *
+ * Each card is a full <a> element linking to the external platform URL.
+ * Platform-specific preview areas use distinct visual treatments:
+ *   - YouTube: grey background with centred play button overlay
+ *   - LinkedIn: italic serif quote on grey background
+ *   - Instagram: gradient using rgba() values (BUG-010 fix — no element opacity)
+ *
+ * Visual source: prototype/styles.css (.content-feed, .feed-*)
+ * Requirements: 6.1–6.9, 12.1, 12.2
+ */
+
+/* Section wrapper — white background with 100px vertical padding (design spec) */
+.socialFeed {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+/* Three-column card grid matching prototype layout; collapses on mobile */
+.feedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/**
+ * Individual feed card — renders as a full clickable <a> element.
+ * Uses flex column layout so the info area pushes to the bottom.
+ * Border matches prototype's 1px solid grey-200 card outline.
+ */
+.feedCard {
+  border: 1px solid var(--gray-200);
+  transition: box-shadow var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Hover: lift 3px + subtle shadow (Req 6.8, Req 12.2) */
+.feedCard:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+  transform: translateY(-3px);
+}
+
+/**
+ * Badge row — displays platform icon, name, and external link icon.
+ * Uppercase text with tight letter-spacing matches prototype styling.
+ */
+.feedBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+}
+
+/* Platform icon container — fixed 18px size matching prototype SVG dimensions */
+.feedBadgeIcon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Platform name takes remaining space, pushing external icon to the right */
+.feedBadgeName {
+  flex: 1;
+}
+
+/**
+ * External link icon — grey by default, transitions to navy on card hover.
+ * Uses margin-left: auto as a fallback to ensure right-alignment.
+ */
+.feedExternalIcon {
+  margin-left: auto;
+  color: var(--gray-400);
+  transition: color var(--transition);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* External icon becomes navy on card hover (Req 6.8) */
+.feedCard:hover .feedExternalIcon {
+  color: var(--navy);
+}
+
+/* ===== Platform-specific preview areas ===== */
+
+/**
+ * YouTube preview — grey background with centred play button overlay.
+ * min-height ensures consistent card height across the grid (Req 6.4).
+ */
+.youtubePreview {
+  width: 100%;
+  min-height: 200px;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/**
+ * Play button — dark semi-transparent circle centred in the YouTube preview.
+ * Uses rgba(0,0,0,0.5) matching the prototype's .feed-play-icon styling.
+ */
+.playButton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/**
+ * LinkedIn preview — italic serif quote on grey background.
+ * min-height 200px ensures visual consistency with other cards (Req 6.5).
+ */
+.linkedinPreview {
+  padding: 24px 20px;
+  background: var(--gray-100);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+}
+
+/* Blockquote styling — Playfair Display italic, navy text, no default borders */
+.linkedinPreview blockquote {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Instagram preview — gradient using rgba() colour values at 20% opacity.
+ * BUG-010 fix: uses background gradient with rgba() instead of element-level
+ * opacity, which would cause transparency bleed on child elements (Req 6.6).
+ */
+.instagramPreview {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 105, 180, 0.2),
+    rgba(138, 43, 226, 0.2)
+  );
+  min-height: 200px;
+}
+
+/* ===== Card info area — title, description, and CTA text ===== */
+
+.feedInfo {
+  padding: 18px;
+}
+
+/* Card title — Inter font, 0.95rem, navy colour */
+.feedInfo h4 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+/* Card description — smaller body text */
+.feedInfo p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-body);
+  margin-bottom: 0;
+}
+
+/**
+ * CTA text — platform-specific action text (e.g. "Watch on YouTube →").
+ * Navy by default, transitions to accent blue on card hover (Req 6.8).
+ */
+.feedCta {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+  transition: color var(--transition);
+}
+
+/* CTA text changes to accent colour on card hover */
+.feedCard:hover .feedCta {
+  color: var(--accent);
+}
+
+/* ===== Platform badge icon colours — match brand guidelines ===== */
+
+/* YouTube brand red */
+.youtubeIcon {
+  color: #ff0000;
+}
+
+/* LinkedIn brand blue */
+.linkedinIcon {
+  color: #0077b5;
+}
+
+/* Instagram brand pink */
+.instagramIcon {
+  color: #e4405f;
+}
+
+/* ===== Responsive: single column on mobile ≤900px (Req 6.2) ===== */
+
+@media (max-width: 900px) {
+  .feedGrid {
+    grid-template-columns: 1fr;
+  }
+}

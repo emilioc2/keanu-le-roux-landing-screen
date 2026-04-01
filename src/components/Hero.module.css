@@ -1,0 +1,103 @@
+/* ===================================================================
+ * Hero.module.css — Full-viewport hero section with video background,
+ * navy overlay, heading, subtitle, and dual CTA buttons.
+ *
+ * Visual source of truth: prototype/styles.css (.hero block)
+ * Requirements: 2.1–2.12, 13.8, 13.9, 14.3
+ * =================================================================== */
+
+/* Full-viewport hero wrapper with navy-dark fallback while video loads.
+ * The fallback background ensures the section is never blank (Req 2.4, 14.3). */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--navy-dark);
+  overflow: hidden;
+}
+
+/* Background video — absolutely positioned and centred via translate.
+ * min-width/min-height 100% ensures full coverage regardless of aspect ratio (Req 2.2). */
+.heroVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Semi-transparent navy overlay on top of video.
+ * Colour matches design spec: rgba(20, 28, 66, 0.55) (Req 2.3). */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 28, 66, 0.55);
+  z-index: 1;
+}
+
+/* Content container — sits above the overlay (z-index 2).
+ * max-width 750px matches the prototype's .hero-content. */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 750px;
+  padding: 0 24px;
+}
+
+/* Main heading — Playfair Display italic at 3.8rem on desktop.
+ * Scales down to 2rem on mobile via the media query below (Req 2.6). */
+.heroHeading {
+  font-family: var(--font-heading);
+  font-size: 3.8rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+/* Subtitle paragraph — light white text at 75% opacity.
+ * Constrained to 540px max-width for readability (Req 2.7). */
+.heroSubtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 40px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* CTA button row — flex layout with 16px gap, centred.
+ * Wraps naturally; stacks vertically on mobile via media query (Req 2.8). */
+.heroButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ===== Responsive: ≤768px =====
+ * Reduces heading to 2rem, subtitle to 0.9rem, and stacks CTAs vertically
+ * to match the prototype's mobile breakpoint (Req 2.6, 2.8, 11.4). */
+@media (max-width: 768px) {
+  .heroHeading {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

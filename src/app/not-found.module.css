@@ -1,0 +1,61 @@
+/* ===================================================================
+ * not-found.module.css — Styles for the custom 404 page.
+ *
+ * Minimal layout: centred content with adequate top padding to clear
+ * the fixed Navbar, white background, and enough vertical space to
+ * push the Footer toward the bottom on short-content pages.
+ *
+ * Uses design tokens from globals.css for colours, fonts, and spacing.
+ * Follows the same responsive breakpoints as the rest of the site.
+ *
+ * @requirements BUG-045
+ * =================================================================== */
+
+/* Section wrapper — white background with generous vertical padding.
+ * 120px top padding accounts for the fixed Navbar (~80px) plus breathing room.
+ * min-height ensures the Footer doesn't crowd the content on tall viewports. */
+.notFound {
+  background: var(--white);
+  padding: 120px 0 100px;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Inner content block — centred text alignment for heading, message, and CTA */
+.content {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Page heading — Playfair Display serif, navy colour, matching the site's
+ * heading hierarchy (similar size to section headings like About/Services) */
+.heading {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+
+/* Descriptive message — body font, muted colour, comfortable line-height */
+.message {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+/* ----- Responsive: Tablet / Mobile (≤768px) -----
+ * Scale down heading size to match the site's mobile typography. */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2rem;
+  }
+
+  /* Reduce padding on smaller screens where Navbar is shorter */
+  .notFound {
+    padding: 100px 0 80px;
+  }
+}

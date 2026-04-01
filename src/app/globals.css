@@ -1,0 +1,258 @@
+/* ===================================================================
+ * globals.css — Design tokens, CSS reset, and shared utility classes
+ * for the Keanu Le Roux Financial Advisor website.
+ *
+ * All component styles MUST reference these custom properties rather
+ * than hardcoding colour, font, or layout values (BUG-047).
+ *
+ * Visual source of truth: prototype/styles.css
+ * Requirements: 11.5, 11.6, 11.7, 14.2
+ * =================================================================== */
+
+/* ----- Design Tokens -----
+ * Centralised colour, typography, layout, and motion values.
+ * Every component CSS Module references these instead of raw values.
+ */
+:root {
+  /* Primary palette */
+  --navy: #1a2456;
+  --navy-dark: #111b42;
+  --navy-light: #2a3570;
+
+  /* Accent / interactive colours */
+  --steel-blue: #7a9bb5;          /* Hero primary CTA fill */
+  --steel-blue-hover: #6889a3;    /* Hero primary CTA hover */
+  --accent: #5a70a0;              /* General hover accent */
+
+  /* Neutrals */
+  --white: #ffffff;
+  --off-white: #f9f9f9;           /* Alternating section background */
+  --gray-100: #f5f5f5;
+  --gray-200: #e0e0e0;
+  --gray-400: #999;
+  --gray-600: #666;
+
+  /* Text colours */
+  --text-dark: #1a2456;           /* Headings, labels */
+  --text-body: #444;              /* Body copy */
+
+  /* Feedback colours */
+  --success: #4ade80;             /* Contact form success checkmark */
+
+  /* Typography — actual font files loaded via next/font/google in layout.tsx.
+   * These fallback stacks ensure text is visible immediately (font-display: swap). */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  /* Layout constraint */
+  --max-width: 1100px;
+
+  /* Shared transition timing */
+  --transition: 0.3s ease;
+}
+
+/* ----- CSS Reset / Normalize -----
+ * Strips browser defaults for consistent cross-browser rendering.
+ * Matches the prototype's reset rules exactly.
+ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Enable smooth anchor scrolling site-wide (Req 1 AC 5) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base body styles — font, colour, line-height from the design system */
+body {
+  font-family: var(--font-body);
+  color: var(--text-body);
+  line-height: 1.6;
+  background: var(--white);
+}
+
+/* Strip default link underlines; inherit colour from parent context */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove default list bullets — components add their own when needed */
+ul {
+  list-style: none;
+}
+
+/* Prevent images from overflowing containers; block display removes inline gap */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ----- Screen-reader only utility -----
+ * Visually hides content while keeping it accessible to assistive tech.
+ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ----- Container -----
+ * Constrains content to --max-width (1100px) with horizontal padding.
+ * Used by every section to maintain consistent gutters.
+ */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ----- Section Heading -----
+ * Shared centred heading pattern used by Services, Blog, Social Feed,
+ * Partners, and Contact sections.
+ */
+.section-heading {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-heading h2 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.section-heading p {
+  font-size: 0.95rem;
+  color: var(--text-body);
+}
+
+/* ----- Buttons -----
+ * Default .btn: pill-shaped, outlined navy border, transparent fill.
+ * Fills navy on hover with white text. (Req 11.7)
+ */
+.btn {
+  display: inline-block;
+  padding: 16px 48px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--navy);
+  border-radius: 40px;              /* Pill shape per design system */
+  cursor: pointer;
+  transition: var(--transition);
+  background: transparent;
+  color: var(--navy);
+}
+
+.btn:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* Hero primary CTA — solid steel-blue fill with white text */
+.btn-hero-primary {
+  border-color: var(--steel-blue);
+  color: var(--white);
+  background: var(--steel-blue);
+  padding: 16px 44px;
+}
+
+.btn-hero-primary:hover {
+  background: var(--steel-blue-hover);
+  border-color: var(--steel-blue-hover);
+}
+
+/* Hero secondary CTA — white outlined on transparent, over the dark hero */
+.btn-hero-secondary {
+  border-color: var(--white);
+  color: var(--white);
+  background: transparent;
+  padding: 16px 44px;
+}
+
+.btn-hero-secondary:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+/* Full-width submit button for the contact form */
+.btn-submit {
+  width: 100%;
+  padding: 18px;
+  border-radius: 40px;
+  border: 1.5px solid var(--navy);
+  background: transparent;
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-submit:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* Newsletter subscribe button — white outlined on navy background */
+.btn-newsletter {
+  display: inline-block;
+  padding: 16px 44px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 40px;
+  background: transparent;
+  color: var(--white);
+  transition: var(--transition);
+}
+
+.btn-newsletter:hover {
+  background: var(--white);
+  color: var(--navy);
+  border-color: var(--white);
+}
+
+/* ----- Focus Styles -----
+ * Visible focus outlines for keyboard navigation on all interactive elements.
+ * Fixes BUG-008 and BUG-019 — the prototype had no focus indicators.
+ * Uses :focus-visible so mouse clicks don't show the outline.
+ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ----- Responsive Typography -----
+ * Scale down large headings on smaller viewports (≤768px).
+ * Matches the prototype's responsive breakpoints.
+ */
+@media (max-width: 768px) {
+  .section-heading h2 {
+    font-size: 2.2rem;
+  }
+}

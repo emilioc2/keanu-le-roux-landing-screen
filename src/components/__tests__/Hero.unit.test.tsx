@@ -14,13 +14,52 @@
  * @requirements 2.1–2.12, 13.8
  */
 
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import Hero from '../Hero';
 
+/**
+ * Creates a matchMedia mock simulating a desktop viewport (>768px).
+ *
+ * WHY: The Hero component now uses a useIsMobile hook that calls
+ * window.matchMedia('(max-width: 768px)'). jsdom does not implement
+ * matchMedia natively, so we must mock it. Desktop mock (matches: false)
+ * ensures the video element renders, preserving the original test expectations.
+ *
+ * @returns A vi.fn() mock implementing the full MediaQueryList interface
+ */
+function createDesktopMatchMediaMock(): ReturnType<typeof vi.fn> {
+  return vi.fn().mockImplementation((query: string) => ({
+    // Desktop viewport — query does not match, so useIsMobile returns false
+    matches: false,
+    media: query,
+    onchange: null,
+    // Modern API methods for viewport change listeners
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+    // Deprecated legacy API methods — included for browser compatibility
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+  }));
+}
+
+/**
+ * Install desktop matchMedia mock before each test and clean up after.
+ * This ensures the Hero component renders the video path (desktop behavior)
+ * which is what these existing unit tests were written to verify.
+ */
+beforeEach(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: createDesktopMatchMediaMock(),
+  });
+});
+
 afterEach(() => {
-  /** Clean up rendered DOM between tests to prevent leaks */
+  /** Clean up rendered DOM and restore mocks between tests to prevent leaks */
   cleanup();
+  vi.restoreAllMocks();
 });
 
 /* =====================================================================

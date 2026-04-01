@@ -1,52 +1,47 @@
 /**
  * Partners.tsx — Trusted Partners logo section.
  *
- * Server Component — no client-side JS needed. All content is static.
+ * Server Component — renders the section wrapper, heading, and subtitle.
+ * Delegates the logo row to PartnersCarousel (Client Component) which
+ * handles carousel interactivity via progressive enhancement.
  *
- * Renders a white background section with:
- *   - Centred "Trusted Partners" heading + subtitle (shared .section-heading)
- *   - Horizontally centred flex row of 7 partner logo images (160×70px)
- *   - Logos reduce opacity on hover via CSS transition (Req 8.5)
+ * The section retains its visual identity: white background, 80px padding,
+ * grey top border, centred heading (Req 4.1, 4.2).
  *
  * Partner data is imported from @/data/siteConfig (static, not CMS-managed).
- *
- * Why native <img> instead of Next.js Image:
- *   - Consistent with other non-CMS image components in the project
- *   - loading="lazy" provides deferred loading since this section is below the fold
- *   - Original images are 300×167px but CSS constrains display to 160×70px
  *
  * Bug fixes applied:
  *   - BUG-128: Replaced placeholder <div>/<span> elements with real <img> tags
  *   - BUG-123/129/130: siteConfig now has correct file paths, brand names, and all 7 entries
  *
  * @module Partners
- * @requirements 8.1–8.6
+ * @requirements 4.1, 4.2, 5.1
  * @see design.md — Partners component specification
  */
 
 import { partnerLogos } from '@/data/siteConfig';
 import styles from './Partners.module.css';
+import PartnersCarousel from './PartnersCarousel';
 
 /**
  * Partners section component.
  *
- * Displays a row of trusted partner logo images to build credibility
- * and showcase professional associations. Content is entirely static —
- * partner logos are maintained in the codebase, not managed through
- * the CMS (Req 8.6).
+ * Displays the "Trusted Partners" heading and delegates logo rendering
+ * to PartnersCarousel, which dynamically switches between a centred
+ * static layout and an infinite-scrolling carousel based on whether
+ * logos fit within the container width.
  *
- * @returns The Partners section with heading and logo grid
+ * This remains a Server Component — no 'use client' directive needed.
+ * The carousel interactivity is encapsulated in the child Client Component.
+ *
+ * @returns The Partners section with heading and carousel
  */
 export default function Partners() {
   return (
     <section id="partners" className={styles.partners}>
       <div className="container">
-        {/*
-         * Centred heading block — uses shared .section-heading utility
-         * class from globals.css for consistent section title styling (Req 8.2).
-         *
-         * Subtitle matches prototype wording (index.html #partners).
-         */}
+        {/* Centred heading — uses shared .section-heading from globals.css
+         * for consistent section title styling (Req 4.2). */}
         <div className="section-heading">
           <h2>Trusted Partners</h2>
           <p>
@@ -55,32 +50,10 @@ export default function Partners() {
           </p>
         </div>
 
-        {/*
-         * Logo grid — flex row with 48px gap on desktop, 24px on mobile.
-         * Wraps naturally on smaller screens (Req 8.3, 8.4).
-         */}
-        <div className={styles.partnersGrid}>
-          {partnerLogos.map((partner) => (
-            /*
-             * Render each partner as an <img> element (BUG-128 fix).
-             *
-             * - width/height attributes set intrinsic size to 160×70px for layout stability
-             * - object-fit: contain (via CSS) ensures logos scale without distortion
-             * - loading="lazy" defers network requests since this section is below the fold
-             * - .partnerLogo class applies the hover opacity transition (Req 8.5)
-             * - alt text uses real brand name for screen reader accessibility (Req 13.2)
-             */
-            <img
-              key={partner.name}
-              src={partner.src}
-              alt={partner.alt}
-              className={styles.partnerLogo}
-              loading="lazy"
-              width={160}
-              height={70}
-            />
-          ))}
-        </div>
+        {/* Carousel component — handles static/scrolling mode dynamically.
+         * In static mode: centred flex row, no carousel features.
+         * In scrolling mode: auto-scroll, drag, keyboard, infinite loop. */}
+        <PartnersCarousel logos={partnerLogos} />
       </div>
     </section>
   );

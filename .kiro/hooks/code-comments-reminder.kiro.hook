@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "name": "Code Comments Reminder",
-  "description": "Reminds the developer and configuration engineer to include clear, meaningful code comments when writing or editing code files. Ensures all functions, components, complex logic, and configuration choices are documented inline.",
+  "description": "Does not execute on markdown files. Reminds the developer and configuration engineer to include clear, meaningful code comments when writing or editing code files. Ensures all functions, components, complex logic, and configuration choices are documented inline.",
   "version": "1",
   "when": {
     "type": "preToolUse",
@@ -11,6 +11,8 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Before writing this code, ensure you include clear and meaningful code comments. Every function, component, complex logic block, and configuration choice should have an inline comment explaining its purpose. Use JSDoc-style comments for TypeScript functions and components. Keep comments concise but informative — explain the \"why\" not just the \"what\"."
-  }
+    "prompt": "Before writing this code, ensure you include clear and meaningful code comments. Every function, component, complex logic block, and configuration choice should have an inline comment explaining its purpose. This hook should not be run on QA or Analyst tasks. Use JSDoc-style comments for TypeScript functions and components. Keep comments concise but informative — explain the \"why\" not just the \"what\"."
+  },
+  "workspaceFolderName": "Keanu Le Roux Website:Landing Page",
+  "shortName": "code-comments-reminder"
 }

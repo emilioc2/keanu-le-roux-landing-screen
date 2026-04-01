@@ -1,17 +1,30 @@
 /**
- * Partners.module.css — Styles for the Trusted Partners logo section.
+ * Partners.module.css — Styles for the Trusted Partners carousel section.
  *
- * White background section with a grey top border, centred heading,
- * and a flex row of partner logo placeholders. All colour and font
- * values reference design tokens from globals.css (BUG-047).
+ * Progressive enhancement pattern:
+ * - Base: .carouselContainer has overflow-x: auto (native horizontal scroll fallback
+ *   for when JavaScript is disabled or fails to load)
+ * - Enhanced: .jsEnhanced hides the native scrollbar and delegates scrolling to
+ *   CSS transform: translateX() driven by the useCarousel hook
+ *
+ * Class hierarchy:
+ *   .partners              — Section wrapper (white bg, 80px padding, grey border)
+ *   .carouselContainer     — Outer scroll container (overflow-x: auto base)
+ *     .jsEnhanced          — Modifier: JS carousel active (overflow: hidden, no scrollbar)
+ *     .staticMode          — Modifier: all logos fit, centred flex-wrap layout
+ *     .grabCursor           — Modifier: idle hover cursor for drag affordance
+ *     .grabbingCursor       — Modifier: active drag cursor
+ *   .logoTrack             — Inner flex row of logos (receives translateX transform)
+ *   .partnerLogo           — Individual logo image (160×70px, flex-shrink: 0)
  *
  * Visual source of truth: prototype/styles.css (.partners block)
- * Requirements: 8.1–8.6
+ * Requirements: 4.1, 4.3–4.8, 5.1, 5.2, 6.3, 7.2, 7.5
  */
 
-/* ----- Section wrapper -----
+/* ----- Section wrapper (unchanged from original) -----
  * White background with 80px vertical padding and a 1px grey top border.
- * Matches prototype .partners exactly (Req 8.1).
+ * Matches prototype .partners exactly (Req 4.1).
+ * All colour values reference design tokens from globals.css.
  */
 .partners {
   padding: 80px 0;
@@ -19,48 +32,130 @@
   border-top: 1px solid var(--gray-200);
 }
 
-/* ----- Logo grid -----
- * Horizontally centred flex row with wrap for the 5 partner logos.
- * 48px gap on desktop, reduced to 24px on mobile (Req 8.4).
- * Matches prototype .partners-grid.
+/* ----- Carousel container -----
+ * No-JS fallback: overflow-x: auto provides native horizontal scroll
+ * with a visible scrollbar so users can still browse logos (Req 5.1, 5.2).
+ * -webkit-overflow-scrolling: touch enables momentum scrolling on iOS.
+ * min-height: 70px reserves vertical space matching logo height to prevent
+ * cumulative layout shift (CLS) before images load (Req 7.5).
  */
-.partnersGrid {
+.carouselContainer {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 70px;
+}
+
+/* ----- JS-enhanced state -----
+ * Applied by the useCarousel hook when carousel mode is active.
+ * Switches from native scroll to translateX-based scrolling (Req 4.6).
+ * Hides the native scrollbar since the carousel provides its own
+ * interaction model (drag, auto-scroll, keyboard).
+ * scrollbar-width: none targets Firefox; ::-webkit-scrollbar targets
+ * Chrome, Safari, and Edge (Chromium-based).
+ */
+.carouselContainer.jsEnhanced {
+  overflow: hidden;
+  scrollbar-width: none; /* Firefox */
+}
+.carouselContainer.jsEnhanced::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+/* ----- Logo track -----
+ * Flex row of logos. Base uses flex-wrap: nowrap so logos overflow
+ * horizontally beyond the container, enabling the native overflow-x: auto
+ * scroll for the no-JS fallback (Req 5.1).
+ * justify-content: center centres logos when they don't fill the container.
+ * gap: 48px is the desktop spacing between logos (Req 4.4).
+ */
+.logoTrack {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 48px;
+  flex-wrap: nowrap;
+}
+
+/* ----- Static mode -----
+ * Applied by JS when all logos fit within the container width.
+ * Enables flex-wrap so logos can wrap to multiple rows on narrow viewports,
+ * and centres them horizontally — matching the original static layout
+ * behaviour (Req 8.2–8.4). No carousel features are active in this mode.
+ */
+.staticMode .logoTrack {
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ----- JS-enhanced scrolling mode -----
+ * When the carousel is active (logos exceed container width), force nowrap
+ * and left-align so the translateX transform can slide the track.
+ * will-change: transform hints the browser to promote this element to its
+ * own compositing layer for GPU-accelerated animation (Req 7.2).
+ */
+.jsEnhanced .logoTrack {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  will-change: transform;
+}
+
+/* ----- Cursor states for drag interaction -----
+ * .grabCursor: applied when the carousel is idle and hoverable, signalling
+ * to the user that they can click-and-drag to scroll (Req 1.6).
+ * .grabbingCursor: applied during an active pointer drag (Req 1.5).
+ */
+.grabCursor {
+  cursor: grab;
+}
+.grabbingCursor {
+  cursor: grabbing;
 }
 
 /* ----- Individual partner logo -----
- * 160×70px container with object-fit: contain so logos scale without
- * distortion. Reduces opacity on hover for subtle interactivity (Req 8.5).
- * Matches prototype .partner-logo sizing.
- *
- * BUG-128 fix: Changed from placeholder div styling to img-compatible styling.
- * Removed background/color/font-size (placeholder-only properties) and added
- * object-fit: contain for proper image scaling within the fixed dimensions.
+ * Fixed 160×70px dimensions with object-fit: contain so logos scale
+ * without distortion regardless of source image aspect ratio (Req 4.3).
+ * flex-shrink: 0 prevents logos from being compressed by the flex container
+ * when the row overflows — essential for consistent sizing in both
+ * native-scroll and translateX modes.
+ * Hover opacity 0.7 provides subtle interactivity feedback (Req 4 AC 8,
+ * main spec Req 8 AC 5). Note: 0.7, NOT 0.6 — corrected per requirements.
+ * No border-radius — removed because the prototype does not use it.
  */
 .partnerLogo {
   width: 160px;
   height: 70px;
   object-fit: contain;
+  flex-shrink: 0;
   transition: opacity var(--transition);
-  border-radius: 4px;
 }
 
-/* Hover state — slight opacity reduction (Req 8.5) */
+/* Hover state — slight opacity reduction for interactivity feedback */
 .partnerLogo:hover {
-  opacity: 0.6;
+  opacity: 0.7;
+}
+
+/* ----- Reduced motion preference -----
+ * Respects the user's OS-level motion preference (Req 6.3).
+ * Disables all CSS transitions on the track and logos so that
+ * no animated movement occurs. The JS hook separately disables
+ * auto-scroll and uses instant position snapping for interactions.
+ * !important overrides any inline or specificity-based transitions.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .logoTrack {
+    transition: none !important;
+  }
+  .partnerLogo {
+    transition: none !important;
+  }
 }
 
 /* ----- Mobile responsive (≤768px) -----
- * Reduce gap from 48px to 24px on small screens.
- * Uses 768px breakpoint per design spec (BUG-046 fix —
- * prototype incorrectly uses 900px).
+ * Reduces gap from 48px to 24px on small screens (Req 4.4, 4.5).
+ * Uses 768px breakpoint per design spec.
  */
 @media (max-width: 768px) {
-  .partnersGrid {
+  .logoTrack {
     gap: 24px;
   }
 }

@@ -51,53 +51,45 @@ export const contactInfo = {
 } as const;
 
 /**
- * Partner logo placeholders for the Trusted Partners section (Req 8.3).
- *
- * All 7 trusted partner brand logos for the Partners section (Req 8.3).
+ * 5 trusted partner brand logos for the Partners section (Req 8.3).
  *
  * Each entry maps to a real logo image in public/images/partners/.
  * These are static assets, not CMS-managed — updated via code deploy.
  *
  * Display: 160×70px per logo, flex layout with 48px gap (24px on mobile).
  *
- * Fixes: BUG-123 (file name mismatch), BUG-129 (generic names),
- *        BUG-130 (5 entries instead of 7).
+ * Ashburton and Sygnia were removed — only 5 active partners remain.
  */
 export const partnerLogos: PartnerLogo[] = [
+  /** Allan Grey — South African asset management firm */
   {
     name: 'Allan Grey',
     src: '/images/partners/Allangrey-300x167.png',
     alt: 'Allan Grey logo',
   },
-  {
-    name: 'Ashburton',
-    src: '/images/partners/ashburton-300x167.png',
-    alt: 'Ashburton logo',
-  },
+  /** BrightRock — needs-matched life insurance provider */
   {
     name: 'BrightRock',
     src: '/images/partners/Brightrock-300x167.png',
     alt: 'BrightRock logo',
   },
+  /** Discovery — financial services and health group */
   {
     name: 'Discovery',
     src: '/images/partners/Discovery-300x167.png',
     alt: 'Discovery logo',
   },
+  /** Momentum — insurance and investment provider */
   {
     name: 'Momentum',
     src: '/images/partners/momentum-300x167.png',
     alt: 'Momentum logo',
   },
+  /** Ninety One — global investment manager */
   {
     name: 'Ninety One',
     src: '/images/partners/ninetyone-300x167.png',
     alt: 'Ninety One logo',
-  },
-  {
-    name: 'Sygnia',
-    src: '/images/partners/sygnia-300x167.png',
-    alt: 'Sygnia logo',
   },
 ];
 

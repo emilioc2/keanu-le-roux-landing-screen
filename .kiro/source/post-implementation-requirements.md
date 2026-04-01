@@ -1,8 +1,8 @@
 <!-- Post-Implementation Requirements: Captures spec gaps found during Tasks 1-28 for the next spec update cycle. -->
-<!-- Last Updated: 2026-04-08 — Marked 15 bugs as RESOLVED following the latest implementation round. -->
+<!-- Last Updated: 2026-04-10 — BUG-131 marked RESOLVED: Ashburton and Sygnia removed, partner count reduced from 7 to 5 matching Req 8 AC 3. -->
 # Post-Implementation Requirements
 
-> **Last Updated:** 2026-04-08 — 15 bugs marked ✅ RESOLVED in this cycle: BUG-049, BUG-055, BUG-063, BUG-067, BUG-071, BUG-079, BUG-083, BUG-090, BUG-091, BUG-092, BUG-097, BUG-099, BUG-105, BUG-119, BUG-121.
+> **Last Updated:** 2026-04-10 — BUG-131 marked ✅ RESOLVED (Ashburton and Sygnia removed; 5 partners now match Req 8 AC 3). Previous cycle: 15 bugs resolved: BUG-049, BUG-055, BUG-063, BUG-067, BUG-071, BUG-079, BUG-083, BUG-090, BUG-091, BUG-092, BUG-097, BUG-099, BUG-105, BUG-119, BUG-121.
 
 ## Introduction
 
@@ -21,7 +21,7 @@ The current spec documents (`requirements.md`, `design.md`, `screen-requirements
 | BUG-044 / BUG-104 | Root layout `<main>` wraps Navbar and Footer — incorrect landmark nesting | Update Req 13 AC 1 to specify that `<main>` SHALL contain only the dominant page content; `<nav>` and `<footer>` SHALL be siblings of `<main>`, not children. Clarify the semantic HTML structure expectation. |
 | BUG-091 | ✅ RESOLVED — Contact API email template does not escape user input | Add a new AC to Req 9 (or Req 18 AC 2): "THE Contact Form API route SHALL HTML-entity-escape all user-supplied input before interpolating it into the email template." |
 | BUG-100 | Blog post page has no `generateMetadata` for dynamic SEO title | Add a new AC to Req 19: "THE Blog_Post_Page SHALL generate dynamic metadata (page title, description) from the blog post's title and excerpt for SEO purposes." |
-| BUG-131 | Req 8 AC 3 specifies 5 partner logos but 7 actual partner brands exist | Update Req 8 AC 3 to specify 7 partner logos instead of 5, reflecting the actual number of partner brands (Allan Grey, Ashburton, BrightRock, Discovery, Momentum, Ninety One, Sygnia). |
+| BUG-131 | ✅ RESOLVED — Req 8 AC 3 specifies 5 partner logos, now matches actual count | No spec change needed. Ashburton and Sygnia have been removed, reducing the partner list from 7 to 5 (Allan Grey, BrightRock, Discovery, Momentum, Ninety One). Req 8 AC 3's original count of 5 is now correct. |
 
 ---
 

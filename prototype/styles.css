@@ -415,21 +415,56 @@ img { max-width: 100%; display: block; }
 .newsletter-success svg { color: #4ade80; }
 .newsletter-success p { font-size: 0.9rem; }
 
-/* ===== Partners ===== */
-.partners { padding: 80px 0; background: var(--white); border-top: 1px solid var(--gray-200); }
+/* ===== Partners — infinite scrolling carousel ===== */
+.partners { padding: 60px 0; background: var(--white); border-top: 1px solid var(--gray-200); }
 
-.partners-grid {
-  display: flex; justify-content: center; align-items: center;
-  gap: 48px; flex-wrap: wrap;
+/* Hides overflow so logos scroll out of view cleanly */
+.partners-carousel {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 32px;
 }
 
-.partner-logo {
-  width: 160px; height: 70px; background: var(--gray-100);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gray-400); font-size: 0.8rem;
+/* Flex row that slides left via CSS animation; width set to fit both logo sets */
+.partners-track {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  animation: scroll-partners 30s linear infinite; /* Slow continuous scroll */
+  width: max-content; /* Prevent logos from wrapping */
+}
+
+/* Pause animation on hover so users can inspect a logo */
+.partners-track:hover {
+  animation-play-state: paused;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .partners-track { animation: none; }
+}
+
+/* Individual logo sizing — matches the reference screenshot proportions */
+.partners-track .partner-logo {
+  height: 48px;
+  width: auto;
+  flex-shrink: 0;
+  opacity: 0.7;
   transition: opacity var(--transition);
+  max-width: none; /* Override base img reset so logos keep natural aspect ratio */
+  background: none;
+  display: block;
 }
-.partner-logo:hover { opacity: 0.7; }
+
+.partners-track .partner-logo:hover {
+  opacity: 1;
+}
+
+/* Translate left by exactly half (one full set of logos) then reset for seamless loop */
+@keyframes scroll-partners {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 32px)); }
+}
 
 /* ===== Contact ===== */
 .contact { padding: 100px 0; background: var(--off-white); }

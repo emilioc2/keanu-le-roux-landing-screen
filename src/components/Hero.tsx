@@ -11,7 +11,47 @@
  */
 'use client';
 
+import { useState, useEffect } from 'react';
 import styles from './Hero.module.css';
+
+/**
+ * useIsMobile — Tracks whether the viewport is at or below 768px.
+ *
+ * Mobile-first SSR default: initializes to `true` so the server-rendered
+ * HTML contains only the fallback image (no <video> element), preventing
+ * the browser from parsing a <source> tag and initiating the 3.1MB video
+ * download on mobile connections.
+ *
+ * On hydration, useEffect detects the actual viewport via matchMedia and
+ * updates state accordingly. Desktop users see a brief fallback-to-video
+ * transition masked by the navy-dark background.
+ *
+ * @returns {boolean} `true` when viewport width is ≤768px, `false` otherwise
+ */
+function useIsMobile(): boolean {
+  // Mobile-first default — SSR renders fallback image, not <video>
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    // Detect actual viewport width on the client
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mediaQuery.matches);
+
+    // Listen for viewport changes (resize, device rotation)
+    const handler = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handler);
+
+    // Clean up listener on unmount to prevent memory leaks
+    return () => {
+      mediaQuery.removeEventListener('change', handler);
+    };
+  }, []);
+
+  return isMobile;
+}
 
 /**
  * Hero section component.
@@ -27,22 +67,42 @@ import styles from './Hero.module.css';
  * The video element includes aria-label for screen reader accessibility (BUG-041).
  */
 export default function Hero() {
+  /* Determine viewport size to conditionally render background media.
+   * Mobile (≤768px) gets a lightweight fallback image instead of the 3.1MB video. */
+  const isMobile = useIsMobile();
+
   return (
     <section id="hero" className={styles.hero}>
-      {/* Background video — autoplay, muted, looping, with poster fallback image.
-        * poster="/hero-fallback.jpg" displays while video loads or if it fails (BUG-029/035).
-        * aria-label provides context for screen readers (BUG-041, Req 13.8). */}
-      <video
-        className={styles.heroVideo}
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/hero-fallback.jpg"
-        aria-label="Background video showing professional financial advisory imagery"
-      >
-        <source src="/hero_video.mp4" type="video/mp4" />
-      </video>
+      {/* Conditional background media:
+        * - Mobile (≤768px): lightweight fallback image (46KB) — prevents the 3.1MB
+        *   video download entirely, fixing autoplay failures and bandwidth waste.
+        * - Desktop (>768px): full autoplay video experience preserved unchanged. */}
+      {isMobile ? (
+        /* Decorative fallback image — alt="" because it serves the same purely
+         * visual background role as the video (Req 2.6). Styled via
+         * .heroFallbackImage to cover the full hero area with object-fit: cover,
+         * matching the video's visual coverage on desktop (Req 2.4). */
+        <img
+          src="/hero-fallback.jpg"
+          alt=""
+          className={styles.heroFallbackImage}
+        />
+      ) : (
+        /* Background video — autoplay, muted, looping, with poster fallback image.
+         * poster="/hero-fallback.jpg" displays while video loads or if it fails (BUG-029/035).
+         * aria-label provides context for screen readers (BUG-041, Req 13.8). */
+        <video
+          className={styles.heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-fallback.jpg"
+          aria-label="Background video showing professional financial advisory imagery"
+        >
+          <source src="/hero_video.mp4" type="video/mp4" />
+        </video>
+      )}
 
       {/* Semi-transparent navy overlay — sits between video (z-index 0) and
         * content (z-index 2) to ensure text readability (Req 2.3) */}

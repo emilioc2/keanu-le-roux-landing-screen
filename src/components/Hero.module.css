@@ -32,6 +32,22 @@
   z-index: 0;
 }
 
+/* Mobile fallback image (≤768px) — replaces the <video> element entirely to
+ * prevent the browser from downloading the 3.1MB hero_video.mp4 on mobile.
+ * Positioned absolutely to cover the full hero area without distortion,
+ * matching the video's visual coverage on desktop viewports.
+ * If this image also fails to load, the .hero background of var(--navy-dark)
+ * provides a solid colour fallback so the section is never blank (Req 3.6). */
+.heroFallbackImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
 /* Semi-transparent navy overlay on top of video.
  * Colour matches design spec: rgba(20, 28, 66, 0.55) (Req 2.3). */
 .heroOverlay {

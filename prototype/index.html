@@ -285,19 +285,33 @@
     </div>
   </section>
 
-  <!-- Partner Brands -->
+  <!-- Partner Brands — infinite scrolling carousel -->
   <section class="partners" id="partners">
     <div class="container">
       <div class="section-header">
         <h2>Trusted Partners</h2>
         <p>I work with leading financial institutions to deliver the best solutions for my clients.</p>
       </div>
-      <div class="partners-grid">
-        <div class="partner-logo"><span>Partner Logo</span></div>
-        <div class="partner-logo"><span>Partner Logo</span></div>
-        <div class="partner-logo"><span>Partner Logo</span></div>
-        <div class="partner-logo"><span>Partner Logo</span></div>
-        <div class="partner-logo"><span>Partner Logo</span></div>
+    </div>
+    <!-- Overflow hidden container masks the scrolling track -->
+    <div class="partners-carousel" aria-label="Trusted partner logos">
+      <!-- Track holds two identical logo sets — the duplicate creates a seamless infinite loop -->
+      <div class="partners-track">
+        <img src="sygnia-300x167.png" alt="Sygnia" class="partner-logo">
+        <img src="Discovery-300x167.png" alt="Discovery" class="partner-logo">
+        <img src="Allangrey-300x167.png" alt="Allan Gray" class="partner-logo">
+        <img src="Brightrock-300x167.png" alt="BrightRock" class="partner-logo">
+        <img src="ninetyone-300x167.png" alt="Ninety One" class="partner-logo">
+        <img src="momentum-300x167.png" alt="Momentum" class="partner-logo">
+        <img src="ashburton-300x167.png" alt="Ashburton" class="partner-logo">
+        <!-- Duplicate set for seamless loop — hidden from screen readers -->
+        <img src="sygnia-300x167.png" alt="" aria-hidden="true" class="partner-logo">
+        <img src="Discovery-300x167.png" alt="" aria-hidden="true" class="partner-logo">
+        <img src="Allangrey-300x167.png" alt="" aria-hidden="true" class="partner-logo">
+        <img src="Brightrock-300x167.png" alt="" aria-hidden="true" class="partner-logo">
+        <img src="ninetyone-300x167.png" alt="" aria-hidden="true" class="partner-logo">
+        <img src="momentum-300x167.png" alt="" aria-hidden="true" class="partner-logo">
+        <img src="ashburton-300x167.png" alt="" aria-hidden="true" class="partner-logo">
       </div>
     </div>
   </section>

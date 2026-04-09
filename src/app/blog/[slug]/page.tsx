@@ -29,12 +29,13 @@ import {
 } from '@/lib/sanity';
 import type { BlogPost } from '@/lib/types';
 /**
- * Shared placeholder post — used as fallback when Sanity CMS is not configured
+ * Shared placeholder posts — used as fallback when Sanity CMS is not configured
  * (e.g. development environments with placeholder credentials). This ensures
  * the blog detail page renders meaningful content instead of a 404 when the
- * slug matches the placeholder post (Req 5 AC 9).
+ * slug matches any of the placeholder posts (Req 5 AC 9).
  */
-import { defaultPost } from '@/data/defaultPost';
+/* Copy-changes: import plural defaultPosts array to support all 3 placeholder slugs */
+import { defaultPosts } from '@/data/defaultPost';
 
 /**
  * ISR revalidation interval in seconds.
@@ -100,19 +101,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   /* Await the params promise (Next.js 15 async params pattern) */
   const { slug } = await params;
 
-  /* Guard: if Sanity is not configured, attempt to serve the placeholder post.
-   * When the slug matches the default post's slug ("why-starting-early"), render
-   * the placeholder content so the "Read More" link from the landing page works
+  /* Guard: if Sanity is not configured, attempt to serve a placeholder post.
+   * When the slug matches any of the defaultPosts slugs, render the matched
+   * placeholder content so "Read More" links from the landing page work
    * even without a live CMS connection. For any other slug, show 404. */
   if (!isSanityConfigured() || !sanityClient) {
-    if (slug === defaultPost.slug.current) {
+    /* Find matching placeholder post by slug from the defaultPosts array.
+     * Supports all three placeholder posts (gold-oil, risk-protection,
+     * retirement-30s) rendering on their detail pages without a CMS. */
+    const matchedPost = defaultPosts.find((p) => p.slug.current === slug);
+    if (matchedPost) {
       return (
         <>
           {/* Navbar in permanent scrolled state — white background, navy text (Req 19.2). */}
           <Navbar alwaysScrolled />
 
-          {/* Render the placeholder post through the same detail component */}
-          <BlogPostDetail post={defaultPost} />
+          {/* Render the matched placeholder post through the same detail component */}
+          <BlogPostDetail post={matchedPost} />
 
           {/* Standard site footer — same as landing page (Req 19.9) */}
           <Footer />

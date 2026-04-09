@@ -149,7 +149,9 @@ export default function BlogPostDetail({ post }: BlogPostDetailProps) {
           {/* CTA block — motivational paragraph + "Get In Touch" pill button (Req 19.7).
            * Links to the contact section on the landing page using /#contact. */}
           <div className={styles.blogPostCta}>
-            <p>Ready to take the first step? I&apos;d love to help you build a plan that works for your life and goals.</p>
+            {/* CTA text — article-specific copy matching prototype/blog-post.html.
+             * Future enhancement: add optional ctaText field to BlogPost type for per-post CTA. */}
+            <p>Want to discuss how commodity movements affect your portfolio? I&apos;d love to help you navigate these markets.</p>
             {/* BUG-097 fix: Use Next.js Link for internal navigation to the
              * landing page contact section instead of a plain <a> tag. */}
             <Link href="/#contact" className="btn">Get In Touch</Link>
@@ -167,7 +169,8 @@ export default function BlogPostDetail({ post }: BlogPostDetailProps) {
           />
           <div>
             <span className={styles.blogPostAuthorName}>Keanu Le Roux</span>
-            <span className={styles.blogPostAuthorTitle}>Financial Advisor</span>
+            {/* Author title — "Independent Wealth Manager" per prototype branding */}
+            <span className={styles.blogPostAuthorTitle}>Independent Wealth Manager</span>
           </div>
         </div>
       </div>

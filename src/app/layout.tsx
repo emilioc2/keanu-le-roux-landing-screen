@@ -42,9 +42,10 @@ const inter = Inter({
   weight: ['300', '400', '500', '600', '700'],
 });
 
-/** Site-wide metadata for SEO and browser tab display */
+/** Site-wide metadata for SEO and browser tab display.
+ *  Title updated to "Independent Wealth Manager" per prototype branding. */
 export const metadata: Metadata = {
-  title: 'Keanu Le Roux | Financial Advisor',
+  title: 'Keanu Le Roux | Independent Wealth Manager',
   description:
     'Trusted financial advice to help you plan with confidence, protect what matters and build lasting wealth.',
   icons: {

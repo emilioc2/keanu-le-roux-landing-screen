@@ -76,8 +76,8 @@ export default function Footer() {
         {/* Brand logo text — uppercase, letter-spaced, matching Navbar logo style */}
         <div className={styles.footerLogo}>KEANU LE ROUX</div>
 
-        {/* Tagline — italic serif, grey */}
-        <p className={styles.footerTagline}>Financial Advisor</p>
+        {/* Tagline — italic serif, grey. "Independent Wealth Manager" per prototype. */}
+        <p className={styles.footerTagline}>Independent Wealth Manager</p>
 
         {/* Social icon row — YouTube, Instagram, LinkedIn (Req 10.2, 10.3, 10.4)
             Each link opens in a new tab with noopener noreferrer for security.
@@ -110,13 +110,13 @@ export default function Footer() {
         </div>
 
         {/* Email mailto: link — opens default email client (Req 10.5).
-            Displayed as lowercase per BUG-046 decision. */}
+            Display text uses mixed-case branding per prototype; mailto href stays lowercase. */}
         <div className={styles.footerEmail}>
           <a
             href={`mailto:${contactInfo.email}`}
             className={styles.footerEmailLink}
           >
-            {contactInfo.email}
+            Keanu@TheWealthRoom.com
           </a>
         </div>
 
@@ -125,7 +125,8 @@ export default function Footer() {
         <div className={styles.footerDetails}>
           <p>T {contactInfo.phone}</p>
           <p>An Authorised Financial Services Representative</p>
-          <p>&copy; {currentYear} Keanu Le Roux. All rights reserved.</p>
+          {/* Copyright — "All Rights Reserved" capitalisation matches prototype */}
+          <p>&copy; {currentYear} Keanu Le Roux. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

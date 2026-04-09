@@ -70,11 +70,11 @@ describe('Blog — Placeholder rendering when no posts', () => {
     render(<Blog posts={[]} />);
 
     /**
-     * The component's internal defaultPost has this title.
-     * Verifying it appears confirms the fallback logic works.
+     * The component falls back to defaultPosts (plural) which has this featured title.
+     * Verifying it appears confirms the fallback logic works with the new copy.
      */
     expect(
-      screen.getByText(/Why Starting Early Is the Best Financial Decision/)
+      screen.getByText(/Gold, Oil, & Your Portfolio/)
     ).toBeTruthy();
   });
 

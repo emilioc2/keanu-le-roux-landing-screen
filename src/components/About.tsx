@@ -30,16 +30,28 @@ const aboutAccordionItems: AccordionItem[] = [
   {
     title: 'My approach',
     content: (
+      /* Updated content: 3 paragraphs covering personal finance philosophy,
+       * behavioural coaching with Advisor's Alpha framework (1.5% net returns),
+       * and clarity/education/long-term thinking focus. */
       <>
         <p>
-          I believe financial planning should feel empowering, not overwhelming.
-          Every conversation starts with your goals — your lifestyle, your family,
-          your ambitions — and from there we build a strategy that&apos;s as unique
-          as you are.
+          As the saying goes, &apos;personal finance is more personal than it is
+          finance.&apos; Every conversation begins with understanding your
+          life—your values, family, and ambitions—before shaping a strategy
+          aligned to what matters most to you.
         </p>
         <p>
-          I focus on education, clarity and long-term thinking. No jargon, no
-          pressure, just honest guidance you can trust.
+          My approach emphasises behavioural coaching, recognising that long-term
+          success is driven as much by disciplined decision-making as by investment
+          selection. Research, including the &apos;Advisor&apos;s Alpha&apos;
+          framework, shows that effective guidance can add up to 1.5% per year in
+          net returns by helping clients avoid costly, emotionally-driven decisions.
+        </p>
+        <p>
+          I focus on clarity, education, and long-term thinking—providing objective
+          guidance without unnecessary complexity or pressure, so you remain
+          confident, informed, and committed through every stage of your financial
+          journey.
         </p>
       </>
     ),
@@ -47,12 +59,27 @@ const aboutAccordionItems: AccordionItem[] = [
   {
     title: 'Qualifications & experience',
     content: (
-      <p>
-        I hold relevant industry qualifications and am an authorised financial
-        services representative. My areas of expertise include wealth planning,
-        risk protection, investment management, retirement planning and estate
-        structuring.
-      </p>
+      /* Updated content: 3 paragraphs detailing specific qualifications (B.Th from
+       * SA Theological Seminary, PGDip from Stellenbosch, CFP® in progress),
+       * RE5/Class of Business credentials with specialisation areas, and career
+       * progression from Discovery → The Wealth Room → Independent Wealth Manager. */
+      <>
+        <p>
+          I hold a Bachelor of Theology from the South African Theological Seminary
+          and a Postgraduate Diploma in Business Management from Stellenbosch
+          Business School, and I am preparing to complete my CFP&reg; certification.
+        </p>
+        <p>
+          As an authorised Financial Services Representative (RE5 and Class of
+          Business certified), I specialise in private wealth management, investment
+          strategy, risk protection, retirement planning, and estate structuring.
+        </p>
+        <p>
+          I began my career at Discovery, completed my supervision at The Wealth
+          Room, and now operate as an Independent Wealth Manager, delivering
+          bespoke, holistic solutions tailored to each client&apos;s long-term goals.
+        </p>
+      </>
     ),
   },
   {
@@ -84,10 +111,11 @@ export default function About() {
         {/* Portrait row — 320px image left, text column right (Req 3.1) */}
         <div className={styles.portraitRow}>
           <div className={styles.portrait}>
-            {/* Professional headshot — lazy loaded since it's below the fold (Req 14.5) */}
+            {/* Professional headshot — alt text uses "Independent Wealth Manager" branding per prototype.
+             * Lazy loaded since it's below the fold (Req 14.5). */}
             <img
               src="/keanu.jpg"
-              alt="Keanu Le Roux — Financial Advisor"
+              alt="Keanu Le Roux, Independent Wealth Manager"
               loading="lazy"
             />
           </div>
@@ -96,19 +124,30 @@ export default function About() {
             {/* Section heading — Playfair Display, 2.4rem (Req 3.2) */}
             <h2>Financial Guidance You Can Trust.</h2>
 
-            {/* Bio paragraphs — content matches prototype exactly (Req 3.3) */}
+            {/* Bio paragraphs — 4 paragraphs covering: (1) Independent Wealth Manager
+             * positioning, (2) objective/holistic approach free from conflicts of interest,
+             * (3) FSP licensing with Category I and II licences, (4) fiduciary duty
+             * commitment. Content matches updated prototype exactly (Req 3.3). */}
             <p>
-              I&apos;m Keanu Le Roux, a qualified financial advisor dedicated to
-              helping individuals, families and business owners take control of
-              their financial futures. My approach is built on trust, transparency
-              and a genuine commitment to understanding your unique goals.
+              I&apos;m Keanu Le Roux, an Independent Wealth Manager focused on helping
+              individuals, families, and business owners build and protect long-term
+              wealth with clarity and confidence.
             </p>
             <p>
-              With experience across financial planning, wealth management,
-              retirement strategy and risk protection, I work alongside you to
-              build a plan that evolves with your life. Great advice starts with
-              listening — and I&apos;m here to make sure you always feel informed,
-              confident and in control.
+              I provide objective, unbiased financial advice that is free from conflicts
+              of interest, grounded in a holistic approach to financial planning. By
+              considering all aspects of your financial position, I develop integrated
+              strategies tailored to your unique goals and evolving needs.
+            </p>
+            <p>
+              I am contracted to a licensed Financial Services Provider (FSP) holding
+              both Category I and Category II licences, enabling the provision of
+              comprehensive advice alongside discretionary investment management solutions.
+            </p>
+            <p>
+              My approach is underpinned by a fiduciary duty to act in your best interests
+              at all times—ensuring transparency, ongoing review, and that you remain
+              informed, confident, and in control of your financial future.
             </p>
           </div>
         </div>

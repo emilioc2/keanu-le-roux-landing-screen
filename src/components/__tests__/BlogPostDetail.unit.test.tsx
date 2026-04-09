@@ -3,7 +3,7 @@
  *
  * Verifies the key behaviours specified in Requirements 19.1–19.12:
  *   - Back link href points to /#blog (Req 19.3)
- *   - Author bio contains name "Keanu Le Roux" and title "Financial Advisor" (Req 19.8)
+ *   - Author bio contains name "Keanu Le Roux" and title "Independent Wealth Manager" (Req 19.8)
  *   - CTA button href points to /#contact (Req 19.7)
  *   - Portable Text body content is rendered via mock (Req 19.6)
  *   - Post title, date, and excerpt are displayed in the header (Req 19.4)
@@ -118,10 +118,10 @@ describe('BlogPostDetail — Author bio', () => {
     expect(screen.getByText('Keanu Le Roux')).toBeTruthy();
   });
 
-  it('displays author title "Financial Advisor"', () => {
+  it('displays author title "Independent Wealth Manager"', () => {
     render(<BlogPostDetail post={createMockPost()} />);
-    /** Author title appears below the name in italic serif */
-    expect(screen.getByText('Financial Advisor')).toBeTruthy();
+    /** Author title appears below the name in italic serif — updated per copy-changes task 7.1 */
+    expect(screen.getByText('Independent Wealth Manager')).toBeTruthy();
   });
 
   it('renders author portrait image with alt text', () => {

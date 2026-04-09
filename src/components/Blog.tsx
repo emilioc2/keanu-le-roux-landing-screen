@@ -31,7 +31,8 @@ import Link from 'next/link';
  * Extracted to a shared module so the blog detail page can reuse the same
  * data when Sanity is not configured.
  */
-import { defaultPost } from '@/data/defaultPost';
+/* Copy-changes: import plural defaultPosts array (was singular defaultPost) */
+import { defaultPosts } from '@/data/defaultPost';
 import ScrollReveal from '@/components/ScrollReveal';
 import styles from './Blog.module.css';
 
@@ -78,7 +79,9 @@ export default function Blog({ posts }: BlogSectionProps) {
    * Fall back to a default placeholder post if CMS returns no posts.
    * This ensures the section is never visually empty (Req 5 AC 9).
    */
-  const displayPosts = posts.length > 0 ? posts : [defaultPost];
+  /* Fall back to the full defaultPosts array (3 posts) instead of wrapping
+   * a single post in an array — provides featured + 2 card posts (Req 5 AC 9). */
+  const displayPosts = posts.length > 0 ? posts : defaultPosts;
 
   /**
    * The featured article is always the first (most recent) post.

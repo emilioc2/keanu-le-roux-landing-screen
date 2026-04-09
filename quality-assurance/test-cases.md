@@ -7878,3 +7878,230 @@ These test cases validate the new requirements document at `.kiro/specs/prototyp
   2. Verify this is distinct from contact form subject pattern
 - **Expected Result:** Subject is New Newsletter Subscription; distinct from contact form
 - **Status:** Pass
+
+
+---
+
+## Copy Changes Validation (Added 2026-04-13)
+
+### TC-646
+- **Requirement:** Copy Change 1 — About bio paragraphs
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/About.tsx
+- **Steps:**
+  1. Open About.tsx and locate the .introBlock paragraphs
+  2. Verify exactly 4 paragraphs exist inside .introBlock (was 2)
+  3. Verify paragraph 1 starts with "I'm Keanu Le Roux, an Independent Wealth Manager"
+  4. Verify paragraph 2 starts with "I provide objective, unbiased financial advice"
+  5. Verify paragraph 3 starts with "I am contracted to a licensed Financial Services Provider"
+  6. Verify paragraph 4 starts with "My approach is underpinned by a fiduciary duty"
+  7. Character-compare each paragraph against prototype/index.html about-intro-block
+- **Expected Result:** All 4 paragraphs match prototype verbatim including punctuation and em dashes
+- **Status:** Not Run
+
+### TC-647
+- **Requirement:** Copy Change 2 — About "My approach" accordion
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/About.tsx
+- **Steps:**
+  1. Locate the "My approach" accordion item in aboutAccordionItems array
+  2. Verify exactly 3 paragraphs in the content (was 2)
+  3. Verify paragraph 1 starts with "As the saying goes"
+  4. Verify paragraph 2 references "behavioural coaching" and "Advisor's Alpha" framework
+  5. Verify paragraph 3 starts with "I focus on clarity, education, and long-term thinking"
+  6. Character-compare each paragraph against prototype aboutAccordion first item
+- **Expected Result:** All 3 paragraphs match prototype verbatim
+- **Status:** Not Run
+
+### TC-521
+- **Requirement:** Copy Change 3 — About "Qualifications and experience" accordion
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/About.tsx
+- **Steps:**
+  1. Locate the "Qualifications and experience" accordion item
+  2. Verify exactly 3 paragraphs in the content (was 1)
+  3. Verify paragraph 1 mentions "Bachelor of Theology" and "Stellenbosch Business School"
+  4. Verify paragraph 2 mentions "RE5 and Class of Business certified"
+  5. Verify paragraph 3 mentions "Discovery" and "The Wealth Room" and "Independent Wealth Manager"
+  6. Verify CFP uses the registered trademark symbol
+  7. Character-compare each paragraph against prototype aboutAccordion second item
+- **Expected Result:** All 3 paragraphs match prototype verbatim including registered trademark symbol
+- **Status:** Not Run
+
+### TC-522
+- **Requirement:** Copy Change 4 — Blog featured post content
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/data/defaultPost.ts
+- **Steps:**
+  1. Open defaultPost.ts and verify the title is "Gold, Oil, and Your Portfolio"
+  2. Verify the publishedAt date renders as "April 9, 2026"
+  3. Verify the excerpt matches prototype featured post excerpt
+  4. Load the landing page and verify the featured post displays the new content
+  5. Character-compare title and date and excerpt against prototype blog-featured
+- **Expected Result:** Featured post title and date and excerpt match prototype verbatim
+- **Status:** Not Run
+
+### TC-523
+- **Requirement:** Copy Change 5 — Blog featured post image
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/data/defaultPost.ts
+- **Steps:**
+  1. Verify defaultPost has a mainImage property
+  2. Verify the image URL contains photo-1610375461246-83df859d849d
+  3. Verify the alt text is "Gold bars and oil barrels representing commodity market dynamics"
+  4. Load the landing page and verify the featured post shows the commodity image instead of grey placeholder
+- **Expected Result:** Featured post displays the Unsplash commodity image with correct alt text
+- **Status:** Not Run
+
+### TC-524
+- **Requirement:** Copy Change 6 — Blog card posts
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/data/defaultPost.ts
+- **Steps:**
+  1. ~~Verify 2 additional default posts exist in the data file~~
+  2. ~~Verify card 1 title "Understanding Risk: Why Protection Matters" and date "March 12, 2026"~~
+  3. ~~Verify card 2 title "Retirement Planning in Your 30s" and date "February 28, 2026"~~
+  4. ~~Verify both cards use the same Unsplash image URL containing photo-1460925895917-afdab827c52f~~
+  5. ~~Load the landing page and verify 2 blog cards appear below the featured post~~
+  6. ~~Character-compare all card content against prototype blog-grid~~
+- **Expected Result:** ~~Two blog cards render with correct content matching prototype~~
+- **Status:** N/A — Change 6 REVERTED per user decision (2025-07-21). The two card posts ("Understanding Risk: Why Protection Matters" and "Retirement Planning in Your 30s") were removed from defaultPosts. The array now contains only the featured Gold/Oil post. No card grid renders. See BUG-232.
+
+### TC-525
+- **Requirement:** Copy Change 7 — Footer tagline
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/Footer.tsx
+- **Steps:**
+  1. Open Footer.tsx and locate the footerTagline element
+  2. Verify the text is "Independent Wealth Manager" (was "Financial Advisor")
+  3. Load the landing page and scroll to the footer
+  4. Verify the tagline displays "Independent Wealth Manager"
+- **Expected Result:** Footer tagline reads "Independent Wealth Manager"
+- **Status:** Not Run
+
+### TC-526
+- **Requirement:** Copy Change 8 — Footer email display casing
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/Footer.tsx
+- **Steps:**
+  1. Open Footer.tsx and locate the footerEmailLink element
+  2. Verify the display text is "Keanu@TheWealthRoom.com" (mixed case)
+  3. Verify the mailto href remains lowercase "keanu@thewealthroom.com"
+  4. Load the landing page and verify the email displays in mixed case
+  5. Click the email link and verify the mailto opens with lowercase address
+- **Expected Result:** Email displays as "Keanu@TheWealthRoom.com" but mailto uses lowercase
+- **Status:** Not Run
+
+### TC-527
+- **Requirement:** Copy Change 9 — Footer copyright capitalisation
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/Footer.tsx
+- **Steps:**
+  1. Open Footer.tsx and locate the copyright text
+  2. Verify the text reads "All Rights Reserved." (capital R on both words)
+  3. Verify the year remains dynamic using currentYear (not hardcoded 2026)
+  4. Load the landing page and verify the copyright line shows correct capitalisation
+- **Expected Result:** Copyright reads "© currentYear Keanu Le Roux. All Rights Reserved." with dynamic year
+- **Status:** Not Run
+
+### TC-528
+- **Requirement:** Copy Change 10 — Page title metadata
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/app/layout.tsx
+- **Steps:**
+  1. Open layout.tsx and locate the metadata.title property
+  2. Verify the title is "Keanu Le Roux | Independent Wealth Manager"
+  3. Load the landing page and verify the browser tab shows the updated title
+- **Expected Result:** Page title reads "Keanu Le Roux | Independent Wealth Manager"
+- **Status:** Not Run
+
+### TC-529
+- **Requirement:** BUG-218 — About portrait alt text (missed change)
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/About.tsx
+- **Steps:**
+  1. Open About.tsx and locate the portrait img element
+  2. Verify the alt text is "Keanu Le Roux, Independent Wealth Manager" (matching prototype)
+  3. Verify the alt text no longer says "Keanu Le Roux — Financial Advisor"
+- **Expected Result:** Portrait alt text matches prototype: "Keanu Le Roux, Independent Wealth Manager"
+- **Status:** Not Run
+
+### TC-530
+- **Requirement:** BUG-219 — Blog post detail author title (missed change)
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/BlogPostDetail.tsx
+- **Steps:**
+  1. Open BlogPostDetail.tsx and locate the blogPostAuthorTitle element
+  2. Verify the text is "Independent Wealth Manager" (was "Financial Advisor")
+  3. Navigate to a blog post detail page and verify the author title displays correctly
+- **Expected Result:** Blog post author title reads "Independent Wealth Manager"
+- **Status:** Not Run
+
+### TC-531
+- **Requirement:** BUG-220 — Blog post detail CTA text (missed change)
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/components/BlogPostDetail.tsx
+- **Steps:**
+  1. Open BlogPostDetail.tsx and locate the blogPostCta paragraph
+  2. Verify the text matches prototype blog-post.html CTA
+  3. Navigate to a blog post detail page and verify the CTA text displays correctly
+- **Expected Result:** Blog post CTA text matches prototype blog-post.html
+- **Status:** Not Run
+
+### TC-532
+- **Requirement:** BUG-221 — Blog post detail body content (missed change)
+- **Type:** End-to-End
+- **Preconditions:** Copy changes implemented in src/data/defaultPost.ts
+- **Steps:**
+  1. Open defaultPost.ts and verify the body array contains the full Gold/Oil article content
+  2. Verify the body includes sections: The Oil-Gold Connection and Russia Gold Export Restrictions and What Does This Mean for the Gold Price and What Does This Mean for You
+  3. Navigate to the default blog post detail page and verify the full article renders
+- **Expected Result:** Default post body contains the complete Gold/Oil article from prototype blog-post.html
+- **Status:** Not Run
+
+### TC-533
+- **Requirement:** Copy Changes — "Why work with me" accordion unchanged
+- **Type:** Integration
+- **Preconditions:** Copy changes implemented and About.tsx updated
+- **Steps:**
+  1. Open About.tsx and locate the "Why work with me" accordion item
+  2. Verify the content is unchanged: "You get a dedicated advisor who genuinely cares about your outcomes..."
+  3. Character-compare against prototype aboutAccordion third item
+- **Expected Result:** "Why work with me" content is identical between prototype and production (no change needed)
+- **Status:** Not Run
+
+### TC-534
+- **Requirement:** Copy Changes — No regression in Hero section
+- **Type:** Integration
+- **Preconditions:** Copy changes implemented
+- **Steps:**
+  1. Verify Hero.tsx heading "Your Wealth, Your Legacy." is unchanged
+  2. Verify Hero.tsx subtitle text is unchanged
+  3. Verify Hero.tsx CTA button text "Book Appointment" and "Subscribe to Newsletter" are unchanged
+  4. Character-compare all Hero text against prototype hero section
+- **Expected Result:** Hero section text remains identical — no copy changes required
+- **Status:** Not Run
+
+### TC-535
+- **Requirement:** Copy Changes — No regression in Services section
+- **Type:** Integration
+- **Preconditions:** Copy changes implemented
+- **Steps:**
+  1. Verify Services.tsx heading "What I Offer" is unchanged
+  2. Verify Services.tsx subtitle is unchanged
+  3. Verify all 7 service accordion titles and descriptions in services.ts are unchanged
+  4. Character-compare against prototype services and servicesAccordion sections
+- **Expected Result:** Services section text remains identical — no copy changes required
+- **Status:** Not Run
+
+### TC-536
+- **Requirement:** Copy Changes — Footer consistency across pages
+- **Type:** Integration
+- **Preconditions:** Copy changes implemented in Footer.tsx
+- **Steps:**
+  1. Load the landing page and verify footer shows "Independent Wealth Manager" tagline
+  2. Navigate to a blog post detail page and verify the same footer renders
+  3. Verify email display "Keanu@TheWealthRoom.com" appears on both pages
+  4. Verify copyright "All Rights Reserved." appears on both pages
+- **Expected Result:** Footer copy changes are consistent across landing page and blog detail page
+- **Status:** Not Run

@@ -1,0 +1,104 @@
+/**
+ * Testimonials.module.css — Styles for the client testimonials section.
+ *
+ * Layout: Off-white background alternates with the navy newsletter section
+ * above and white partners section below, creating visual rhythm.
+ *
+ * Cards use white backgrounds with subtle box-shadows for depth against
+ * the off-white section background. Flex column layout with flex:1 on
+ * the quote ensures client attribution aligns at the bottom across cards
+ * of varying quote lengths.
+ *
+ * Responsive breakpoints:
+ * - Default: 3-column grid (desktop)
+ * - ≤900px: 2-column grid (tablet)
+ * - ≤768px: 1-column stack (mobile)
+ *
+ * Design tokens referenced: --off-white, --white, --text-body, --navy, --gray-600
+ * Steel-blue accent (#7a9bb5) matches the hero primary CTA colour.
+ *
+ * Requirements: Req 5 AC 1, AC 3, AC 4, AC 5, AC 7
+ */
+
+/* Section wrapper — off-white background for visual alternation with
+   the navy newsletter above and white partners below */
+.testimonials {
+  padding: 80px 0;
+  background: var(--off-white);
+}
+
+/* 3-column responsive card grid — collapses at breakpoints below */
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* Individual testimonial card — white with subtle shadow for depth.
+   Flex column layout ensures consistent vertical alignment across cards:
+   the quote (flex:1) fills available space, pushing client info to the bottom */
+.testimonialCard {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 36px 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Decorative open-quote mark — uses steel-blue (#7a9bb5) to tie into
+   the site's CTA colour palette. Georgia serif for typographic contrast */
+.quoteIcon {
+  font-size: 2.4rem;
+  line-height: 1;
+  color: #7a9bb5;
+  font-family: Georgia, serif;
+}
+
+/* Quote body — italic for visual distinction from regular body copy.
+   flex:1 fills remaining card height so client info aligns at the bottom
+   across cards with different quote lengths */
+.quote {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-body);
+  font-style: italic;
+  flex: 1;
+  /* Reset default blockquote margin for consistent spacing */
+  margin: 0;
+}
+
+/* Client attribution container — name and role stacked vertically */
+.client {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Client name — semi-bold navy for emphasis and hierarchy */
+.clientName {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--navy);
+}
+
+/* Client role/tenure — muted grey for secondary information */
+.clientRole {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+}
+
+/* Tablet breakpoint: collapse from 3 to 2 columns */
+@media (max-width: 900px) {
+  .testimonialsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile breakpoint: single column stack */
+@media (max-width: 768px) {
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+  }
+}

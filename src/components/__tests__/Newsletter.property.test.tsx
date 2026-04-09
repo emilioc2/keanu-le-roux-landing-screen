@@ -1,45 +1,22 @@
 /**
- * Newsletter.property.test.tsx — Property-based test for the Newsletter subscribe button.
+ * Newsletter.property.test.tsx — Property-based tests for the Newsletter component.
  *
- * Property 18: Newsletter subscribe button opens in new tab
+ * Tests the inline email subscription form behaviour after the rewrite
+ * from Server Component (external link) to Client Component (inline form):
+ *   1. Subscribe button is a <button> element (not an <a> link)
+ *   2. Email input has correct accessibility attributes
+ *   3. Honeypot field is present and hidden from users
+ *   4. Benefits list renders all three items with checkmarks
  *
- * Uses fast-check to generate random newsletter URLs and verifies that
- * the Subscribe element:
- *   1. Is an `<a>` element (not a `<button>`)
- *   2. Has `target="_blank"` attribute (opens in new tab)
- *   3. Has `rel="noopener noreferrer"` attribute (security — prevents window.opener access)
- *   4. Has a non-empty external `href` attribute
- *
- * This ensures the newsletter CTA always opens safely in a new tab
- * regardless of the configured newsletter URL.
- *
- * Validates: Requirements 7.6
- * @see design.md — Correctness Property 18
+ * Validates: Req 4 AC 1–6, AC 13, AC 14, AC 17
+ * @see design.md — Newsletter component specification (Section 4.3)
  */
 
-import { describe, it, expect, vi, afterEach } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { describe, it, expect, afterEach } from 'vitest';
+import { render, cleanup, screen } from '@testing-library/react';
 import fc from 'fast-check';
 
-/**
- * Mutable reference for the newsletter URL.
- * Allows fast-check to inject random URLs per iteration
- * without re-importing the module.
- */
-const mockNewsletterUrl = { value: 'https://newsletter.example.com' };
-
-/**
- * Mock the siteConfig module so we can control the newsletterUrl
- * value across fast-check iterations. The getter ensures each
- * render picks up the latest value from mockNewsletterUrl.
- */
-vi.mock('@/data/siteConfig', () => ({
-  get newsletterUrl() {
-    return mockNewsletterUrl.value;
-  },
-}));
-
-/* Import the component under test after mocks are set up */
+/* Import the component under test — now a Client Component with form */
 import Newsletter from '../Newsletter';
 
 /**
@@ -50,63 +27,134 @@ afterEach(() => {
   cleanup();
 });
 
-describe('Newsletter — Property 18: Subscribe button opens in new tab', () => {
+describe('Newsletter — Inline form properties', () => {
   /**
-   * For any random valid external URL, the Subscribe element must be
-   * an `<a>` tag with target="_blank", rel="noopener noreferrer",
-   * and a non-empty href matching the configured URL.
-   *
-   * Uses fc.webUrl() to generate realistic external URLs, ensuring
-   * the property holds for any plausible newsletter signup destination.
+   * Property: The Subscribe element is a <button> with type="submit",
+   * not an external <a> link. This validates the rewrite from external
+   * link to inline form submission (Req 4 AC 1, AC 4).
    */
-  it('Subscribe element is an <a> with target="_blank", rel="noopener noreferrer", and non-empty external href', () => {
+  it('Subscribe element is a <button> with type="submit"', () => {
     fc.assert(
       fc.property(
-        /* Generate random valid web URLs to simulate different newsletter destinations */
-        fc.webUrl(),
-        (randomUrl) => {
-          /* Override the mocked newsletter URL with the randomly generated one */
-          mockNewsletterUrl.value = randomUrl;
-
-          /* Render the Newsletter component with the mocked URL */
-          const { unmount, getByTestId } = render(<Newsletter />);
+        /* Use a constant arbitrary since the component takes no props */
+        fc.constant(null),
+        () => {
+          const { unmount } = render(<Newsletter />);
 
           /* Locate the subscribe element via data-testid */
-          const subscribeEl = getByTestId('newsletter-subscribe');
+          const subscribeEl = screen.getByTestId('newsletter-subscribe');
 
-          /**
-           * Assertion 1: Element is an `<a>` tag, not a `<button>`.
-           * The design spec requires a link element for external navigation (Req 7.6).
-           */
-          expect(subscribeEl.tagName).toBe('A');
+          /* Must be a <button>, not an <a> — form submission, not navigation */
+          expect(subscribeEl.tagName).toBe('BUTTON');
 
-          /**
-           * Assertion 2: target="_blank" — ensures the link opens in a new tab
-           * so the visitor stays on the site (Req 7.6).
-           */
-          expect(subscribeEl.getAttribute('target')).toBe('_blank');
+          /* Must be type="submit" for form submission */
+          expect(subscribeEl.getAttribute('type')).toBe('submit');
 
-          /**
-           * Assertion 3: rel="noopener noreferrer" — prevents the opened page
-           * from accessing window.opener, a critical security measure for
-           * external links (Req 7.6).
-           */
-          expect(subscribeEl.getAttribute('rel')).toBe('noopener noreferrer');
+          /* Button text should be "Subscribe" in idle state */
+          expect(subscribeEl.textContent).toBe('Subscribe');
 
-          /**
-           * Assertion 4: href is non-empty and matches the configured URL.
-           * Ensures the link actually points somewhere useful (Req 7.6).
-           */
-          const href = subscribeEl.getAttribute('href');
-          expect(href).toBeTruthy();
-          expect(href).toBe(randomUrl);
-
-          /* Clean up DOM to prevent memory leaks between fast-check iterations */
           unmount();
         }
       ),
-      /* 100 iterations as specified in the task requirements */
-      { numRuns: 100 }
+      { numRuns: 10 }
+    );
+  });
+
+  /**
+   * Property: The email input has the correct accessibility attributes
+   * for screen readers and assistive technology (Req 4 AC 14).
+   */
+  it('Email input has aria-label, type="email", required, and placeholder', () => {
+    fc.assert(
+      fc.property(
+        fc.constant(null),
+        () => {
+          const { unmount } = render(<Newsletter />);
+
+          /* Find the email input by its data-testid */
+          const emailInput = screen.getByTestId('newsletter-email');
+
+          /* aria-label for screen readers (Req 4 AC 14) */
+          expect(emailInput.getAttribute('aria-label')).toBe('Email address for newsletter');
+
+          /* type="email" for browser-native validation */
+          expect(emailInput.getAttribute('type')).toBe('email');
+
+          /* required attribute for HTML5 validation */
+          expect(emailInput.hasAttribute('required')).toBe(true);
+
+          /* Placeholder text matches spec (Req 4 AC 2) */
+          expect(emailInput.getAttribute('placeholder')).toBe('Enter your email address');
+
+          unmount();
+        }
+      ),
+      { numRuns: 10 }
+    );
+  });
+
+  /**
+   * Property: The honeypot field is present in the DOM but hidden
+   * from real users via aria-hidden and off-screen positioning (Req 4 AC 17).
+   */
+  it('Honeypot field is present and hidden from users', () => {
+    fc.assert(
+      fc.property(
+        fc.constant(null),
+        () => {
+          const { unmount, container } = render(<Newsletter />);
+
+          /* Find the honeypot input by name attribute */
+          const honeypotInput = container.querySelector('input[name="honeypot"]');
+          expect(honeypotInput).not.toBeNull();
+
+          /* tabIndex -1 prevents keyboard focus so real users can't tab to it */
+          expect(honeypotInput?.getAttribute('tabindex')).toBe('-1');
+
+          /* autoComplete off prevents browser autofill from revealing the field */
+          expect(honeypotInput?.getAttribute('autocomplete')).toBe('off');
+
+          /* Parent wrapper has aria-hidden to hide from screen readers */
+          const honeypotWrapper = honeypotInput?.closest('[aria-hidden="true"]');
+          expect(honeypotWrapper).not.toBeNull();
+
+          unmount();
+        }
+      ),
+      { numRuns: 10 }
+    );
+  });
+
+  /**
+   * Property: All three benefit items render with non-empty text
+   * and checkmark prefixes (Req 4 AC 13).
+   */
+  it('Benefits list renders all three items with checkmarks', () => {
+    fc.assert(
+      fc.property(
+        fc.constant(null),
+        () => {
+          const { unmount, container } = render(<Newsletter />);
+
+          /* Query all benefit list items — should be exactly 3 */
+          const benefitItems = container.querySelectorAll('li');
+          expect(benefitItems.length).toBe(3);
+
+          /* Each item should have non-empty text content */
+          benefitItems.forEach((item) => {
+            expect(item.textContent?.trim().length).toBeGreaterThan(0);
+          });
+
+          /* Each item should contain a decorative checkmark span (✓) */
+          const checkmarkSpans = Array.from(
+            container.querySelectorAll('span[aria-hidden="true"]')
+          ).filter((el) => el.textContent === '✓');
+          expect(checkmarkSpans.length).toBe(3);
+
+          unmount();
+        }
+      ),
+      { numRuns: 10 }
     );
   });
 });

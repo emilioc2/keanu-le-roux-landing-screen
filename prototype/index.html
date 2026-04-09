@@ -24,7 +24,11 @@
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#blog">Insights</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <!-- Testimonials nav link — anchors to the client testimonials section -->
+        <li><a href="#testimonials">Testimonials</a></li>
+        <!-- Contact CTA — pill-styled on desktop, steel-blue to match hero CTA.
+             Regular link styling in mobile hamburger menu via CSS override -->
+        <li><a href="#contact" class="nav-cta nav-cta-blue">Get In Touch</a></li>
       </ul>
     </div>
   </nav>
@@ -38,7 +42,9 @@
       <h1>Your Wealth,<br>Your Legacy.</h1>
       <p class="hero-subtitle">Trusted financial advice to help you plan with confidence, protect what matters and build lasting wealth.</p>
       <div class="hero-ctas">
-        <a href="#contact" class="btn btn-hero-primary">Get In Touch</a>
+        <!-- Hero primary CTA — opens external booking/appointment page in new tab -->
+        <!-- Hero primary CTA — real Calendly URL replacing placeholder (BUG-200) -->
+        <a href="https://calendly.com/keanu-thewealthroom/meetingrequest" target="_blank" rel="noopener noreferrer" class="btn btn-hero-primary">Book Appointment</a>
         <a href="#newsletter" class="btn btn-hero-secondary">Subscribe to Newsletter</a>
       </div>
     </div>
@@ -266,6 +272,15 @@
           </div>
         </a>
       </div>
+      <!-- Free resource download — budget tracking spreadsheet placed below
+           the social feed cards as a value-add for visitors. The download
+           attribute triggers a file save instead of navigation. -->
+      <div class="feed-download">
+        <!-- Download href uses URL-encoded spaces to match actual filename (BUG-181/BUG-209) -->
+        <a href="Tracking%20Budget%202026.xlsx" download class="btn">
+          📥 Download Free Budget Tracker 2026
+        </a>
+      </div>
     </div>
   </section>
 
@@ -280,7 +295,63 @@
           <li>Market updates and economic insights</li>
           <li>Tips for smarter financial decisions</li>
         </ul>
-        <a href="https://newsletter.example.com" target="_blank" rel="noopener noreferrer" class="btn btn-newsletter">Subscribe</a>
+        <!-- Newsletter email capture form — uses mailto: action to send the
+             subscriber's email address to Keanu's inbox. This is a simple
+             no-backend solution; the user's mail client opens pre-filled. -->
+        <form class="newsletter-form" action="mailto:keanu@thewealthroom.com" method="POST" enctype="text/plain">
+          <!-- Email input — bottom-border-only style matching site form convention -->
+          <input type="email" name="email" placeholder="Enter your email address" required aria-label="Email address for newsletter">
+          <!-- Submit button — white outlined pill on navy background -->
+          <button type="submit" class="btn-newsletter">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials — client social proof positioned above partner logos
+       to build trust before showing institutional backing -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <!-- Reuses .section-header pattern from Content Feed and Partners -->
+      <div class="section-header">
+        <h2>What My Clients Say</h2>
+        <p>Real feedback from people I've had the privilege of working with.</p>
+      </div>
+      <!-- 3-column card grid — collapses responsively via CSS -->
+      <div class="testimonials-grid">
+        <!-- Testimonial card 1 — family/individual client -->
+        <article class="testimonial-card">
+          <span class="testimonial-quote-icon" aria-hidden="true">&ldquo;</span>
+          <blockquote class="testimonial-quote">
+            Keanu took the time to truly understand our family's goals. His advice gave us clarity and confidence in our financial future.
+          </blockquote>
+          <div class="testimonial-client">
+            <span class="testimonial-name">Sarah M.</span>
+            <span class="testimonial-role">Client since 2023</span>
+          </div>
+        </article>
+        <!-- Testimonial card 2 — business owner client -->
+        <article class="testimonial-card">
+          <span class="testimonial-quote-icon" aria-hidden="true">&ldquo;</span>
+          <blockquote class="testimonial-quote">
+            Working with Keanu has been a game-changer for my business finances. He simplified what felt overwhelming and built a plan that actually works.
+          </blockquote>
+          <div class="testimonial-client">
+            <span class="testimonial-name">James T.</span>
+            <span class="testimonial-role">Business Owner</span>
+          </div>
+        </article>
+        <!-- Testimonial card 3 — retirement planning client -->
+        <article class="testimonial-card">
+          <span class="testimonial-quote-icon" aria-hidden="true">&ldquo;</span>
+          <blockquote class="testimonial-quote">
+            I finally feel in control of my retirement planning. Keanu's transparent, no-pressure approach is exactly what I was looking for.
+          </blockquote>
+          <div class="testimonial-client">
+            <span class="testimonial-name">Priya N.</span>
+            <span class="testimonial-role">Client since 2024</span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -296,22 +367,20 @@
     <!-- Overflow hidden container masks the scrolling track -->
     <div class="partners-carousel" aria-label="Trusted partner logos">
       <!-- Track holds two identical logo sets — the duplicate creates a seamless infinite loop -->
+      <!-- Partner logos: 5 logos only (Allan Gray, BrightRock, Discovery, Momentum, Ninety One).
+           Ashburton and Sygnia removed per Req 7 to match production partner list. -->
       <div class="partners-track">
-        <img src="sygnia-300x167.png" alt="Sygnia" class="partner-logo">
-        <img src="Discovery-300x167.png" alt="Discovery" class="partner-logo">
         <img src="Allangrey-300x167.png" alt="Allan Gray" class="partner-logo">
         <img src="Brightrock-300x167.png" alt="BrightRock" class="partner-logo">
-        <img src="ninetyone-300x167.png" alt="Ninety One" class="partner-logo">
+        <img src="Discovery-300x167.png" alt="Discovery" class="partner-logo">
         <img src="momentum-300x167.png" alt="Momentum" class="partner-logo">
-        <img src="ashburton-300x167.png" alt="Ashburton" class="partner-logo">
+        <img src="ninetyone-300x167.png" alt="Ninety One" class="partner-logo">
         <!-- Duplicate set for seamless loop — hidden from screen readers -->
-        <img src="sygnia-300x167.png" alt="" aria-hidden="true" class="partner-logo">
-        <img src="Discovery-300x167.png" alt="" aria-hidden="true" class="partner-logo">
         <img src="Allangrey-300x167.png" alt="" aria-hidden="true" class="partner-logo">
         <img src="Brightrock-300x167.png" alt="" aria-hidden="true" class="partner-logo">
-        <img src="ninetyone-300x167.png" alt="" aria-hidden="true" class="partner-logo">
+        <img src="Discovery-300x167.png" alt="" aria-hidden="true" class="partner-logo">
         <img src="momentum-300x167.png" alt="" aria-hidden="true" class="partner-logo">
-        <img src="ashburton-300x167.png" alt="" aria-hidden="true" class="partner-logo">
+        <img src="ninetyone-300x167.png" alt="" aria-hidden="true" class="partner-logo">
       </div>
     </div>
   </section>
@@ -384,7 +453,8 @@
       </div>
 
       <div class="footer-details">
-        <p>T +27 83 789 8227</p>
+        <!-- Updated contact number per client request -->
+        <p>T +27 65 572 3909</p>
         <p>An Authorised Financial Services Representative</p>
         <p>&copy; 2026 Keanu Le Roux. All Rights Reserved.</p>
       </div>

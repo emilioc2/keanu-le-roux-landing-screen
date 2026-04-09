@@ -210,6 +210,23 @@ export default function SocialFeed() {
             </ScrollReveal>
           ))}
         </div>
+
+        {/*
+         * Budget tracker download button (Req 6 AC 1–6, AC 8).
+         * URL-encoded href matches the filename with spaces (BUG-181).
+         * The `download` attribute triggers a file save dialog instead of
+         * navigating to the file. The global `.btn` class provides the
+         * standard navy-outlined pill styling from globals.css.
+         */}
+        <div className={styles.feedDownload}>
+          <a
+            href="/Tracking%20Budget%202026.xlsx"
+            download
+            className="btn"
+          >
+            📥 Download Free Budget Tracker 2026
+          </a>
+        </div>
       </div>
     </section>
   );

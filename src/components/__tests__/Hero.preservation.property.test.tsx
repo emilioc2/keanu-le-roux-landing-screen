@@ -239,12 +239,13 @@ describe('Hero Preservation — Property 4: Content Always Present', () => {
         expect(screen.getByText(/Your Wealth,/)).toBeTruthy();
         expect(screen.getByText(/Your Legacy\./)).toBeTruthy();
 
-        // Assert: primary CTA "Get In Touch" links to the contact section
-        const getInTouch = screen.getByText('Get In Touch');
-        expect(getInTouch).toBeTruthy();
-        expect(getInTouch.getAttribute('href')).toBe('#contact');
+        // Assert: primary CTA "Book Appointment" links to Calendly (ENH-6, Req 2 AC 1–4).
+        // The CTA opens in a new tab — no longer an anchor scroll to #contact.
+        const bookAppointment = screen.getByText('Book Appointment');
+        expect(bookAppointment).toBeTruthy();
+        expect(bookAppointment.getAttribute('href')).toBe('https://calendly.com/keanu-thewealthroom/meetingrequest');
 
-        // Assert: secondary CTA "Subscribe to Newsletter" links to newsletter section
+        // Assert: secondary CTA "Subscribe to Newsletter" links to newsletter section (unchanged)
         const subscribe = screen.getByText('Subscribe to Newsletter');
         expect(subscribe).toBeTruthy();
         expect(subscribe.getAttribute('href')).toBe('#newsletter');

@@ -225,6 +225,16 @@
   color: #e4405f;
 }
 
+/**
+ * Budget tracker download button container (Req 6 AC 7, AC 8).
+ * Centres the download anchor below the feed card grid with 48px spacing.
+ * The anchor itself uses the global `.btn` class for pill styling.
+ */
+.feedDownload {
+  text-align: center;
+  margin-top: 48px;
+}
+
 /* ===== Responsive: single column on mobile ≤900px (Req 6.2) ===== */
 
 @media (max-width: 900px) {

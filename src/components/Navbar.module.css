@@ -112,6 +112,81 @@
   color: var(--accent);
 }
 
+/* ----- Nav CTA Pill Button -----
+ * Pill-shaped button treatment for the "Get In Touch" link,
+ * making it visually distinct from regular nav links as the
+ * primary call-to-action. Uses the same 40px border-radius
+ * pill shape from the site's button convention.
+ * Visual source: prototype/styles.css (.nav-cta section)
+ * Requirements: Req 3 AC 7–16
+ */
+
+/* Base .navCta on transparent navbar — white outlined pill */
+.navCta {
+  padding: 8px 24px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 40px;
+  color: var(--white) !important;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+/* Hover on transparent navbar — fills white to invert against the dark hero */
+.navCta:hover {
+  background: var(--white);
+  color: var(--navy) !important;
+  border-color: var(--white);
+}
+
+/* Scrolled state — switch to navy border on white background */
+.scrolled .navCta {
+  border-color: var(--navy);
+  color: var(--navy) !important;
+}
+
+/* Scrolled hover — fills navy to invert against the white navbar */
+.scrolled .navCta:hover {
+  background: var(--navy);
+  color: var(--white) !important;
+  border-color: var(--navy);
+}
+
+/* ----- Nav CTA Blue Variant -----
+ * Solid steel-blue fill (#7a9bb5) matching the hero primary CTA
+ * colour for visual consistency across the site. Applied alongside
+ * .navCta to override the outlined style with a filled variant.
+ * Visual source: prototype/styles.css (.nav-cta.nav-cta-blue)
+ */
+
+/* Transparent navbar — solid steel-blue fill */
+.navCtaBlue {
+  border-color: #7a9bb5;
+  background: #7a9bb5;
+  color: var(--white) !important;
+}
+
+/* Transparent hover — darker steel-blue for interactive feedback */
+.navCtaBlue:hover {
+  background: #6889a3;
+  border-color: #6889a3;
+  color: var(--white) !important;
+}
+
+/* Scrolled state — retains steel-blue fill (does NOT switch to navy outline) */
+.scrolled .navCtaBlue {
+  border-color: #7a9bb5;
+  background: #7a9bb5;
+  color: var(--white) !important;
+}
+
+/* Scrolled hover — slightly darker steel-blue */
+.scrolled .navCtaBlue:hover {
+  background: #6889a3;
+  border-color: #6889a3;
+  color: var(--white) !important;
+}
+
 /* ----- Hamburger Toggle Button -----
  * Hidden on desktop (>768px). Shown on mobile as a 3-line icon.
  * Lines are CSS spans, not SVG — per task requirements.
@@ -180,5 +255,23 @@
   /* Hover accent on mobile dropdown links */
   .navLinks.open .navLink:hover {
     color: var(--accent);
+  }
+
+  /*
+   * Mobile override — strip all pill styling from CTA links in the
+   * dropdown so they match the other nav links: plain text, navy colour,
+   * no border. Both .navCta and .navCtaBlue need to be overridden here.
+   * Visual source: prototype/styles.css (.nav-links.active .nav-cta)
+   * Requirements: Req 3 AC 15, AC 16
+   */
+  .navLinks.open .navCta,
+  .navLinks.open .navCtaBlue {
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--navy) !important;
+    font-weight: 400;
+    letter-spacing: 0.04em;
   }
 }

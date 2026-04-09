@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "name": "Code Comments Reminder",
-  "description": "Does not execute on markdown files. Reminds the developer and configuration engineer to include clear, meaningful code comments when writing or editing code files. Ensures all functions, components, complex logic, and configuration choices are documented inline.",
+  "description": "Should only be invoked for the @developer and @configuration_engineer agents. Does not execute on markdown files. Reminds the developer and configuration engineer to include clear, meaningful code comments when writing or editing code files. Ensures all functions, components, complex logic, and configuration choices are documented inline.",
   "version": "1",
   "when": {
     "type": "preToolUse",

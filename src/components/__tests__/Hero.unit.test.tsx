@@ -117,24 +117,26 @@ describe('Hero — Poster fallback', () => {
 });
 
 /* =====================================================================
- * CTA href values (Req 2.9, 2.10)
+ * CTA href values (Req 2 AC 1–4, ENH-6)
  *
- * The two hero CTA buttons must link to the correct section anchors:
- *   - "Get In Touch" → #contact (Req 2.9)
+ * The two hero CTA buttons must link to the correct destinations:
+ *   - "Book Appointment" → Calendly URL (external, new tab) (Req 2 AC 1–4)
  *   - "Subscribe to Newsletter" → #newsletter (Req 2.10)
  * ===================================================================== */
 describe('Hero — CTA href values', () => {
-  it('"Get In Touch" button links to #contact', () => {
+  /** Primary CTA opens Calendly booking page in a new tab with security attrs */
+  it('"Book Appointment" button links to Calendly booking page', () => {
     render(<Hero />);
-    const cta = screen.getByText('Get In Touch');
-    /** Primary CTA smooth-scrolls to the contact form section */
-    expect(cta.getAttribute('href')).toBe('#contact');
+    const cta = screen.getByText('Book Appointment');
+    expect(cta.getAttribute('href')).toBe('https://calendly.com/keanu-thewealthroom/meetingrequest');
+    expect(cta.getAttribute('target')).toBe('_blank');
+    expect(cta.getAttribute('rel')).toBe('noopener noreferrer');
   });
 
+  /** Secondary CTA smooth-scrolls to the newsletter section (unchanged) */
   it('"Subscribe to Newsletter" button links to #newsletter', () => {
     render(<Hero />);
     const cta = screen.getByText('Subscribe to Newsletter');
-    /** Secondary CTA smooth-scrolls to the newsletter section */
     expect(cta.getAttribute('href')).toBe('#newsletter');
   });
 });

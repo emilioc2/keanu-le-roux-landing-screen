@@ -10,7 +10,7 @@
  *
  * The component order matches the prototype's visual section order:
  * Navbar → Hero → About → Services → Blog → SocialFeed → Newsletter →
- * Partners → ContactForm → Footer
+ * Testimonials → Partners → ContactForm → Footer
  *
  * Note: Navbar and Footer render inside the <main> from layout.tsx.
  * This is a known layout issue (BUG-044) to be addressed separately.
@@ -25,6 +25,9 @@ import Services from '@/components/Services';
 import Blog from '@/components/Blog';
 import SocialFeed from '@/components/SocialFeed';
 import Newsletter from '@/components/Newsletter';
+/* Testimonials section — client social proof positioned between Newsletter
+ * and Partners to build trust before showing institutional backing */
+import Testimonials from '@/components/Testimonials';
 import Partners from '@/components/Partners';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
@@ -76,8 +79,11 @@ export default async function Home() {
       <Blog posts={posts} />
       {/* YouTube, LinkedIn, Instagram feed cards */}
       <SocialFeed />
-      {/* Navy CTA section with external subscribe link */}
+      {/* Navy CTA section with inline email subscribe form */}
       <Newsletter />
+      {/* Client testimonials — 3 social-proof cards with ScrollReveal fade-up
+       * animation, positioned before Partners to build trust (Req 5 AC 9) */}
+      <Testimonials />
       {/* Static partner logo row */}
       <Partners />
       {/* Lead-capture form with validation and success state */}

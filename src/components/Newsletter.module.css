@@ -1,17 +1,17 @@
 /**
  * Newsletter.module.css — Styles for the Newsletter subscribe CTA section.
  *
- * Navy background section with centred content, benefit list, and
- * an external subscribe link. All colour and font values reference
- * design tokens from globals.css (BUG-047).
+ * Navy background section with centred content, benefit list, inline
+ * email form, success/error states, and honeypot spam trap.
+ * All colour and font values reference design tokens from globals.css.
  *
  * Visual source of truth: prototype/styles.css (.newsletter block)
- * Requirements: 7.1–7.7
+ * Requirements: Req 4 AC 1–17
  */
 
 /* ----- Section wrapper -----
  * Navy background with 80px vertical padding, centred text.
- * Matches prototype .newsletter exactly (Req 7.1).
+ * Matches prototype .newsletter exactly.
  */
 .newsletter {
   padding: 80px 0;
@@ -21,7 +21,7 @@
 
 /* ----- Content container -----
  * Constrains the inner content to 560px for readability,
- * matching prototype .newsletter-inner (Req 7.1).
+ * matching prototype .newsletter-inner.
  */
 .newsletterContent {
   max-width: 560px;
@@ -30,7 +30,6 @@
 
 /* ----- Heading -----
  * "Stay Ahead of the Curve" — italic serif, white text.
- * Matches prototype .newsletter h2 (Req 7.2).
  */
 .heading {
   font-family: var(--font-heading);
@@ -43,7 +42,6 @@
 
 /* ----- Description paragraph -----
  * Light white text at 70% opacity explaining subscriber value.
- * Matches prototype .newsletter p (Req 7.3).
  */
 .description {
   color: rgba(255, 255, 255, 0.7);
@@ -54,7 +52,6 @@
 
 /* ----- Benefit list -----
  * Horizontal flex layout with wrap for the three benefit items.
- * Centred with 24px gap between items (Req 7.4).
  */
 .benefits {
   display: flex;
@@ -64,10 +61,7 @@
   margin-bottom: 32px;
 }
 
-/* ----- Individual benefit item -----
- * Each item displays a checkmark + text inline.
- * Matches prototype .newsletter-benefits li (Req 7.4).
- */
+/* ----- Individual benefit item ----- */
 .benefit {
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.65);
@@ -76,22 +70,137 @@
   gap: 8px;
 }
 
-/* ----- Checkmark prefix -----
- * "✓" character preceding each benefit text.
- * Uses rgba white at 50% opacity to match prototype .newsletter-benefits li::before.
- */
+/* ----- Checkmark prefix ----- */
 .checkmark {
   color: rgba(255, 255, 255, 0.5);
   font-weight: 600;
 }
 
+/* ----- Newsletter form container (Req 4 AC 5) -----
+ * Flex row for email input + subscribe button, centred with max-width.
+ * Stacks vertically on mobile (≤768px) per Req 4 AC 6.
+ */
+.newsletterForm {
+  display: flex;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+  /* Relative positioning needed for the absolutely-positioned honeypot */
+  position: relative;
+}
+
+/* ----- Email input (Req 4 AC 2, AC 3) -----
+ * Bottom-border-only style matching the site's form convention.
+ * Transparent background on navy section, white text.
+ */
+.newsletterForm input {
+  flex: 1;
+  padding: 14px 0;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: var(--white);
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+/* Placeholder text — subtle white at 40% opacity */
+.newsletterForm input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Focus state — border brightens to full white for visibility */
+.newsletterForm input:focus {
+  border-color: var(--white);
+}
+
+/* ----- Subscribe button (Req 4 AC 4) -----
+ * White outlined pill on navy background. Uses CSS Module class
+ * .btnNewsletter (NOT the global .btn-newsletter) per BUG-206.
+ * Padding 14px 32px matches prototype .newsletter-form button.
+ */
+.btnNewsletter {
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 40px;
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+/* Hover — fills white with navy text for contrast inversion */
+.btnNewsletter:hover {
+  background: var(--white);
+  color: var(--navy);
+  border-color: var(--white);
+}
+
+/* Disabled state — visual indicator during form submission (Req 4 AC 15) */
+.btnNewsletter:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ----- Success confirmation (Req 4 AC 10) -----
+ * Replaces the form after successful submission.
+ * Green checkmark SVG + heading + subtitle, centred.
+ */
+.newsletterSuccess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ----- Error message (Req 4 AC 11) -----
+ * Inline retry message shown below the form on submission failure.
+ * Red-tinted text with role="alert" for screen reader announcement.
+ * BUG-204: production-only addition, no prototype equivalent.
+ */
+.newsletterError {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: rgba(255, 100, 100, 0.9);
+  font-size: 0.85rem;
+}
+
+/* ----- Honeypot spam trap (Req 4 AC 17) -----
+ * Hidden off-screen so real users never see it.
+ * Bots that auto-fill all fields will populate it,
+ * triggering silent rejection on the server.
+ */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  height: 0;
+  overflow: hidden;
+}
+
 /* ----- Mobile responsive (≤768px) -----
- * Stack benefit items vertically on small screens.
- * Matches prototype @media (max-width: 768px) behaviour.
+ * Stack benefit items and form elements vertically on small screens.
  */
 @media (max-width: 768px) {
   .benefits {
     flex-direction: column;
     align-items: center;
+  }
+
+  /* Stack email input and button vertically (Req 4 AC 6) */
+  .newsletterForm {
+    flex-direction: column;
   }
 }

@@ -128,9 +128,15 @@ export default function Hero() {
           * in the module CSS — they come from the shared globals. */}
         <div className={styles.heroButtons}>
           {/* Primary CTA — solid steel blue (#7a9bb5) fill with white text.
-            * Smooth-scrolls to the contact form section (Req 2.9, 2.11). */}
-          <a href="#contact" className="btn btn-hero-primary">
-            Get In Touch
+            * Opens Calendly booking page in a new tab (ENH-6, Req 2 AC 1–4).
+            * target="_blank" + rel="noopener noreferrer" for security. */}
+          <a
+            href="https://calendly.com/keanu-thewealthroom/meetingrequest"
+            className="btn btn-hero-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Book Appointment
           </a>
 
           {/* Secondary CTA — white outlined, transparent fill.

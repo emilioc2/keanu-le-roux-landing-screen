@@ -78,6 +78,14 @@ export interface NavLink {
   label: string;
   /** Anchor or path target */
   href: string;
+  /**
+   * When true, the Navbar renders this link with `.navCta.navCtaBlue` pill
+   * styling instead of the standard `.navLink` class. Used for the primary
+   * navigation call-to-action ("Get In Touch").
+   * @see Navbar.module.css — .navCta, .navCtaBlue
+   * @requirements Req 3 AC 6
+   */
+  isCta?: boolean;
 }
 
 /**

@@ -6563,3 +6563,1318 @@ Updated: 2026-04-03
   2. Check alt attribute and aria-hidden attribute
 - **Expected Result:** Duplicated logos should have aria-hidden="true" and alt="" (empty string) for full accessibility compliance.
 - **Status:** Fail (Code Review) — BUG-173: Duplicated logos have non-empty alt alongside aria-hidden="true"
+
+
+---
+
+## Prototype Enhancements
+
+Test cases for the 9 prototype enhancements (ENH-1, 2, 3, 6, 7, 8, 9, 10, 11).
+All test cases are pre-implementation and have Status: Not Run.
+
+Generated: 2026-04-11
+
+---
+
+### ENH-1: Testimonials Section
+
+### TC-537
+- **Requirement:** ENH-1 AC 1
+- **Type:** End-to-End
+- **Preconditions:** Website loaded at desktop viewport
+- **Steps:**
+  1. Scroll to the Testimonials section
+  2. Inspect the section background colour
+  3. Inspect the vertical padding
+- **Expected Result:** Background is off-white (#f9f9f9); vertical padding is 80px top and bottom
+- **Status:** Not Run
+
+### TC-538
+- **Requirement:** ENH-1 AC 2
+- **Type:** End-to-End
+- **Preconditions:** Website loaded at desktop viewport
+- **Steps:**
+  1. Scroll to the Testimonials section
+  2. Observe the section header
+  3. Verify heading text and subtitle text
+- **Expected Result:** Centred heading "What My Clients Say" and subtitle "Real feedback from people I've had the privilege of working with." with 48px bottom margin on the header
+- **Status:** Not Run
+
+### TC-539
+- **Requirement:** ENH-1 AC 3, AC 4, AC 5
+- **Type:** End-to-End
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. View Testimonials section at desktop (>900px) — observe grid layout
+  2. Resize to 900px or below — observe grid layout
+  3. Resize to 768px or below — observe grid layout
+- **Expected Result:** Desktop: 3-column grid with 32px gap. At ≤900px: 2-column grid. At ≤768px: single-column stack.
+- **Status:** Not Run
+
+### TC-540
+- **Requirement:** ENH-1 AC 6
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled to Testimonials section
+- **Steps:**
+  1. Count the number of testimonial cards
+  2. Verify Card 1: Sarah M. (Client since 2023) with correct quote text
+  3. Verify Card 2: James T. (Business Owner) with correct quote text
+  4. Verify Card 3: Priya N. (Client since 2024) with correct quote text
+- **Expected Result:** Exactly 3 cards with content matching the prototype verbatim
+- **Status:** Not Run
+
+### TC-541
+- **Requirement:** ENH-1 AC 7
+- **Type:** Integration
+- **Preconditions:** Website loaded, scrolled to Testimonials section
+- **Steps:**
+  1. Inspect each card for decorative open-quote icon (steel-blue #7a9bb5, 2.4rem, Georgia serif)
+  2. Verify blockquote element with italic text
+  3. Verify client name in semi-bold navy (font-weight 600, 0.9rem)
+  4. Verify client role in muted grey (#666, 0.82rem)
+- **Expected Result:** Each card contains all four elements with correct styling matching prototype CSS values
+- **Status:** Not Run
+
+### TC-542
+- **Requirement:** ENH-1 AC 8
+- **Type:** Integration
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. Inspect the Testimonials section outermost element
+  2. Verify it has id="testimonials"
+- **Expected Result:** Section element has id="testimonials" for anchor navigation
+- **Status:** Not Run
+
+### TC-543
+- **Requirement:** ENH-1 AC 9
+- **Type:** End-to-End
+- **Preconditions:** Website loaded at desktop viewport
+- **Steps:**
+  1. Scroll through the page and observe section order
+  2. Verify Testimonials appears after Newsletter and before Partners
+- **Expected Result:** Page order is: ...Newsletter → Testimonials → Partners...
+- **Status:** Not Run
+
+### TC-544
+- **Requirement:** ENH-1 (Card CSS)
+- **Type:** Integration
+- **Preconditions:** Website loaded, scrolled to Testimonials section
+- **Steps:**
+  1. Inspect testimonial card CSS: background, border-radius, padding, box-shadow, flex layout
+- **Expected Result:** White background, border-radius 12px, padding 36px 32px, box-shadow 0 2px 12px rgba(0,0,0,0.06), flex column with gap 20px
+- **Status:** Not Run
+
+---
+
+### ENH-2: Nav Links + Contact Pill CTA
+
+### TC-545
+- **Requirement:** ENH-2 AC 1
+- **Type:** End-to-End
+- **Preconditions:** Website loaded at desktop viewport
+- **Steps:**
+  1. Observe the navbar navigation items
+  2. Count the items and verify order
+- **Expected Result:** 6 items in order: Home, About, Services, Insights, Testimonials, Get In Touch
+- **Status:** Not Run
+
+### TC-546
+- **Requirement:** ENH-2 AC 2
+- **Type:** End-to-End
+- **Preconditions:** Website loaded on landing page
+- **Steps:**
+  1. Inspect the "Testimonials" nav link href
+  2. Navigate to a blog post detail page
+  3. Inspect the "Testimonials" nav link href on the blog page
+- **Expected Result:** Landing page: href="#testimonials". Blog page: href="/#testimonials"
+- **Status:** Not Run
+
+### TC-547
+- **Requirement:** ENH-2 AC 3
+- **Type:** End-to-End
+- **Preconditions:** Website loaded on landing page
+- **Steps:**
+  1. Inspect the "Get In Touch" nav link href
+  2. Navigate to a blog post detail page
+  3. Inspect the "Get In Touch" nav link href on the blog page
+- **Expected Result:** Landing page: href="#contact". Blog page: href="/#contact"
+- **Status:** Not Run
+
+### TC-548
+- **Requirement:** ENH-2 AC 4
+- **Type:** Integration
+- **Preconditions:** Website loaded at desktop viewport
+- **Steps:**
+  1. Inspect the "Get In Touch" link for CSS classes
+  2. Verify it has .nav-cta and .nav-cta-blue classes applied
+  3. Verify visual appearance: solid steel-blue pill with white text
+- **Expected Result:** Link has both CTA classes; renders as steel-blue (#7a9bb5) filled pill button with white text
+- **Status:** Not Run
+
+### TC-549
+- **Requirement:** ENH-2 AC 5
+- **Type:** End-to-End
+- **Preconditions:** Website loaded at viewport width at or below 768px
+- **Steps:**
+  1. Open the mobile hamburger menu
+  2. Inspect the "Get In Touch" link styling
+- **Expected Result:** No border, no background, no border-radius; plain navy text matching other nav links (font-weight 400, letter-spacing 0.04em)
+- **Status:** Not Run
+
+### TC-550
+- **Requirement:** ENH-2 AC 6
+- **Type:** Integration
+- **Preconditions:** Code review of siteConfig.ts and types.ts
+- **Steps:**
+  1. Inspect NavLink type for CTA styling property
+  2. Inspect navLinks array for CTA metadata on the "Get In Touch" entry
+- **Expected Result:** NavLink type has a mechanism (boolean or className) to identify CTA links; "Get In Touch" entry uses it
+- **Status:** Not Run
+
+### TC-551
+- **Requirement:** ENH-2 (Testimonials smooth scroll)
+- **Type:** End-to-End
+- **Preconditions:** Website loaded on landing page
+- **Steps:**
+  1. Click the "Testimonials" nav link
+  2. Observe scroll behaviour
+- **Expected Result:** Page smooth-scrolls to the #testimonials section
+- **Status:** Not Run
+
+---
+
+### ENH-3: Partner Logos Sync (Prototype Only)
+
+### TC-552
+- **Requirement:** ENH-3 AC 1
+- **Type:** End-to-End
+- **Preconditions:** Prototype index.html loaded in browser
+- **Steps:**
+  1. Scroll to the Partners section
+  2. Count the unique partner logos in the primary set
+  3. Verify logos are: Allan Grey, BrightRock, Discovery, Momentum, Ninety One
+- **Expected Result:** Exactly 5 partner logos displayed in the primary carousel track set
+- **Status:** Not Run
+
+### TC-553
+- **Requirement:** ENH-3 AC 2
+- **Type:** Integration
+- **Preconditions:** Prototype index.html source code open
+- **Steps:**
+  1. Search for "ashburton" in the .partners-track div
+  2. Search for "sygnia" in the .partners-track div
+- **Expected Result:** No Ashburton or Sygnia img tags found in either the primary or duplicate carousel track sets
+- **Status:** Not Run
+
+### TC-554
+- **Requirement:** ENH-3 AC 3
+- **Type:** Integration
+- **Preconditions:** Production site loaded
+- **Steps:**
+  1. Scroll to Partners section
+  2. Verify 5 logos displayed
+- **Expected Result:** Production Partners section remains unchanged at 5 logos (Allan Grey, BrightRock, Discovery, Momentum, Ninety One)
+- **Status:** Not Run
+
+---
+
+### ENH-6: Hero Primary CTA Changed
+
+### TC-555
+- **Requirement:** ENH-6 AC 1
+- **Type:** End-to-End
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. Observe the hero section primary CTA button text
+- **Expected Result:** Button displays "Book Appointment"
+- **Status:** Not Run
+
+### TC-556
+- **Requirement:** ENH-6 AC 2, AC 3
+- **Type:** End-to-End
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. Inspect the "Book Appointment" button href attribute
+  2. Inspect target and rel attributes
+  3. Click the button
+- **Expected Result:** href is "https://calendly.com/keanu-thewealthroom/meetingrequest"; target="_blank"; rel="noopener noreferrer"; opens Calendly in new tab
+- **Status:** Not Run
+
+### TC-557
+- **Requirement:** ENH-6 AC 4
+- **Type:** End-to-End
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. Click the "Book Appointment" button
+  2. Observe page behaviour
+- **Expected Result:** Page does NOT smooth-scroll to the Contact Form section; a new tab opens instead
+- **Status:** Not Run
+
+### TC-558
+- **Requirement:** ENH-6 AC 5, AC 6
+- **Type:** Integration
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. Inspect "Book Appointment" button CSS: background, text colour, border-radius
+  2. Hover over the button and inspect hover state
+- **Expected Result:** Default: steel-blue (#7a9bb5) fill, white text, border-radius 40px. Hover: darkens to #6889a3
+- **Status:** Not Run
+
+### TC-559
+- **Requirement:** ENH-6 AC 7
+- **Type:** End-to-End
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. Observe the secondary CTA button in the hero
+  2. Verify text, href, and behaviour
+- **Expected Result:** "Subscribe to Newsletter" button links to #newsletter and smooth-scrolls — unchanged from current implementation
+- **Status:** Not Run
+
+---
+
+### ENH-7: Nav CTA Blue Variant CSS
+
+### TC-560
+- **Requirement:** ENH-7 AC 1
+- **Type:** Integration
+- **Preconditions:** Website loaded at desktop viewport, navbar transparent (at top of page)
+- **Steps:**
+  1. Inspect the .nav-cta element for padding, border-radius, border, font-weight
+- **Expected Result:** padding 8px 24px, border-radius 40px, 1.5px solid border, font-weight 500
+- **Status:** Not Run
+
+### TC-561
+- **Requirement:** ENH-7 AC 2, AC 3
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, navbar in transparent state (scrollY = 0)
+- **Steps:**
+  1. Observe the .nav-cta base styling: border colour, text colour
+  2. Hover over the .nav-cta
+- **Expected Result:** Default: white semi-transparent border rgba(255,255,255,0.6), white text. Hover: white background, navy text
+- **Status:** Not Run
+
+### TC-562
+- **Requirement:** ENH-7 AC 4, AC 5
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled past 50px (navbar in scrolled state)
+- **Steps:**
+  1. Observe the .nav-cta styling: border colour, text colour
+  2. Hover over the .nav-cta
+- **Expected Result:** Default: navy border, navy text. Hover: navy background, white text
+- **Status:** Not Run
+
+### TC-563
+- **Requirement:** ENH-7 AC 6, AC 7
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, navbar in transparent state
+- **Steps:**
+  1. Observe the .nav-cta.nav-cta-blue element: background, border, text colour
+  2. Hover over the element
+- **Expected Result:** Default: steel-blue (#7a9bb5) background and border, white text. Hover: #6889a3 background and border, white text
+- **Status:** Not Run
+
+### TC-564
+- **Requirement:** ENH-7 AC 8, AC 9
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled past 50px (navbar in scrolled/white state)
+- **Steps:**
+  1. Observe the .nav-cta.nav-cta-blue element: background, border, text colour
+  2. Hover over the element
+- **Expected Result:** Default: retains steel-blue (#7a9bb5) background and border, white text (does NOT switch to navy outline). Hover: #6889a3 background and border, white text
+- **Status:** Not Run
+
+### TC-565
+- **Requirement:** ENH-7 AC 10
+- **Type:** End-to-End
+- **Preconditions:** Website loaded at viewport width at or below 768px
+- **Steps:**
+  1. Open the mobile hamburger menu
+  2. Inspect .nav-cta and .nav-cta.nav-cta-blue styling
+- **Expected Result:** Both stripped of pill styling: border none, padding 0, border-radius 0, background transparent, navy text, font-weight 400, letter-spacing 0.04em
+- **Status:** Not Run
+
+---
+
+### ENH-8: Free Resource Download (Budget Tracker)
+
+### TC-566
+- **Requirement:** ENH-8 AC 1, AC 8
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled to Social Feed section
+- **Steps:**
+  1. Scroll past the feed card grid
+  2. Observe the download button below the cards
+  3. Verify it is centred horizontally
+- **Expected Result:** A centred download button appears below the feed grid with text-align: center on its container
+- **Status:** Not Run
+
+### TC-567
+- **Requirement:** ENH-8 AC 2
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled to Social Feed section
+- **Steps:**
+  1. Read the download button text
+- **Expected Result:** Button text is "📥 Download Free Budget Tracker 2026" (including emoji prefix)
+- **Status:** Not Run
+
+### TC-568
+- **Requirement:** ENH-8 AC 3, AC 4
+- **Type:** Integration
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. Inspect the download button href attribute
+  2. Inspect for the HTML download attribute
+- **Expected Result:** href points to /Tracking Budget 2026.xlsx (or correct filename); download attribute is present
+- **Status:** Not Run
+
+### TC-569
+- **Requirement:** ENH-8 AC 5, AC 6
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled to download button
+- **Steps:**
+  1. Inspect button CSS: pill shape, navy outlined border, transparent background
+  2. Hover over the button
+- **Expected Result:** Default: .btn class styling (border-radius 40px, 1.5px navy border, transparent bg). Hover: navy background, white text
+- **Status:** Not Run
+
+### TC-570
+- **Requirement:** ENH-8 AC 7
+- **Type:** Integration
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. Inspect the download button container margin-top
+- **Expected Result:** Container has margin-top: 48px separating it from the feed grid
+- **Status:** Not Run
+
+---
+
+### ENH-9: Budget Tracker File
+
+### TC-571
+- **Requirement:** ENH-9 AC 1, AC 5
+- **Type:** End-to-End
+- **Preconditions:** Production site deployed
+- **Steps:**
+  1. Navigate to /Tracking Budget 2026.xlsx in the browser
+  2. Verify the file downloads
+- **Expected Result:** File is accessible and downloads as an Excel spreadsheet
+- **Status:** Not Run
+
+### TC-572
+- **Requirement:** ENH-9 AC 2, AC 3
+- **Type:** Integration
+- **Preconditions:** File copied to public/ directory
+- **Steps:**
+  1. Open the .xlsx file in Excel or a spreadsheet viewer
+  2. Verify it is a monthly budget tracking template
+  3. Check for budget categories: Income, Home Expenses, Transportation, Health/Insurance, Charity/Gifts, Daily Living, Entertainment, Savings/Investments, Debts/Financing, Subscriptions, Miscellaneous
+- **Expected Result:** Valid Excel spreadsheet with all 11 budget categories present
+- **Status:** Not Run
+
+### TC-573
+- **Requirement:** ENH-9 AC 4
+- **Type:** Integration
+- **Preconditions:** File opened in spreadsheet viewer
+- **Steps:**
+  1. Look for charts in the spreadsheet
+  2. Verify income trend chart exists
+  3. Verify monthly expense breakdown chart exists
+- **Expected Result:** Spreadsheet contains charts for income trend and monthly expense breakdowns
+- **Status:** Not Run
+
+---
+
+### ENH-10: Newsletter Inline Email Form
+
+### TC-574
+- **Requirement:** ENH-10 AC 1
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled to Newsletter section
+- **Steps:**
+  1. Observe the Newsletter section
+  2. Verify an inline email form is present (not an external link button)
+- **Expected Result:** An email input field and submit button are visible; no external link button
+- **Status:** Not Run
+
+### TC-575
+- **Requirement:** ENH-10 AC 2, AC 14
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled to Newsletter section
+- **Steps:**
+  1. Observe the email input placeholder text
+  2. Inspect the input for aria-label attribute
+- **Expected Result:** Placeholder: "Enter your email address"; aria-label: "Email address for newsletter"
+- **Status:** Not Run
+
+### TC-576
+- **Requirement:** ENH-10 AC 3
+- **Type:** Integration
+- **Preconditions:** Website loaded, scrolled to Newsletter section
+- **Steps:**
+  1. Inspect email input CSS: border style, background, colour
+  2. Click into the input and inspect focus state
+- **Expected Result:** Bottom-border-only (1px solid rgba(255,255,255,0.25)), transparent background, white text. Focus: border-color transitions to white
+- **Status:** Not Run
+
+### TC-577
+- **Requirement:** ENH-10 AC 4
+- **Type:** Integration
+- **Preconditions:** Website loaded, scrolled to Newsletter section
+- **Steps:**
+  1. Inspect the Subscribe button CSS class and styling
+- **Expected Result:** .btn-newsletter class; white outlined pill on navy background (1.5px solid rgba(255,255,255,0.5), border-radius 40px, transparent bg, white text, uppercase)
+- **Status:** Not Run
+
+### TC-578
+- **Requirement:** ENH-10 AC 5, AC 6
+- **Type:** End-to-End
+- **Preconditions:** Website loaded
+- **Steps:**
+  1. View Newsletter form at desktop — observe input and button layout
+  2. Resize to 768px or below — observe layout change
+- **Expected Result:** Desktop: side by side in flex container (max-width 480px, centred, gap 12px). Mobile: stacked vertically (flex-direction: column)
+- **Status:** Not Run
+
+### TC-579
+- **Requirement:** ENH-10 AC 7, AC 8, AC 9
+- **Type:** Integration
+- **Preconditions:** Website loaded; /api/newsletter route exists
+- **Steps:**
+  1. Enter a valid email address in the newsletter input
+  2. Click Subscribe
+  3. Verify the form POSTs to /api/newsletter
+  4. Verify the API sends email via Resend to keanu@thewealthroom.com
+  5. Verify email subject is "New Newsletter Subscription"
+  6. Verify email body contains the subscriber email address
+- **Expected Result:** Email sent to keanu@thewealthroom.com with subject "New Newsletter Subscription" and body containing the submitted email
+- **Status:** Not Run
+
+### TC-580
+- **Requirement:** ENH-10 AC 10
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, newsletter form visible
+- **Steps:**
+  1. Submit the newsletter form with a valid email
+  2. Wait for success response
+  3. Observe the section
+- **Expected Result:** Success confirmation message displayed with green checkmark icon (#4ade80)
+- **Status:** Not Run
+
+### TC-581
+- **Requirement:** ENH-10 AC 11
+- **Type:** End-to-End
+- **Preconditions:** Website loaded; API route configured to fail (e.g. invalid Resend key)
+- **Steps:**
+  1. Submit the newsletter form with a valid email
+  2. Wait for error response
+  3. Observe the section
+- **Expected Result:** Inline error message displayed so the subscriber can retry
+- **Status:** Not Run
+
+### TC-582
+- **Requirement:** ENH-10 AC 12
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, newsletter form visible
+- **Steps:**
+  1. Leave email field empty and click Subscribe
+  2. Enter an invalid email (e.g. "notanemail") and click Subscribe
+- **Expected Result:** Form prevents submission; validation error shown for empty or invalid email
+- **Status:** Not Run
+
+### TC-583
+- **Requirement:** ENH-10 AC 13
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled to Newsletter section
+- **Steps:**
+  1. Verify heading text: "Stay Ahead of the Curve"
+  2. Verify description paragraph text matches prototype
+  3. Verify three benefit items with checkmarks are present and unchanged
+- **Expected Result:** Heading, description, and benefit list remain identical to current implementation
+- **Status:** Not Run
+
+---
+
+### ENH-11: Phone Number Update
+
+### TC-584
+- **Requirement:** ENH-11 AC 1
+- **Type:** Integration
+- **Preconditions:** Code review of siteConfig.ts
+- **Steps:**
+  1. Open src/data/siteConfig.ts
+  2. Inspect contactInfo.phone value
+- **Expected Result:** Value is "+27 65 572 3909" (not the old "+27 83 789 8227")
+- **Status:** Not Run
+
+### TC-585
+- **Requirement:** ENH-11 AC 2
+- **Type:** End-to-End
+- **Preconditions:** Website loaded, scrolled to footer
+- **Steps:**
+  1. Observe the phone number in the footer details block
+- **Expected Result:** Footer displays "T +27 65 572 3909"
+- **Status:** Not Run
+
+### TC-586
+- **Requirement:** ENH-11 AC 3
+- **Type:** Integration
+- **Preconditions:** Prototype index.html loaded
+- **Steps:**
+  1. Inspect the footer phone number in the prototype
+- **Expected Result:** Prototype already displays "+27 65 572 3909" (confirmed in current prototype)
+- **Status:** Not Run
+
+---
+
+### Cross-Enhancement Integration Tests
+
+### TC-587
+- **Requirement:** ENH-1 + ENH-2 (Testimonials nav link integration)
+- **Type:** End-to-End
+- **Preconditions:** Website loaded at desktop viewport
+- **Steps:**
+  1. Click the "Testimonials" nav link in the navbar
+  2. Observe scroll behaviour
+  3. Verify the page scrolls to the Testimonials section (id="testimonials")
+- **Expected Result:** Clicking "Testimonials" smooth-scrolls to the new Testimonials section between Newsletter and Partners
+- **Status:** Not Run
+
+### TC-588
+- **Requirement:** ENH-2 + ENH-7 (Nav CTA blue on blog page)
+- **Type:** End-to-End
+- **Preconditions:** Blog post detail page loaded
+- **Steps:**
+  1. Observe the "Get In Touch" CTA in the navbar (always scrolled state)
+  2. Verify it retains steel-blue fill on the white navbar
+  3. Click the "Get In Touch" link
+- **Expected Result:** Steel-blue pill button visible on scrolled navbar; clicking navigates to /#contact on the landing page
+- **Status:** Not Run
+
+### TC-589
+- **Requirement:** ENH-8 + ENH-9 (Download button + file integration)
+- **Type:** End-to-End
+- **Preconditions:** Website loaded; budget tracker file in public/
+- **Steps:**
+  1. Scroll to the Social Feed section
+  2. Click the download button
+  3. Verify file download dialog appears
+  4. Verify downloaded file is a valid .xlsx spreadsheet
+- **Expected Result:** Clicking the download button triggers a file save dialog; the downloaded file is the budget tracker spreadsheet
+- **Status:** Not Run
+
+### TC-590
+- **Requirement:** ENH-6 + ENH-2 (Hero CTA + Nav CTA consistency)
+- **Type:** End-to-End
+- **Preconditions:** Website loaded at desktop viewport
+- **Steps:**
+  1. Observe the hero primary CTA ("Book Appointment") — steel-blue fill
+  2. Observe the nav CTA ("Get In Touch") — steel-blue fill
+  3. Verify both use the same steel-blue colour (#7a9bb5)
+- **Expected Result:** Both CTAs share the same steel-blue colour for visual consistency across the site
+- **Status:** Not Run
+
+### TC-591
+- **Requirement:** ENH-10 (Newsletter API rate limiting)
+- **Type:** Integration
+- **Preconditions:** Website loaded; /api/newsletter route exists
+- **Steps:**
+  1. Submit the newsletter form rapidly 5+ times in succession
+  2. Observe API responses
+- **Expected Result:** Rate limiting applies (same as contact form); excessive submissions are rejected with appropriate error
+- **Status:** Not Run
+
+### TC-592
+- **Requirement:** ENH-1 (Page composition order)
+- **Type:** Integration
+- **Preconditions:** Code review of src/app/page.tsx
+- **Steps:**
+  1. Open src/app/page.tsx
+  2. Verify Testimonials component is imported
+  3. Verify render order: Newsletter then Testimonials then Partners
+- **Expected Result:** Testimonials component is imported and rendered between Newsletter and Partners in the JSX
+- **Status:** Not Run
+
+
+---
+
+## Prototype Enhancements Requirements Validation (Added 2026-04-11)
+
+These test cases validate the new requirements document at `.kiro/specs/prototype-enhancements/requirements.md` against the source enhancements document, prototype files, production code, and main spec cross-references.
+
+### Req 1: Phone Number Update
+
+### TC-593
+- **Requirement:** Enh Req 1 AC 1 (siteConfig phone value)
+- **Type:** Integration
+- **Preconditions:** Code review of src/data/siteConfig.ts
+- **Steps:**
+  1. Open src/data/siteConfig.ts
+  2. Check contactInfo.phone value
+  3. Verify it currently reads "+27 83 789 8227"
+- **Expected Result:** Current value is "+27 83 789 8227" confirming the change to "+27 65 572 3909" is needed
+- **Status:** Pass (verified — siteConfig.ts has "+27 83 789 8227")
+
+### TC-594
+- **Requirement:** Enh Req 1 AC 3 (prototype already correct)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html footer
+- **Steps:**
+  1. Open prototype/index.html
+  2. Locate the footer-details section
+  3. Verify phone number displayed
+- **Expected Result:** Prototype footer displays "T +27 65 572 3909"
+- **Status:** Pass (verified — prototype line shows "+27 65 572 3909")
+
+### Req 2: Hero Primary CTA Changed
+
+### TC-595
+- **Requirement:** Enh Req 2 AC 1-4 (Hero CTA text and behaviour)
+- **Type:** Integration
+- **Preconditions:** Code review of Hero.tsx and prototype/index.html
+- **Steps:**
+  1. Open prototype/index.html hero section
+  2. Verify CTA text is "Book Appointment"
+  3. Verify href is "https://booking.example.com" (placeholder)
+  4. Verify target="_blank" and rel="noopener noreferrer" present
+  5. Open Hero.tsx and verify current CTA text is "Get In Touch" with href="#contact"
+- **Expected Result:** Prototype has "Book Appointment" with external link; production has "Get In Touch" with #contact — confirming the change is needed
+- **Status:** Pass (verified — prototype and production states confirmed)
+
+### TC-596
+- **Requirement:** Enh Req 2 AC 5-6 (Hero CTA styling)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/styles.css
+- **Steps:**
+  1. Open prototype/styles.css
+  2. Locate .btn-hero-primary styles
+  3. Verify background: #7a9bb5, border-color: #7a9bb5, padding: 16px 44px, border-radius: 40px
+  4. Verify hover: background #6889a3, border-color #6889a3
+- **Expected Result:** All CSS values in requirements match prototype exactly
+- **Status:** Pass (verified — all values match)
+
+### TC-597
+- **Requirement:** Enh Req 2 (Calendly URL note)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Read Req 2 Note about placeholder URL
+  2. Verify the real Calendly URL is specified: https://calendly.com/keanu-thewealthroom/meetingrequest
+- **Expected Result:** Note clearly states production must use real Calendly URL
+- **Status:** Pass (verified — Note present with correct URL)
+
+### Req 3: Nav CTA Blue Variant
+
+### TC-598
+- **Requirement:** Enh Req 3 AC 1 (6 nav items)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html nav and siteConfig.ts
+- **Steps:**
+  1. Open prototype/index.html nav section
+  2. Count nav links and verify order: Home, About, Services, Insights, Testimonials, Get In Touch
+  3. Open siteConfig.ts and verify current nav links: Home, About, Services, Insights, Contact
+- **Expected Result:** Prototype has 6 links; production has 5 — confirming the change is needed
+- **Status:** Pass (verified)
+
+### TC-599
+- **Requirement:** Enh Req 3 AC 7-16 (Nav CTA CSS values vs prototype)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/styles.css
+- **Steps:**
+  1. Open prototype/styles.css
+  2. Verify .nav-cta base styles: padding 8px 24px, border-radius 40px, border 1.5px solid rgba(255,255,255,0.6), font-weight 500, letter-spacing 0.06em
+  3. Verify .nav-cta hover: background var(--white), color var(--navy), border-color var(--white)
+  4. Verify .navbar.scrolled .nav-cta: border-color var(--navy), color var(--navy)
+  5. Verify .navbar.scrolled .nav-cta:hover: background var(--navy), color var(--white)
+  6. Verify .nav-cta.nav-cta-blue: border-color #7a9bb5, background #7a9bb5, color var(--white)
+  7. Verify .nav-cta.nav-cta-blue:hover: background #6889a3, border-color #6889a3
+  8. Verify .navbar.scrolled .nav-cta.nav-cta-blue: retains steel-blue fill
+  9. Verify mobile override at 768px: border none, padding 0, border-radius 0, background transparent, color var(--navy), font-weight 400, letter-spacing 0.04em
+- **Expected Result:** All CSS values in requirements match prototype exactly
+- **Status:** Pass (verified — all values match prototype/styles.css)
+
+### TC-600
+- **Requirement:** Enh Req 3 (Cross-reference to main spec Req 1 AC 4)
+- **Type:** Integration
+- **Preconditions:** Code review of main spec requirements.md
+- **Steps:**
+  1. Open main spec requirements.md
+  2. Locate Req 1 AC 4
+  3. Verify it currently says "Home, About, Services, Insights, Contact"
+  4. Verify Enh Req 3 correctly identifies this as needing update
+- **Expected Result:** Main spec Req 1 AC 4 confirmed as needing update from 5 to 6 nav items
+- **Status:** Pass (verified — main spec says "Home, About, Services, Insights, Contact")
+
+### Req 4: Newsletter Inline Email Form
+
+### TC-601
+- **Requirement:** Enh Req 4 AC 1-6 (Newsletter form layout)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html and prototype/styles.css
+- **Steps:**
+  1. Open prototype/index.html newsletter section
+  2. Verify form element with class "newsletter-form" exists
+  3. Verify email input with placeholder "Enter your email address" and aria-label
+  4. Verify submit button with text "Subscribe"
+  5. Open prototype/styles.css and verify .newsletter-form: display flex, gap 12px, max-width 480px
+  6. Verify 768px breakpoint: flex-direction column
+- **Expected Result:** Prototype form structure matches requirements
+- **Status:** Pass (verified — prototype has inline form matching requirements)
+
+### TC-602
+- **Requirement:** Enh Req 4 AC 3 (Email input CSS)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/styles.css
+- **Steps:**
+  1. Locate .newsletter-form input styles
+  2. Verify: flex 1, padding 14px 0, font-size 0.88rem, border: none, border-bottom: 1px solid rgba(255,255,255,0.25)
+  3. Verify placeholder colour: rgba(255,255,255,0.4)
+  4. Verify focus: border-color var(--white)
+- **Expected Result:** All input CSS values match prototype
+- **Status:** Pass (verified)
+
+### TC-603
+- **Requirement:** Enh Req 4 AC 7-9 (Newsletter API specification)
+- **Type:** Integration
+- **Preconditions:** Code review of contact API route for Resend pattern
+- **Steps:**
+  1. Open src/app/api/contact/route.ts
+  2. Verify Resend API pattern exists (from, to, subject, html)
+  3. Verify requirements specify same pattern for newsletter: POST /api/newsletter, email to keanu@thewealthroom.com, subject "New Newsletter Subscription"
+- **Expected Result:** Newsletter API spec follows established Resend pattern
+- **Status:** Pass (verified — API spec mirrors contact route pattern)
+
+### TC-604
+- **Requirement:** Enh Req 4 AC 10 (Success state text — BUG-185 fix)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify Req 4 AC 10 specifies heading "Thank you for subscribing!" and subtitle "You'll hear from me soon."
+  2. Verify QA Fixes table lists BUG-185 as incorporated
+- **Expected Result:** Success text is explicitly defined, BUG-185 fix confirmed
+- **Status:** Pass (verified — AC 10 has exact text, BUG-185 in QA Fixes table)
+
+### TC-605
+- **Requirement:** Enh Req 4 AC 11 (Error state text — BUG-183 fix)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify Req 4 AC 11 specifies error text "Something went wrong. Please try again."
+  2. Verify .newsletter-error class with role="alert" specified
+  3. Verify QA Fixes table lists BUG-183 and BUG-184 as incorporated
+- **Expected Result:** Error text and accessibility attributes defined, BUG-183/184 fixes confirmed
+- **Status:** Pass (verified — AC 11 has exact text, BUG-183/184 in QA Fixes table)
+
+### TC-606
+- **Requirement:** Enh Req 4 AC 15 (Loading state — BUG-186 fix)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify Req 4 AC 15 specifies disabled button with text "Subscribing..."
+  2. Verify QA Fixes table lists BUG-186 as incorporated
+- **Expected Result:** Loading state AC present, BUG-186 fix confirmed
+- **Status:** Pass (verified — AC 15 has loading state, BUG-186 in QA Fixes table)
+
+### TC-607
+- **Requirement:** Enh Req 4 (Cross-reference to main spec Req 7 AC 5-7)
+- **Type:** Integration
+- **Preconditions:** Code review of main spec requirements.md
+- **Steps:**
+  1. Open main spec requirements.md
+  2. Locate Req 7 AC 5: "Subscribe pill button with white outlined style"
+  3. Locate Req 7 AC 6: "open external newsletter signup page"
+  4. Locate Req 7 AC 7: "no email input field and no inline form"
+  5. Verify Enh Req 4 correctly identifies all three as superseded
+- **Expected Result:** All three ACs confirmed as needing supersession
+- **Status:** Pass (verified — main spec Req 7 AC 5-7 match cross-reference descriptions)
+
+### Req 5: New Testimonials Section
+
+### TC-608
+- **Requirement:** Enh Req 5 AC 1-5 (Testimonials layout and responsiveness)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html and prototype/styles.css
+- **Steps:**
+  1. Open prototype/index.html testimonials section
+  2. Verify section has id="testimonials" and class="testimonials"
+  3. Verify 3 testimonial cards in .testimonials-grid
+  4. Open prototype/styles.css
+  5. Verify .testimonials: padding 80px 0, background var(--off-white)
+  6. Verify .testimonials-grid: grid repeat(3, 1fr), gap 32px
+  7. Verify 900px breakpoint: repeat(2, 1fr)
+  8. Verify 768px breakpoint: 1fr
+- **Expected Result:** All layout values match prototype
+- **Status:** Pass (verified — all values match)
+
+### TC-609
+- **Requirement:** Enh Req 5 AC 6 (Testimonial card content)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html
+- **Steps:**
+  1. Verify Card 1: Sarah M., Client since 2023, quote text matches
+  2. Verify Card 2: James T., Business Owner, quote text matches
+  3. Verify Card 3: Priya N., Client since 2024, quote text matches
+- **Expected Result:** All card content matches prototype exactly
+- **Status:** Pass (verified — all quotes, names, and roles match)
+
+### TC-610
+- **Requirement:** Enh Req 5 AC 7 (Card structure and CSS)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html and prototype/styles.css
+- **Steps:**
+  1. Verify each card has: .testimonial-quote-icon (aria-hidden), blockquote.testimonial-quote, .testimonial-client with .testimonial-name and .testimonial-role
+  2. Verify CSS: quote icon font-size 2.4rem, color #7a9bb5, font-family Georgia serif
+  3. Verify blockquote: font-size 0.95rem, line-height 1.75, font-style italic, flex 1, margin 0
+  4. Verify .testimonial-name: font-weight 600, font-size 0.9rem, color var(--navy)
+  5. Verify .testimonial-role: font-size 0.82rem, color var(--gray-600)
+- **Expected Result:** All card structure and CSS values match prototype
+- **Status:** Pass (verified)
+
+### TC-611
+- **Requirement:** Enh Req 5 AC 9 (Page position)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html
+- **Steps:**
+  1. Verify testimonials section appears after newsletter section
+  2. Verify testimonials section appears before partners section
+- **Expected Result:** Testimonials positioned between Newsletter and Partners
+- **Status:** Pass (verified — prototype order: newsletter then testimonials then partners)
+
+### TC-612
+- **Requirement:** Enh Req 5 AC 10 (ScrollReveal — BUG-191 fix)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify Req 5 AC 10 specifies ScrollReveal animation for testimonial cards
+  2. Verify QA Fixes table lists BUG-191 as incorporated
+- **Expected Result:** ScrollReveal AC present, BUG-191 fix confirmed
+- **Status:** Pass (verified — AC 10 specifies ScrollReveal, BUG-191 in QA Fixes table)
+
+### Req 6: Budget Tracker Download
+
+### TC-613
+- **Requirement:** Enh Req 6 AC 1-8 (Download button)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html
+- **Steps:**
+  1. Open prototype/index.html feed-download section
+  2. Verify .feed-download container with text-align center, margin-top 48px
+  3. Verify anchor with download attribute, class "btn"
+  4. Verify button text includes emoji prefix and "Download Free Budget Tracker 2026"
+- **Expected Result:** Download button structure matches requirements
+- **Status:** Pass (verified — prototype has download button matching requirements)
+
+### TC-614
+- **Requirement:** Enh Req 6 AC 3 (Filename — BUG-181 fix)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html and prototype directory
+- **Steps:**
+  1. Check prototype/index.html href: "Tracking-Budget-2026.xlsx" (hyphens)
+  2. Check prototype directory: "Tracking Budget 2026.xlsx" (spaces)
+  3. Verify requirements specify spaces matching actual filename
+  4. Verify BUG-181 noted in QA Fixes table
+- **Expected Result:** Requirements correctly specify spaces; BUG-181 fix confirmed
+- **Status:** Pass (verified — requirements use spaces, BUG-181 in QA Fixes table)
+
+### Req 7: Partner Logos Sync
+
+### TC-615
+- **Requirement:** Enh Req 7 AC 1-3 (Prototype partner logos)
+- **Type:** Integration
+- **Preconditions:** Code review of prototype/index.html partners section
+- **Steps:**
+  1. Open prototype/index.html partners section
+  2. Count logos in .partners-track: 7 (including Ashburton and Sygnia)
+  3. Verify requirements specify removing Ashburton and Sygnia to leave 5
+  4. Verify production siteConfig.ts already has 5 correct logos
+- **Expected Result:** Prototype has 7 logos; requirements correctly identify 2 for removal; production already correct
+- **Status:** Pass (verified — prototype has 7, production has 5, requirements specify removal of 2)
+
+### Cross-Reference Validation
+
+### TC-616
+- **Requirement:** Cross-reference accuracy — Req 2 AC 9 (main spec)
+- **Type:** Integration
+- **Preconditions:** Code review of main spec requirements.md
+- **Steps:**
+  1. Open main spec Req 2 AC 9
+  2. Verify it says: WHEN a Visitor clicks the "Get In Touch" button, THE Hero_Section SHALL smooth-scroll the viewport to the Contact_Form section
+  3. Verify Enh Req 2 correctly identifies this as superseded by "Book Appointment" opening Calendly
+- **Expected Result:** Cross-reference is accurate
+- **Status:** Pass (verified — main spec Req 2 AC 9 matches description)
+
+### TC-617
+- **Requirement:** Cross-reference accuracy — Req 2 AC 11 (main spec)
+- **Type:** Integration
+- **Preconditions:** Code review of main spec requirements.md
+- **Steps:**
+  1. Open main spec Req 2 AC 11
+  2. Verify it references "Get In Touch" button with steel-blue fill
+  3. Verify Enh Req 2 correctly identifies text change to "Book Appointment"
+- **Expected Result:** Cross-reference is accurate
+- **Status:** Pass (verified)
+
+### TC-618
+- **Requirement:** Cross-reference accuracy — Req 1 AC 4 (main spec)
+- **Type:** Integration
+- **Preconditions:** Code review of main spec requirements.md
+- **Steps:**
+  1. Open main spec Req 1 AC 4
+  2. Verify it says "Home, About, Services, Insights, Contact"
+  3. Verify Enh Req 3 correctly identifies update to 6 items including Testimonials and Get In Touch
+- **Expected Result:** Cross-reference is accurate
+- **Status:** Pass (verified)
+
+### Correctness Properties Validation
+
+### TC-619
+- **Requirement:** Property 17 (Testimonial card completeness)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify Property 17 validates Req 5 AC 7
+  2. Verify it checks: quote icon, blockquote with text, client name, client role
+  3. Verify all elements are independently testable
+- **Expected Result:** Property is well-defined and testable
+- **Status:** Pass
+
+### TC-620
+- **Requirement:** Property 18 (Hero CTA external URL)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify Property 18 validates Req 2 AC 2, AC 3, AC 4
+  2. Verify it checks: href contains "calendly.com", target="_blank", rel contains "noopener" and "noreferrer", href does NOT start with "#"
+- **Expected Result:** Property is well-defined and testable
+- **Status:** Pass
+
+### TC-621
+- **Requirement:** Property 19 (Newsletter email distinction)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify Property 19 validates Req 4 AC 8, AC 9
+  2. Verify it checks: subject contains "Newsletter", does NOT contain "Contact Form", body contains submitted email
+- **Expected Result:** Property is well-defined and testable
+- **Status:** Pass
+
+### TC-622
+- **Requirement:** Property 20 (Nav CTA blue scrolled state)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify Property 20 validates Req 3 AC 14
+  2. Verify it checks: background-color #7a9bb5, white text, NOT transparent background with navy border
+- **Expected Result:** Property is well-defined and testable
+- **Status:** Pass
+
+### ENH Coverage and QA Fix Validation
+
+### TC-623
+- **Requirement:** All ENH items covered (ENH-1, 2, 3, 6, 7, 8, 9, 10, 11)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify ENH-1 mapped to Req 5 (Testimonials)
+  2. Verify ENH-2 mapped to Req 3 (Nav items)
+  3. Verify ENH-3 mapped to Req 7 (Partner logos sync)
+  4. Verify ENH-6 mapped to Req 2 (Hero CTA)
+  5. Verify ENH-7 mapped to Req 3 (Nav CTA CSS)
+  6. Verify ENH-8 mapped to Req 6 (Download button)
+  7. Verify ENH-9 mapped to Req 6 (Budget tracker file)
+  8. Verify ENH-10 mapped to Req 4 (Newsletter form)
+  9. Verify ENH-11 mapped to Req 1 (Phone number)
+  10. Verify ENH-4 and ENH-5 noted as excluded
+- **Expected Result:** All 9 active ENH items have corresponding requirements; ENH-4/5 excluded
+- **Status:** Pass (verified — all ENH items mapped to requirements)
+
+### TC-624
+- **Requirement:** BUG-181 incorporation (Budget tracker filename)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify QA Fixes table lists BUG-181
+  2. Verify Req 6 AC 3 uses spaces in filename
+  3. Verify Req 6 Note explains the prototype href mismatch
+- **Expected Result:** BUG-181 fix properly incorporated
+- **Status:** Pass
+
+### TC-625
+- **Requirement:** BUG-183, BUG-184, BUG-185, BUG-186 incorporation (Newsletter states)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify QA Fixes table lists all four bugs
+  2. Verify Req 4 AC 11 has error text (BUG-183)
+  3. Verify Req 4 Screen Requirements has .newsletter-error with role="alert" (BUG-184)
+  4. Verify Req 4 AC 10 has success text (BUG-185)
+  5. Verify Req 4 AC 15 has loading state (BUG-186)
+- **Expected Result:** All four bug fixes properly incorporated into ACs
+- **Status:** Pass
+
+### TC-626
+- **Requirement:** BUG-191 incorporation (Testimonial ScrollReveal)
+- **Type:** Integration
+- **Preconditions:** Requirements document review
+- **Steps:**
+  1. Verify QA Fixes table lists BUG-191
+  2. Verify Req 5 AC 10 specifies ScrollReveal animation for testimonial cards
+- **Expected Result:** BUG-191 fix properly incorporated
+- **Status:** Pass
+
+
+## Design Document Validation — Prototype Enhancements (Added 2026-04-12)
+
+### TC-627
+
+- **Requirement:** Design doc Section 2 — Component Architecture matches requirements
+- **Type:** Integration
+- **Preconditions:** Design doc at .kiro/specs/prototype-enhancements/design.md is readable
+- **Steps:**
+  1. Read design doc Section 2 Component Architecture
+  2. Verify all 7 requirements (Req 1-7) have corresponding component changes listed
+  3. Verify the Updated Page Section Order includes Testimonials between Newsletter and Partners
+  4. Verify the component tree shows all new/modified components
+- **Expected Result:** All requirements mapped to component changes; section order matches Req 5 AC 9; tree includes Testimonials, modified Newsletter, modified Hero, modified Navbar, modified SocialFeed
+- **Status:** Pass
+
+### TC-628
+
+- **Requirement:** Design doc Section 3 — Data Model changes compatible with existing types.ts
+- **Type:** Integration
+- **Preconditions:** src/lib/types.ts and src/data/siteConfig.ts are readable
+- **Steps:**
+  1. Read design doc Section 3 NavLink Type Update
+  2. Verify isCta optional boolean is additive and backward compatible
+  3. Verify navLinks array grows from 5 to 6 items with correct labels and hrefs
+  4. Verify phone number update matches Req 1 AC 1
+  5. Verify NewsletterFormData interface has email and honeypot fields
+- **Expected Result:** isCta is optional (backward compatible); navLinks has 6 items; phone is +27 65 572 3909; NewsletterFormData has email string and honeypot optional string
+- **Status:** Pass
+
+### TC-629
+
+- **Requirement:** Design doc Section 4.1 — Navbar CTA CSS values match prototype styles.css
+- **Type:** Integration
+- **Preconditions:** prototype/styles.css is readable
+- **Steps:**
+  1. Compare design doc navCta base styles with prototype nav-cta
+  2. Compare all hover states (transparent and scrolled) with prototype
+  3. Compare navCtaBlue variant with prototype nav-cta-blue
+  4. Compare mobile override with prototype media query nav-links active nav-cta
+- **Expected Result:** All CSS values match between design doc and prototype
+- **Status:** Pass (BUG-215 notes minor ambiguity in transition description)
+
+### TC-630
+
+- **Requirement:** Design doc Section 4.2 — Hero CTA changes are minimal and correct
+- **Type:** Integration
+- **Preconditions:** src/components/Hero.tsx is readable
+- **Steps:**
+  1. Verify design doc specifies only text href target rel changes
+  2. Verify href is the correct Calendly URL
+  3. Verify no CSS changes are specified
+  4. Verify secondary CTA remains unchanged
+- **Expected Result:** Minimal changes: text Book Appointment, href Calendly URL, target blank, rel noopener noreferrer; no CSS changes; secondary CTA unchanged
+- **Status:** Pass
+
+### TC-631
+
+- **Requirement:** Design doc Section 4.3 — Newsletter rewrite scope is accurate
+- **Type:** Integration
+- **Preconditions:** src/components/Newsletter.tsx and Newsletter.module.css are readable
+- **Steps:**
+  1. Verify design doc identifies current Newsletter as Server Component
+  2. Verify design doc specifies change to Client Component with use client
+  3. Verify design doc specifies removal of newsletterUrl import
+  4. Verify form state model covers idle submitting success error
+  5. Verify CSS values match prototype newsletter-form and newsletter-form input and newsletter-form button
+- **Expected Result:** Server to Client transition documented; newsletterUrl removal noted; 4-state model specified; CSS values match prototype
+- **Status:** Partial Pass (BUG-206 BUG-207 BUG-208)
+
+### TC-632
+
+- **Requirement:** Design doc Section 4.4 — Testimonials CSS values match prototype styles.css
+- **Type:** Integration
+- **Preconditions:** prototype/styles.css is readable
+- **Steps:**
+  1. Compare testimonials section padding and background with prototype
+  2. Compare testimonialsGrid columns gap and breakpoints with prototype
+  3. Compare testimonialCard padding border-radius box-shadow with prototype
+  4. Compare quoteIcon font-size color font-family with prototype
+  5. Compare quote font-size line-height font-style with prototype
+  6. Compare clientName and clientRole styles with prototype
+- **Expected Result:** All CSS values match prototype testimonials testimonials-grid testimonial-card etc
+- **Status:** Pass
+
+### TC-633
+
+- **Requirement:** Design doc Section 4.5 — SocialFeed download button placement is correct
+- **Type:** Integration
+- **Preconditions:** src/components/SocialFeed.tsx is readable
+- **Steps:**
+  1. Verify design doc places download button below feedGrid inside container
+  2. Verify href uses URL-encoded form
+  3. Verify download attribute is specified
+  4. Verify btn class is used
+  5. Verify feedDownload container has text-align center and margin-top 48px
+- **Expected Result:** Button placed correctly; href URL-encoded; download attribute present; uses existing btn class; container styled correctly
+- **Status:** Pass
+
+### TC-634
+
+- **Requirement:** Design doc Section 5 — Newsletter API route mirrors contact route pattern
+- **Type:** Integration
+- **Preconditions:** src/app/api/contact/route.ts is readable
+- **Steps:**
+  1. Verify processing pipeline matches contact route pattern
+  2. Verify response codes match: 200 400 429 500
+  3. Verify Resend email config: from to subject match requirements
+  4. Verify subject is New Newsletter Subscription per Req 4 AC 8
+  5. Verify escapeHtml is applied per Req 4 AC 16
+- **Expected Result:** Pipeline mirrors contact route; subject correct; escapeHtml applied; all response codes documented
+- **Status:** Pass (BUG-210 notes independent rate limiters)
+
+### TC-635
+
+- **Requirement:** Design doc Section 6 — File Changes Summary completeness
+- **Type:** Integration
+- **Preconditions:** All source documents readable
+- **Steps:**
+  1. Verify all new files listed match requirements
+  2. Verify all modified files listed match requirements
+  3. Verify prototype file changes are listed
+  4. Cross-reference with requirements doc Files to Change tables
+- **Expected Result:** All files from all 7 requirements are accounted for in the consolidated list
+- **Status:** Partial Pass (BUG-209: prototype download button href fix not listed)
+
+### TC-636
+
+- **Requirement:** Design doc Section 7 — Properties 17-20 are well-specified
+- **Type:** Integration
+- **Preconditions:** Design doc Section 7 is readable
+- **Steps:**
+  1. Verify Property 17 covers Req 5 AC 7
+  2. Verify Property 18 covers Req 2 AC 2-4
+  3. Verify Property 19 covers Req 4 AC 8-9
+  4. Verify Property 20 covers Req 3 AC 14
+  5. Verify each property has a clear test approach
+- **Expected Result:** All 4 properties map to correct ACs; test approaches are actionable
+- **Status:** Pass
+
+### TC-637
+
+- **Requirement:** Design doc — Requirements coverage completeness
+- **Type:** Integration
+- **Preconditions:** Requirements doc and design doc are readable
+- **Steps:**
+  1. Map each Req 1 AC to design doc coverage
+  2. Map each Req 2 AC to design doc coverage
+  3. Map each Req 3 AC to design doc coverage
+  4. Map each Req 4 AC to design doc coverage
+  5. Map each Req 5 AC to design doc coverage
+  6. Map each Req 6 AC to design doc coverage
+  7. Map each Req 7 AC to design doc coverage
+- **Expected Result:** Every AC has a corresponding design specification
+- **Status:** Partial Pass (BUG-207: Req 4 AC 14 aria-label not in design component spec; BUG-211: Req 4 AC 12 client-side validation not in submission flow)
+
+### TC-638
+
+- **Requirement:** Design doc — Existing production code compatibility
+- **Type:** Integration
+- **Preconditions:** All production source files readable
+- **Steps:**
+  1. Verify NavLink isCta addition is backward compatible
+  2. Verify Navbar className logic is additive
+  3. Verify Hero changes are attribute-only
+  4. Verify Newsletter rewrite scope is complete
+  5. Verify SocialFeed changes are additive
+  6. Verify page.tsx change is a single import plus render insertion
+- **Expected Result:** All changes are backward compatible or clearly scoped rewrites
+- **Status:** Pass
+
+### TC-639
+
+- **Requirement:** Design doc — CSS values consistency across all documents
+- **Type:** Integration
+- **Preconditions:** All three documents readable
+- **Steps:**
+  1. Cross-reference Req 3 nav CTA CSS with design doc and prototype
+  2. Cross-reference Req 4 newsletter form CSS with design doc and prototype
+  3. Cross-reference Req 5 testimonials CSS with design doc and prototype
+  4. Cross-reference Req 6 download button CSS with design doc and prototype
+- **Expected Result:** All CSS values are consistent across all three documents
+- **Status:** Partial Pass (BUG-206: newsletter button padding inconsistency)
+
+### TC-640
+
+- **Requirement:** Design doc Section 8 — Priority order and dependency chain
+- **Type:** Integration
+- **Preconditions:** Design doc Section 8 readable
+- **Steps:**
+  1. Verify priority order matches requirements doc
+  2. Verify dependency chain types to siteConfig to Navbar is correct
+  3. Verify Newsletter API to Newsletter component dependency is correct
+  4. Verify Testimonials to page.tsx dependency is correct
+  5. Verify ENH-3 is marked as independent
+- **Expected Result:** Priority order matches; all dependency chains are valid
+- **Status:** Pass
+
+### TC-641
+
+- **Requirement:** Design doc — Testimonial content matches Req 5 AC 6
+- **Type:** End-to-End
+- **Preconditions:** Design doc and requirements doc readable
+- **Steps:**
+  1. Verify Card 1: Sarah M. Client since 2023 correct quote
+  2. Verify Card 2: James T. Business Owner correct quote
+  3. Verify Card 3: Priya N. Client since 2024 correct quote
+- **Expected Result:** All 3 testimonial cards match Req 5 AC 6 content exactly
+- **Status:** Pass
+
+### TC-642
+
+- **Requirement:** Design doc — Newsletter form state model prevents impossible states
+- **Type:** Integration
+- **Preconditions:** Design doc Section 3 and 4.3 readable
+- **Steps:**
+  1. Verify single state variable approach
+  2. Verify no impossible combinations
+  3. Verify state transitions are complete
+  4. Verify error state keeps form visible for retry
+- **Expected Result:** Single enum state prevents impossible combinations; all transitions documented
+- **Status:** Pass
+
+### TC-643
+
+- **Requirement:** Design doc — Calendly URL is correct production URL
+- **Type:** End-to-End
+- **Preconditions:** Design doc Section 4.2 readable
+- **Steps:**
+  1. Verify design doc Hero CTA href is https://calendly.com/keanu-thewealthroom/meetingrequest
+  2. Verify this matches the provided Calendly URL
+  3. Verify design doc notes prototype uses placeholder
+- **Expected Result:** Correct Calendly URL specified; prototype placeholder noted
+- **Status:** Pass
+
+### TC-644
+
+- **Requirement:** Design doc — Partner count is 5 and ENH-3 is prototype-only
+- **Type:** Integration
+- **Preconditions:** Design doc Section 6 readable
+- **Steps:**
+  1. Verify design doc states ENH-3 is prototype-only
+  2. Verify design doc does not modify partnerLogos array
+  3. Verify prototype file changes list removal of Ashburton and Sygnia
+- **Expected Result:** ENH-3 correctly scoped to prototype-only; production partner count unchanged at 5
+- **Status:** Pass
+
+### TC-645
+
+- **Requirement:** Design doc — Newsletter API subject line matches Req 4 AC 8
+- **Type:** Integration
+- **Preconditions:** Design doc Section 5 readable
+- **Steps:**
+  1. Verify Resend email subject is New Newsletter Subscription
+  2. Verify this is distinct from contact form subject pattern
+- **Expected Result:** Subject is New Newsletter Subscription; distinct from contact form
+- **Status:** Pass

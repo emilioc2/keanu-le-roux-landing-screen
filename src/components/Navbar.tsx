@@ -190,27 +190,39 @@ export default function Navbar({ alwaysScrolled = false }: NavbarProps) {
          *   appropriate here since no route change occurs.
          */}
         <ul className={linksClassName}>
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              {alwaysScrolled ? (
-                <Link
-                  href={resolveHref(link.href)}
-                  className={styles.navLink}
-                  onClick={handleLinkClick}
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  href={resolveHref(link.href)}
-                  className={styles.navLink}
-                  onClick={handleLinkClick}
-                >
-                  {link.label}
-                </a>
-              )}
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            /**
+             * Determine the CSS class for each nav link.
+             * CTA links (isCta: true) get pill styling via .navCta + .navCtaBlue
+             * in addition to the base .navLink class. Regular links use .navLink only.
+             * The isCta flag is set in siteConfig.ts for "Get In Touch" (Req 3 AC 4).
+             */
+            const linkClassName = link.isCta
+              ? `${styles.navLink} ${styles.navCta} ${styles.navCtaBlue}`
+              : styles.navLink;
+
+            return (
+              <li key={link.href}>
+                {alwaysScrolled ? (
+                  <Link
+                    href={resolveHref(link.href)}
+                    className={linkClassName}
+                    onClick={handleLinkClick}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={resolveHref(link.href)}
+                    className={linkClassName}
+                    onClick={handleLinkClick}
+                  >
+                    {link.label}
+                  </a>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </nav>

@@ -75,6 +75,7 @@ img { max-width: 100%; display: block; }
 .navbar.scrolled .nav-links a { color: var(--navy); }
 .navbar.scrolled .nav-toggle span { background: var(--navy); }
 
+/* Nav container — flex row with logo left, nav-links right */
 .nav-container {
   max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
   display: flex; align-items: center; justify-content: space-between; height: 72px;
@@ -85,6 +86,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.18em; color: var(--white); text-transform: uppercase;
 }
 
+/* Nav links row — horizontal list of navigation items */
 .nav-links { display: flex; gap: 36px; }
 .nav-links a {
   font-size: 0.82rem; font-weight: 400; letter-spacing: 0.04em;
@@ -92,6 +94,63 @@ img { max-width: 100%; display: block; }
 }
 .nav-links a:hover { color: var(--white); }
 .navbar.scrolled .nav-links a:hover { color: var(--accent); }
+
+/* Nav CTA — pill-shaped button treatment for the Contact link,
+   making it visually distinct from regular nav links as the
+   primary call-to-action. Uses the same 40px border-radius
+   pill shape from the site's button convention. */
+.nav-cta {
+  padding: 8px 24px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 40px;
+  color: var(--white) !important;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+/* Hover — fills white to invert against the transparent/dark hero */
+.nav-cta:hover {
+  background: var(--white);
+  color: var(--navy) !important;
+  border-color: var(--white);
+}
+/* Scrolled navbar state — switch to navy border on white background */
+.navbar.scrolled .nav-cta {
+  border-color: var(--navy);
+  color: var(--navy) !important;
+}
+/* Scrolled hover — fills navy to invert against the white navbar */
+.navbar.scrolled .nav-cta:hover {
+  background: var(--navy);
+  color: var(--white) !important;
+  border-color: var(--navy);
+}
+
+/* Blue variant of the nav CTA — solid steel-blue fill (#7a9bb5) matching
+   the hero primary CTA colour for visual consistency across the site */
+.nav-cta.nav-cta-blue {
+  border-color: #7a9bb5;
+  background: #7a9bb5;
+  color: var(--white) !important;
+}
+/* Darker steel-blue on hover for interactive feedback */
+.nav-cta.nav-cta-blue:hover {
+  background: #6889a3;
+  border-color: #6889a3;
+  color: var(--white) !important;
+}
+/* Scrolled state — retain steel-blue fill even on the white navbar */
+.navbar.scrolled .nav-cta.nav-cta-blue {
+  border-color: #7a9bb5;
+  background: #7a9bb5;
+  color: var(--white) !important;
+}
+/* Scrolled hover — slightly darker steel-blue */
+.navbar.scrolled .nav-cta.nav-cta-blue:hover {
+  background: #6889a3;
+  border-color: #6889a3;
+  color: var(--white) !important;
+}
 
 .nav-toggle {
   display: none; flex-direction: column; gap: 5px;
@@ -352,6 +411,13 @@ img { max-width: 100%; display: block; }
 }
 .feed-card:hover .feed-cta { color: var(--accent); }
 
+/* Download link wrapper — centred below the social feed cards,
+   used for free resource downloads like the budget tracker */
+.feed-download {
+  text-align: center;
+  margin-top: 48px;
+}
+
 /* ===== Newsletter ===== */
 .newsletter { padding: 80px 0; background: var(--navy); text-align: center; }
 
@@ -414,6 +480,73 @@ img { max-width: 100%; display: block; }
 
 .newsletter-success svg { color: #4ade80; }
 .newsletter-success p { font-size: 0.9rem; }
+
+/* ===== Testimonials — client social proof cards ===== */
+
+/* Section wrapper — off-white background to alternate with the white
+   newsletter section above and white partners section below */
+.testimonials { padding: 80px 0; background: var(--off-white); }
+
+/* 3-column card grid — responsive breakpoints collapse to 2 then 1 column */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* Individual card — white with subtle shadow for depth against off-white bg.
+   Flex column ensures quote text fills space and pushes client info to bottom */
+.testimonial-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 36px 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Decorative open-quote mark — uses steel-blue accent colour (#7a9bb5)
+   to tie into the site's CTA colour palette */
+.testimonial-quote-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  color: #7a9bb5;
+  font-family: Georgia, serif;
+}
+
+/* Quote body — italic for visual distinction from regular body copy.
+   flex: 1 aligns client info rows at the same height across cards */
+.testimonial-quote {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-body);
+  font-style: italic;
+  flex: 1;
+  /* Reset default blockquote margin */
+  margin: 0;
+}
+
+/* Client attribution — name and role stacked below the quote */
+.testimonial-client {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Client name — semi-bold navy for emphasis */
+.testimonial-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--navy);
+}
+
+/* Client role — muted grey for visual hierarchy */
+.testimonial-role {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+}
 
 /* ===== Partners — infinite scrolling carousel ===== */
 .partners { padding: 60px 0; background: var(--white); border-top: 1px solid var(--gray-200); }
@@ -652,9 +785,12 @@ img { max-width: 100%; display: block; }
   .blog-grid { grid-template-columns: 1fr; }
   .feed-grid { grid-template-columns: 1fr; }
   .partners-grid { gap: 24px; }
+  /* Testimonials — collapse from 3 to 2 columns on medium screens */
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
+  /* Hide desktop nav links on mobile, show hamburger toggle */
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
 
@@ -665,6 +801,19 @@ img { max-width: 100%; display: block; }
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   }
   .nav-links.active a { color: var(--navy); }
+  /* Reset pill and blue styling from CTA in mobile dropdown menu
+     so it matches the other nav links — plain text, navy colour, no border.
+     Both .nav-cta and .nav-cta-blue need to be overridden here. */
+  .nav-links.active .nav-cta,
+  .nav-links.active .nav-cta.nav-cta-blue {
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--navy) !important;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
 
   .hero h1 { font-size: 2rem; }
   .hero-subtitle { font-size: 0.9rem; }
@@ -677,4 +826,6 @@ img { max-width: 100%; display: block; }
   .newsletter-form { flex-direction: column; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
   .form-row .form-group { margin-bottom: 36px; }
+  /* Testimonials — single column stack on mobile screens */
+  .testimonials-grid { grid-template-columns: 1fr; }
 }

@@ -25,14 +25,19 @@ import type { NavLink, PartnerLogo } from '@/lib/types';
  * On the blog detail page, the Navbar component prefixes them
  * with "/" (e.g. /#about) so they navigate back to the landing page.
  *
- * Order matches the prototype: Home, About, Services, Insights, Contact.
+ * Order matches the prototype: Home, About, Services, Insights,
+ * Testimonials, Get In Touch. The last item uses `isCta: true` to
+ * render as a steel-blue pill button in the navbar (Req 3 AC 1–6).
  */
 export const navLinks: NavLink[] = [
   { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Insights', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
+  /* Testimonials link added for the new social proof section (ENH-1, Req 3 AC 3) */
+  { label: 'Testimonials', href: '#testimonials' },
+  /* CTA pill button — isCta triggers .navCta.navCtaBlue styling in Navbar (ENH-2, Req 3 AC 1) */
+  { label: 'Get In Touch', href: '#contact', isCta: true },
 ];
 
 /**
@@ -46,8 +51,8 @@ export const navLinks: NavLink[] = [
 export const contactInfo = {
   /** Keanu's professional email — used for the mailto: link in the footer */
   email: 'keanu@thewealthroom.com',
-  /** South African mobile number with international dialling code */
-  phone: '+27 83 789 8227',
+  /** South African mobile number — updated per client request (ENH-11, Req 1 AC 1) */
+  phone: '+27 65 572 3909',
 } as const;
 
 /**

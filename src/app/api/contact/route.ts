@@ -170,7 +170,7 @@ function validateFormData(data: ContactFormData): string | null {
 
 /**
  * The email address that receives contact form submissions.
- * Hardcoded per the task spec — could be moved to an env var if needed.
+ * Updated to the project owner's preferred inbox for lead notifications.
  */
 const RECIPIENT_EMAIL = 'keanu@thewealthroom.com';
 
@@ -258,9 +258,8 @@ export async function POST(req: NextRequest) {
 
   try {
     await resend.emails.send({
-      /* 'onboarding@resend.dev' is Resend's default verified sender for
-       * new accounts. Replace with a custom domain sender once verified. */
-      from: 'Keanu Le Roux Website <onboarding@resend.dev>',
+      /* Custom domain sender — requires DNS verification in Resend dashboard */
+      from: 'Keanu Le Roux Website <noreply@keanuleroux.com>',
       to: RECIPIENT_EMAIL,
       /* BUG-091 fix: HTML-escape all user-supplied values before interpolating
        * into the HTML email template. This prevents stored XSS attacks if the

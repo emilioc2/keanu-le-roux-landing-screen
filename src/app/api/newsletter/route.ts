@@ -133,7 +133,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
  * The email address that receives newsletter subscription notifications.
- * Hardcoded per the task spec — matches the contact form recipient.
+ * Updated to the project owner's preferred inbox — matches the contact form recipient.
  */
 const RECIPIENT_EMAIL = 'keanu@thewealthroom.com';
 
@@ -233,9 +233,8 @@ export async function POST(req: NextRequest) {
 
   try {
     await resend.emails.send({
-      /* 'onboarding@resend.dev' is Resend's default verified sender for
-       * new accounts. Replace with a custom domain sender once verified. */
-      from: 'Keanu Le Roux Website <onboarding@resend.dev>',
+      /* Custom domain sender — requires DNS verification in Resend dashboard */
+      from: 'Keanu Le Roux Website <noreply@keanuleroux.com>',
       to: RECIPIENT_EMAIL,
       /* Subject clearly identifies this as a newsletter subscription,
        * distinct from contact form submissions (Req 4 AC 8). */

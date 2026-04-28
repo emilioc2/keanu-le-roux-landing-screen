@@ -8,8 +8,8 @@
  * This is a Server Component — all data is static (imported from
  * `src/data/socialLinks.ts`) and no client-side state is needed.
  *
- * Platform-specific preview areas:
- *   - YouTube: grey background with centred play button overlay
+ * Platform-specific preview areas (each with distinct visual treatment):
+ *   - YouTube: thumbnail image (/images/youtube-thumbnail.jpg) with centred play button overlay
  *   - LinkedIn: italic serif quote on grey background (hardcoded — BUG-047)
  *   - Instagram: gradient using rgba() values (BUG-010 fix — no element opacity)
  *
@@ -96,11 +96,17 @@ function ExternalLinkIcon() {
  */
 function FeedPreview({ platform }: { platform: SocialLink['platform'] }) {
   switch (platform) {
-    /* YouTube preview: grey background with centred play button overlay */
+    /* YouTube preview: thumbnail image with centred play button overlay */
     case 'youtube':
       return (
         <div className={styles.youtubePreview} data-testid="youtube-preview">
-          {/* Dark semi-transparent circle containing a white play triangle */}
+          {/* Thumbnail image — fills the preview area via object-fit: cover (absolutely positioned behind the play button) */}
+          <img
+            src="/images/youtube-thumbnail.jpg"
+            alt="R50K Post Retirement Income Strategy For a 25 Year Old South African"
+            className={styles.youtubeThumbnail}
+          />
+          {/* Play button overlay — dark semi-transparent circle with white play triangle, z-indexed above the thumbnail */}
           <div className={styles.playButton}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true">
               <polygon points="5 3 19 12 5 21 5 3" />

@@ -22,12 +22,12 @@ import type { SocialLink } from '@/lib/types';
  */
 export const socialLinks: SocialLink[] = [
   {
-    // YouTube card — red (#ff0000) badge, grey preview with centred play button overlay (Req 6.4)
+    // YouTube card — red (#ff0000) badge, thumbnail preview with centred play button overlay (Req 6.4)
     platform: 'youtube',
-    url: 'https://www.youtube.com/channel/UCx1K9NdhRghMU_TWBDNCC6g',
-    title: 'How to Build Wealth in Your 20s',
+    url: 'https://www.youtube.com/watch?v=yQ_eeDbcUIo&t=2s',
+    title: 'R50K Post Retirement Income Strategy For a 25 Year Old South African',
     description:
-      'My latest breakdown on the habits and strategies that set you up for long-term financial success.',
+      'Want to retire with R50,000 net monthly income from age 65 to 100? In this video, I break down a powerful long-term wealth strategy for a 25-year-old South African tax resident earning under R32,000 per month (26% tax bracket).',
     ctaText: 'Watch on YouTube \u2192',
   },
   {

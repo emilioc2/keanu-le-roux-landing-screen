@@ -27,16 +27,16 @@ export const socialLinks: SocialLink[] = [
     url: 'https://www.youtube.com/watch?v=yQ_eeDbcUIo&t=2s',
     title: 'R50K Post Retirement Income Strategy For a 25 Year Old South African',
     description:
-      'Want to retire with R50,000 net monthly income from age 65 to 100? In this video, I break down a powerful long-term wealth strategy for a 25-year-old South African tax resident earning under R32,000 per month (26% tax bracket).',
+      'Want to retire with R50,000 net monthly income from age 65 to 100?',
     ctaText: 'Watch on YouTube \u2192',
   },
   {
-    // LinkedIn card — blue (#0077b5) badge, italic serif quote on grey background (Req 6.5)
+    // LinkedIn card — blue (#0077b5) badge, thumbnail image preview (Req 6.5)
+    // Updated with real post URL, title, and description
     platform: 'linkedin',
-    url: 'https://www.linkedin.com/in/keanu-le-roux-5a4b7a282/',
-    title: 'Thought Leadership Post',
-    description:
-      'Sharing insights on why goal-based planning outperforms reactive decision-making.',
+    url: 'https://www.linkedin.com/posts/keanu-le-roux-5a4b7a282_start-small-start-now-activity-7435234735863427072-g6GK?utm_source=share&utm_medium=member_desktop&rcm=ACoAACMrg7sBphmwuyQ8wVTGG187c1-dWfOZDtE',
+    title: 'Keanu Le Roux - Independent Wealth Manager',
+    description: 'Start small, start now.', // Tagline displayed as card subtext
     ctaText: 'Read on LinkedIn \u2192',
   },
   {

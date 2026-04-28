@@ -25,14 +25,6 @@ import styles from './SocialFeed.module.css';
 import type { SocialLink } from '@/lib/types';
 
 /**
- * LinkedIn quote text — hardcoded in the component because the SocialLink
- * type doesn't include a quote field. Matches the prototype text exactly.
- * Uses Unicode characters for typographic quotes and em dash.
- */
-const LINKEDIN_QUOTE =
-  '\u201CThe biggest risk in financial planning isn\u2019t market volatility \u2014 it\u2019s not having a plan at all. Start with your goals, not your fears.\u201D';
-
-/**
  * Renders the platform-specific brand SVG icon for the badge row.
  * Icons are inline SVGs matching the prototype's visual dimensions.
  * All icons use `aria-hidden="true"` since the platform name text
@@ -115,12 +107,19 @@ function FeedPreview({ platform }: { platform: SocialLink['platform'] }) {
         </div>
       );
 
-    /* LinkedIn preview: italic serif quote on grey background (min-height 200px) */
+    /* LinkedIn preview: thumbnail image filling the preview area edge-to-edge.
+     * Uses /images/linkedin.jpg as the post preview image, consistent with
+     * the YouTube card's image+overlay pattern. The .linkedinPreview container
+     * has overflow: hidden so the image respects any border-radius on the card. */
     case 'linkedin':
       return (
         <div className={styles.linkedinPreview} data-testid="linkedin-preview">
-          {/* Blockquote uses Playfair Display italic via CSS — text is hardcoded (BUG-047) */}
-          <blockquote>{LINKEDIN_QUOTE}</blockquote>
+          {/* Thumbnail fills the full preview area via object-fit: cover */}
+          <img
+            src="/images/linkedin.jpg"
+            alt="Start small, start now."
+            className={styles.linkedinThumbnail}
+          />
         </div>
       );
 

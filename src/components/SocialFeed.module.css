@@ -149,27 +149,35 @@
 }
 
 /**
- * LinkedIn preview — italic serif quote on grey background.
- * min-height 200px ensures visual consistency with other cards (Req 6.5).
+ * LinkedIn preview — mirrors the YouTube preview container exactly.
+ * position: relative establishes the stacking context for the absolutely-
+ * positioned thumbnail. height: 200px + min-height: 200px gives the same
+ * fixed 200px height as .youtubePreview. overflow: hidden clips the image
+ * to the container bounds (Req 6.5).
  */
 .linkedinPreview {
-  padding: 24px 20px;
+  padding: 0;
   background: var(--gray-100);
   min-height: 200px;
-  display: flex;
-  align-items: center;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Blockquote styling — Playfair Display italic, navy text, no default borders */
-.linkedinPreview blockquote {
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-style: italic;
-  color: var(--navy);
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  border: none;
+/**
+ * LinkedIn thumbnail — absolutely positioned to fill the entire
+ * .linkedinPreview container, identical to .youtubeThumbnail.
+ * object-fit: cover ensures the image fills edge-to-edge without distortion.
+ * display: block removes the default inline gap below the image element.
+ */
+.linkedinThumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /**

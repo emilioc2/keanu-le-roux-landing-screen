@@ -47,27 +47,21 @@ interface Testimonial {
  * Content matches Req 5 AC 6 exactly — 3 testimonials with specific
  * names, roles, and quote text from the requirements.
  */
+/**
+ * Single real testimonial replacing the 3 placeholder entries (UCU-REQ-2).
+ * Quote text matches the requirement verbatim (AC 2.2).
+ * Role is empty — the `.clientRole` span is conditionally hidden (design §2.2).
+ */
 const testimonials: Testimonial[] = [
   {
-    /* Card 1: Family/individual client — emphasises understanding and clarity */
     quote:
-      'Keanu took the time to truly understand our family\u2019s goals. His advice gave us clarity and confidence in our financial future.',
-    name: 'Sarah M.',
-    role: 'Client since 2023',
-  },
-  {
-    /* Card 2: Business owner client — emphasises simplification and results */
-    quote:
-      'Working with Keanu has been a game-changer for my business finances. He simplified what felt overwhelming and built a plan that actually works.',
-    name: 'James T.',
-    role: 'Business Owner',
-  },
-  {
-    /* Card 3: Retirement planning client — emphasises transparency and control */
-    quote:
-      'I finally feel in control of my retirement planning. Keanu\u2019s transparent, no-pressure approach is exactly what I was looking for.',
-    name: 'Priya N.',
-    role: 'Client since 2024',
+      'If you want a financial advisor who operates with absolute integrity and speed, ' +
+      'Keanu is 100% your person. The advice I\u2019ve received has been invaluable and ' +
+      'custom fit to my goals. He is patient in answering the plethora of questions I ' +
+      'always have, deeply knowledgeable, and remarkably quick with getting things done. ' +
+      'I trust his judgment implicitly.',
+    name: 'Wikus Venter',
+    role: '',
   },
 ];
 
@@ -123,9 +117,12 @@ export default function Testimonials() {
 
                 {/* Client attribution — name in semi-bold navy for emphasis,
                  * role in muted grey (--gray-600) for visual hierarchy */}
+                {/* Client attribution — conditionally hide role when empty (design §2.2) */}
                 <div className={styles.client}>
                   <span className={styles.clientName}>{testimonial.name}</span>
-                  <span className={styles.clientRole}>{testimonial.role}</span>
+                  {testimonial.role && (
+                    <span className={styles.clientRole}>{testimonial.role}</span>
+                  )}
                 </div>
               </article>
             </ScrollReveal>

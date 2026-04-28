@@ -56,46 +56,35 @@ export const contactInfo = {
 } as const;
 
 /**
- * 5 trusted partner brand logos for the Partners section (Req 8.3).
+ * 17 trusted partner brand logos for the Partners section (UCU-REQ-1).
  *
  * Each entry maps to a real logo image in public/images/partners/.
  * These are static assets, not CMS-managed — updated via code deploy.
+ * Entries are sorted alphabetically by partner name.
  *
  * Display: 160×70px per logo, flex layout with 48px gap (24px on mobile).
  *
- * Ashburton and Sygnia were removed — only 5 active partners remain.
+ * "Allan Grey" corrected to "Allan Gray" per AC 1.7.
+ * Ninety One removed per AC 1.8.
  */
 export const partnerLogos: PartnerLogo[] = [
-  /** Allan Grey — South African asset management firm */
-  {
-    name: 'Allan Grey',
-    src: '/images/partners/Allangrey-300x167.png',
-    alt: 'Allan Grey logo',
-  },
-  /** BrightRock — needs-matched life insurance provider */
-  {
-    name: 'BrightRock',
-    src: '/images/partners/Brightrock-300x167.png',
-    alt: 'BrightRock logo',
-  },
-  /** Discovery — financial services and health group */
-  {
-    name: 'Discovery',
-    src: '/images/partners/Discovery-300x167.png',
-    alt: 'Discovery logo',
-  },
-  /** Momentum — insurance and investment provider */
-  {
-    name: 'Momentum',
-    src: '/images/partners/momentum-300x167.png',
-    alt: 'Momentum logo',
-  },
-  /** Ninety One — global investment manager */
-  {
-    name: 'Ninety One',
-    src: '/images/partners/ninetyone-300x167.png',
-    alt: 'Ninety One logo',
-  },
+  { name: 'Allan Gray', src: '/images/partners/Allangrey-300x167.png', alt: 'Allan Gray' },
+  { name: 'Auto & General', src: '/images/partners/Auto_and_general.png', alt: 'Auto & General' },
+  { name: 'Bidvest Life', src: '/images/partners/Bidvest_life.png', alt: 'Bidvest Life' },
+  { name: 'BrightRock', src: '/images/partners/Brightrock-300x167.png', alt: 'BrightRock' },
+  { name: 'Capital Legacy', src: '/images/partners/Capital Legacy.png', alt: 'Capital Legacy' },
+  { name: 'Discovery', src: '/images/partners/Discovery-300x167.png', alt: 'Discovery' },
+  { name: 'King Price', src: '/images/partners/King_Price.png', alt: 'King Price' },
+  { name: 'Liberty', src: '/images/partners/Liberty.png', alt: 'Liberty' },
+  { name: 'Marriott', src: '/images/partners/Marriot.png', alt: 'Marriott' },
+  { name: 'Momentum', src: '/images/partners/momentum-300x167.png', alt: 'Momentum' },
+  { name: 'Old Mutual', src: '/images/partners/Old_mutual.png', alt: 'Old Mutual' },
+  { name: 'PPS', src: '/images/partners/PPS.png', alt: 'PPS' },
+  { name: 'Sanlam', src: '/images/partners/Sanlam.png', alt: 'Sanlam' },
+  { name: 'Santam', src: '/images/partners/Santam.png', alt: 'Santam' },
+  { name: 'Sasfin', src: '/images/partners/Sasfin.png', alt: 'Sasfin' },
+  { name: 'Sirago', src: '/images/partners/Sirago.png', alt: 'Sirago' },
+  { name: 'Stratum', src: '/images/partners/Stratum.png', alt: 'Stratum' },
 ];
 
 /**

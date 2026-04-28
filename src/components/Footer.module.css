@@ -98,3 +98,14 @@
 .footerDetails p {
   margin-bottom: 4px;
 }
+
+/* Developer credit link — inherits footer details grey, transitions to accent on hover (UCU-REQ-3 AC 3.6, 3.7) */
+.creditLink {
+  color: var(--gray-400);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.creditLink:hover {
+  color: var(--accent);
+}

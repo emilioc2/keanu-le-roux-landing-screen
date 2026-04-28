@@ -19,7 +19,7 @@
  *
  * Test index:
  *   1. Renders heading and subtitle (Req 4.2)
- *   2. Renders all 7 logos in static mode — centred, no duplication (Req 8.2, 8.4)
+ *   2. Renders all 17 logos in static mode — centred, no duplication (Req 8.2, 8.4)
  *   3. Applies ARIA attributes in scrolling mode (Req 6.1)
  *   4. No ARIA carousel attributes in static mode (Req 8.3)
  *   5. Cursor classes toggle on drag (Req 1.5, 1.6)
@@ -46,17 +46,30 @@ import PartnersCarousel from '../PartnersCarousel';
 /* ------------------------------------------------------------------ */
 
 /**
- * 5 partner logos matching the production siteConfig data.
+ * 17 partner logos matching the production siteConfig data (UCU-REQ-1).
  * Used by most tests to simulate the real-world logo set.
- * Ashburton and Sygnia removed — only 5 active partners remain.
- * Total width at 48px gap: 5 * 160 + 4 * 48 = 992px.
+ * "Allan Grey" corrected to "Allan Gray" per AC 1.7.
+ * Ninety One removed per AC 1.8.
+ * Total width at 48px gap: 17 * 160 + 16 * 48 = 3488px.
  */
-const fiveLogos: PartnerLogo[] = [
-  { name: 'Allan Grey', src: '/images/partners/Allangrey-300x167.png', alt: 'Allan Grey logo' },
-  { name: 'BrightRock', src: '/images/partners/Brightrock-300x167.png', alt: 'BrightRock logo' },
-  { name: 'Discovery', src: '/images/partners/Discovery-300x167.png', alt: 'Discovery logo' },
-  { name: 'Momentum', src: '/images/partners/momentum-300x167.png', alt: 'Momentum logo' },
-  { name: 'Ninety One', src: '/images/partners/ninetyone-300x167.png', alt: 'Ninety One logo' },
+const allLogos: PartnerLogo[] = [
+  { name: 'Allan Gray', src: '/images/partners/Allangrey-300x167.png', alt: 'Allan Gray' },
+  { name: 'Auto & General', src: '/images/partners/Auto_and_general.png', alt: 'Auto & General' },
+  { name: 'Bidvest Life', src: '/images/partners/Bidvest_life.png', alt: 'Bidvest Life' },
+  { name: 'BrightRock', src: '/images/partners/Brightrock-300x167.png', alt: 'BrightRock' },
+  { name: 'Capital Legacy', src: '/images/partners/Capital Legacy.png', alt: 'Capital Legacy' },
+  { name: 'Discovery', src: '/images/partners/Discovery-300x167.png', alt: 'Discovery' },
+  { name: 'King Price', src: '/images/partners/King_Price.png', alt: 'King Price' },
+  { name: 'Liberty', src: '/images/partners/Liberty.png', alt: 'Liberty' },
+  { name: 'Marriott', src: '/images/partners/Marriot.png', alt: 'Marriott' },
+  { name: 'Momentum', src: '/images/partners/momentum-300x167.png', alt: 'Momentum' },
+  { name: 'Old Mutual', src: '/images/partners/Old_mutual.png', alt: 'Old Mutual' },
+  { name: 'PPS', src: '/images/partners/PPS.png', alt: 'PPS' },
+  { name: 'Sanlam', src: '/images/partners/Sanlam.png', alt: 'Sanlam' },
+  { name: 'Santam', src: '/images/partners/Santam.png', alt: 'Santam' },
+  { name: 'Sasfin', src: '/images/partners/Sasfin.png', alt: 'Sasfin' },
+  { name: 'Sirago', src: '/images/partners/Sirago.png', alt: 'Sirago' },
+  { name: 'Stratum', src: '/images/partners/Stratum.png', alt: 'Stratum' },
 ];
 
 /**
@@ -64,7 +77,7 @@ const fiveLogos: PartnerLogo[] = [
  * At 160px wide, this always fits in any reasonable container → static mode.
  */
 const singleLogo: PartnerLogo[] = [
-  { name: 'Allan Grey', src: '/images/partners/Allangrey-300x167.png', alt: 'Allan Grey logo' },
+  { name: 'Allan Gray', src: '/images/partners/Allangrey-300x167.png', alt: 'Allan Gray' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -80,7 +93,7 @@ const singleLogo: PartnerLogo[] = [
  * jsdom doesn't provide ResizeObserver, so we mock it to control the
  * container width seen by the hook.
  *
- * - Wide width (e.g. 2000px): logos fit → static mode (no carousel)
+ * - Wide width (e.g. 4000px): logos fit → static mode (no carousel)
  * - Narrow width (e.g. 500px): logos overflow → scrolling mode (carousel active)
  *
  * @param width - Simulated container width in pixels
@@ -178,6 +191,7 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
+
 /* ================================================================== */
 /*  Test 1: Renders heading and subtitle                              */
 /*  Verifies the Partners section displays the correct heading and    */
@@ -187,7 +201,7 @@ afterEach(() => {
 describe('Partners — Renders heading and subtitle', () => {
   it('renders "Trusted Partners" heading and subtitle text', async () => {
     // Use wide container so the carousel stays in static mode (simpler render)
-    window.ResizeObserver = createMockResizeObserver(2000) as unknown as typeof ResizeObserver;
+    window.ResizeObserver = createMockResizeObserver(4000) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
     render(<Partners />);
@@ -210,31 +224,31 @@ describe('Partners — Renders heading and subtitle', () => {
 });
 
 /* ================================================================== */
-/*  Test 2: Renders all 7 logos in static mode (wide container)       */
-/*  With a 2000px container, 7 logos at 1408px total fit → static.    */
+/*  Test 2: Renders all 17 logos in static mode (wide container)      */
+/*  With a 4000px container, 17 logos at 3488px total fit → static.   */
 /*  Verifies no duplication occurs and all logos are rendered.         */
 /*  Req 8.2, 8.4                                                      */
 /* ================================================================== */
 
-describe('Partners — Static mode with 7 logos', () => {
-  it('renders exactly 7 img elements with no duplication in a wide container', async () => {
-    // 2000px container > 1408px total logo width → logos fit → static mode
-    window.ResizeObserver = createMockResizeObserver(2000) as unknown as typeof ResizeObserver;
+describe('Partners — Static mode with 17 logos', () => {
+  it('renders exactly 17 img elements with no duplication in a wide container', async () => {
+    // 4000px container > 3488px total logo width → logos fit → static mode
+    window.ResizeObserver = createMockResizeObserver(4000) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
-    render(<PartnersCarousel logos={sevenLogos} />);
+    render(<PartnersCarousel logos={allLogos} />);
 
     // Flush debounce so fit detection runs
     await act(async () => {
       vi.advanceTimersByTime(200);
     });
 
-    /** Exactly 7 images — no duplication in static mode */
+    /** Exactly 17 images — no duplication in static mode */
     const images = screen.getAllByRole('img');
-    expect(images).toHaveLength(7);
+    expect(images).toHaveLength(17);
 
     /** Each logo's alt text should be present in the DOM */
-    sevenLogos.forEach((logo) => {
+    allLogos.forEach((logo) => {
       expect(screen.getByAltText(logo.alt)).toBeInTheDocument();
     });
   });
@@ -242,18 +256,18 @@ describe('Partners — Static mode with 7 logos', () => {
 
 /* ================================================================== */
 /*  Test 3: Applies ARIA attributes in scrolling mode                 */
-/*  With a 500px container, 7 logos at 1408px overflow → scrolling.   */
+/*  With a 500px container, 17 logos at 3488px overflow → scrolling.  */
 /*  The carousel container should have ARIA landmark attributes.      */
 /*  Req 6.1                                                            */
 /* ================================================================== */
 
 describe('Partners — ARIA attributes in scrolling mode', () => {
   it('has role="region", aria-roledescription="carousel", and aria-label', async () => {
-    // 500px container < 1408px total → logos overflow → scrolling mode
+    // 500px container < 3488px total → logos overflow → scrolling mode
     window.ResizeObserver = createMockResizeObserver(500) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
-    render(<PartnersCarousel logos={sevenLogos} />);
+    render(<PartnersCarousel logos={allLogos} />);
 
     await act(async () => {
       vi.advanceTimersByTime(200);
@@ -276,10 +290,10 @@ describe('Partners — ARIA attributes in scrolling mode', () => {
 describe('Partners — No ARIA carousel attributes in static mode', () => {
   it('does not have role="region" or aria-roledescription when logos fit', async () => {
     // Wide container → static mode
-    window.ResizeObserver = createMockResizeObserver(2000) as unknown as typeof ResizeObserver;
+    window.ResizeObserver = createMockResizeObserver(4000) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
-    const { container } = render(<PartnersCarousel logos={sevenLogos} />);
+    const { container } = render(<PartnersCarousel logos={allLogos} />);
 
     await act(async () => {
       vi.advanceTimersByTime(200);
@@ -294,6 +308,7 @@ describe('Partners — No ARIA carousel attributes in static mode', () => {
   });
 });
 
+
 /* ================================================================== */
 /*  Test 5: Cursor classes toggle on drag                             */
 /*  In scrolling mode, the container should show grab cursor when     */
@@ -307,7 +322,7 @@ describe('Partners — Cursor classes toggle on drag', () => {
     window.ResizeObserver = createMockResizeObserver(500) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
-    const { container } = render(<PartnersCarousel logos={sevenLogos} />);
+    const { container } = render(<PartnersCarousel logos={allLogos} />);
 
     await act(async () => {
       vi.advanceTimersByTime(200);
@@ -349,7 +364,7 @@ describe('Partners — Tab does not trap focus', () => {
     window.ResizeObserver = createMockResizeObserver(500) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
-    const { container } = render(<PartnersCarousel logos={sevenLogos} />);
+    const { container } = render(<PartnersCarousel logos={allLogos} />);
 
     await act(async () => {
       vi.advanceTimersByTime(200);
@@ -390,10 +405,10 @@ describe('Partners — Tab does not trap focus', () => {
 
 describe('Partners — No-JS fallback has overflow-x: auto', () => {
   it('applies the carouselContainer class which provides overflow-x: auto in CSS', async () => {
-    window.ResizeObserver = createMockResizeObserver(2000) as unknown as typeof ResizeObserver;
+    window.ResizeObserver = createMockResizeObserver(4000) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
-    const { container } = render(<PartnersCarousel logos={sevenLogos} />);
+    const { container } = render(<PartnersCarousel logos={allLogos} />);
 
     await act(async () => {
       vi.advanceTimersByTime(200);
@@ -424,7 +439,7 @@ describe('Partners — jsEnhanced class in scrolling mode', () => {
     window.ResizeObserver = createMockResizeObserver(500) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
-    const { container } = render(<PartnersCarousel logos={sevenLogos} />);
+    const { container } = render(<PartnersCarousel logos={allLogos} />);
 
     await act(async () => {
       vi.advanceTimersByTime(200);
@@ -437,6 +452,7 @@ describe('Partners — jsEnhanced class in scrolling mode', () => {
   });
 });
 
+
 /* ================================================================== */
 /*  Test 9: Section retains visual identity                           */
 /*  The Partners section wrapper should have the .partners class,     */
@@ -446,7 +462,7 @@ describe('Partners — jsEnhanced class in scrolling mode', () => {
 
 describe('Partners — Section retains visual identity', () => {
   it('has .partners class on section, heading present, and full container width', async () => {
-    window.ResizeObserver = createMockResizeObserver(2000) as unknown as typeof ResizeObserver;
+    window.ResizeObserver = createMockResizeObserver(4000) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
     render(<Partners />);
@@ -480,10 +496,10 @@ describe('Partners — Section retains visual identity', () => {
 
 describe('Partners — min-height on carousel container', () => {
   it('carousel container element exists with the carouselContainer class', async () => {
-    window.ResizeObserver = createMockResizeObserver(2000) as unknown as typeof ResizeObserver;
+    window.ResizeObserver = createMockResizeObserver(4000) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
-    const { container } = render(<PartnersCarousel logos={sevenLogos} />);
+    const { container } = render(<PartnersCarousel logos={allLogos} />);
 
     await act(async () => {
       vi.advanceTimersByTime(200);
@@ -511,7 +527,7 @@ describe('Partners — min-height on carousel container', () => {
 
 describe('Partners — Zero logos renders empty', () => {
   it('renders no errors and no img elements with an empty array', async () => {
-    window.ResizeObserver = createMockResizeObserver(2000) as unknown as typeof ResizeObserver;
+    window.ResizeObserver = createMockResizeObserver(4000) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
     const { container } = render(<PartnersCarousel logos={[]} />);
@@ -539,7 +555,7 @@ describe('Partners — Zero logos renders empty', () => {
 describe('Partners — Single logo renders static', () => {
   it('renders 1 img with no duplication and static mode classes', async () => {
     // Wide container → 1 logo at 160px → easily fits → static mode
-    window.ResizeObserver = createMockResizeObserver(2000) as unknown as typeof ResizeObserver;
+    window.ResizeObserver = createMockResizeObserver(4000) as unknown as typeof ResizeObserver;
     vi.useFakeTimers();
 
     const { container } = render(<PartnersCarousel logos={singleLogo} />);
@@ -551,7 +567,7 @@ describe('Partners — Single logo renders static', () => {
     /** Exactly 1 image — no duplication in static mode */
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(1);
-    expect(images[0]).toHaveAttribute('alt', 'Allan Grey logo');
+    expect(images[0]).toHaveAttribute('alt', 'Allan Gray');
 
     /** No ARIA carousel landmark — static mode doesn't need it */
     expect(screen.queryByRole('region')).toBeNull();

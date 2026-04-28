@@ -127,6 +127,18 @@ export default function Footer() {
           <p>An Authorised Financial Services Representative</p>
           {/* Copyright — "All Rights Reserved" capitalisation matches prototype */}
           <p>&copy; {currentYear} Keanu Le Roux. All Rights Reserved.</p>
+          {/* Developer credit line (UCU-REQ-3) — links to Eternity Software Solutions */}
+          <p>
+            Designed and developed by{' '}
+            <a
+              href="https://www.eternitysoftwaresolutions.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.creditLink}
+            >
+              Eternity Software Solutions
+            </a>
+          </p>
         </div>
       </div>
     </footer>

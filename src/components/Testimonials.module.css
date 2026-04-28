@@ -27,10 +27,11 @@
   background: var(--off-white);
 }
 
-/* 3-column responsive card grid — collapses at breakpoints below */
+/* Flex layout for single-card centering (UCU-REQ-2 AC 2.8).
+   Replaced grid with flex since there's now only one testimonial card. */
 .testimonialsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: center;
   gap: 32px;
 }
 
@@ -45,6 +46,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* Cap card width for single-card layout (design §2.3) */
+  max-width: 650px;
+  width: 100%;
 }
 
 /* Decorative open-quote mark — uses steel-blue (#7a9bb5) to tie into
@@ -89,16 +93,4 @@
   color: var(--gray-600);
 }
 
-/* Tablet breakpoint: collapse from 3 to 2 columns */
-@media (max-width: 900px) {
-  .testimonialsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Mobile breakpoint: single column stack */
-@media (max-width: 768px) {
-  .testimonialsGrid {
-    grid-template-columns: 1fr;
-  }
-}
+/* Grid breakpoints removed — flex handles single-card layout at all viewports */

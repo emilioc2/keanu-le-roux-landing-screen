@@ -558,12 +558,14 @@ img { max-width: 100%; display: block; }
   margin-top: 32px;
 }
 
-/* Flex row that slides left via CSS animation; width set to fit both logo sets */
+/* Flex row that slides left via CSS animation; width set to fit both logo sets.
+   Duration scaled to 120s (from 30s) to maintain a comfortable scroll speed
+   with 20 partner logos instead of the original 5. */
 .partners-track {
   display: flex;
   align-items: center;
   gap: 64px;
-  animation: scroll-partners 30s linear infinite; /* Slow continuous scroll */
+  animation: scroll-partners 120s linear infinite;
   width: max-content; /* Prevent logos from wrapping */
 }
 

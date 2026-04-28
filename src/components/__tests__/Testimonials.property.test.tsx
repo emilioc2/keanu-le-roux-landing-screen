@@ -9,7 +9,9 @@
  *   1. A decorative quote icon (aria-hidden="true")
  *   2. A <blockquote> element with non-empty text
  *   3. A client name element with non-empty text
- *   4. A client role element with non-empty text
+ *
+ * The single real testimonial (Wikus Venter) has an empty role, so .clientRole
+ * is conditionally hidden and not asserted (UCU-REQ-2 AC 2.4, design §2.2).
  *
  * Uses fast-check with a constant arbitrary since the component takes no props
  * — the property must hold on every render regardless of external conditions.
@@ -63,14 +65,16 @@ describe('Testimonials — Property 17: Card rendering completeness', () => {
    *   - A decorative quote icon (aria-hidden="true") with the open-quote character
    *   - A <blockquote> element with non-empty testimonial text
    *   - A client name span (.clientName) with non-empty text
-   *   - A client role span (.clientRole) with non-empty text
+   *
+   * The .clientRole span is conditionally hidden when the role is empty
+   * (UCU-REQ-2 AC 2.4), so it is not asserted here.
    *
    * Uses fc.constant(null) since the component is deterministic (no props).
    * The property must hold unconditionally on every render.
    *
-   * @validates Req 5 AC 7 — Each card shows quote icon, quote text, name, role
+   * @validates Req 5 AC 7 — Each card shows quote icon, quote text, name
    */
-  it('every testimonial card contains quote icon, blockquote, client name, and client role', () => {
+  it('every testimonial card contains quote icon, blockquote, and client name', () => {
     fc.assert(
       fc.property(
         /* Constant arbitrary — component takes no props, so no input variation needed */
@@ -85,10 +89,10 @@ describe('Testimonials — Property 17: Card rendering completeness', () => {
             (el) => el.className.includes('testimonialCard')
           );
 
-          /* There must be exactly 3 testimonial cards per Req 5 AC 6 */
-          expect(cards.length).toBe(3);
+          /* There must be exactly 1 testimonial card (UCU-REQ-2 AC 2.1) */
+          expect(cards.length).toBe(1);
 
-          /* Verify each card contains all four required structural elements */
+          /* Verify each card contains all three required structural elements */
           cards.forEach((card) => {
             /* 1. Decorative quote icon — aria-hidden="true" element with U+201C open-quote.
              *    This is purely visual and hidden from screen readers (Req 5 AC 7). */
@@ -110,13 +114,9 @@ describe('Testimonials — Property 17: Card rendering completeness', () => {
             expect(clientName).toBeDefined();
             expect(clientName!.textContent!.trim().length).toBeGreaterThan(0);
 
-            /* 4. Client role — span with .clientRole class containing the client's role/tenure.
-             *    Muted grey text providing context about the client relationship. */
-            const clientRole = Array.from(card.querySelectorAll('span')).find(
-              (el) => el.className.includes('clientRole')
-            );
-            expect(clientRole).toBeDefined();
-            expect(clientRole!.textContent!.trim().length).toBeGreaterThan(0);
+            /* Note: .clientRole is conditionally hidden when role is empty (UCU-REQ-2 AC 2.4).
+             * The single real testimonial (Wikus Venter) has an empty role, so .clientRole
+             * is not rendered and not asserted here. */
           });
 
           /* Clean up between fast-check iterations to prevent DOM leaks */
@@ -124,7 +124,7 @@ describe('Testimonials — Property 17: Card rendering completeness', () => {
         }
       ),
       /* 10 iterations — component is deterministic with no props, so fewer runs suffice.
-       * Each iteration verifies all 3 cards × 4 assertions = 12 checks per run. */
+       * Each iteration verifies 1 card × 3 assertions = 3 checks per run. */
       { numRuns: 10 }
     );
   });

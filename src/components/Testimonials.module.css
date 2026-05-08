@@ -27,17 +27,21 @@
   background: var(--off-white);
 }
 
-/* Flex layout for single-card centering (UCU-REQ-2 AC 2.8).
-   Replaced grid with flex since there's now only one testimonial card. */
+/* Grid layout — 2 equal columns on desktop so both cards share the same
+   height via CSS grid's row-stretching behaviour. Collapses to 1 column
+   on mobile. align-items: stretch (the default) ensures cards fill the
+   full row height regardless of quote length. */
 .testimonialsGrid {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 32px;
 }
 
 /* Individual testimonial card — white with subtle shadow for depth.
-   Flex column layout ensures consistent vertical alignment across cards:
-   the quote (flex:1) fills available space, pushing client info to the bottom */
+   Flex column layout ensures consistent vertical alignment within each card:
+   the quote (flex:1) fills available space, pushing client info to the bottom.
+   height: 100% ensures the card fills the full grid cell height so both
+   cards are the same size even when quote lengths differ. */
 .testimonialCard {
   background: var(--white);
   border-radius: 12px;
@@ -46,9 +50,14 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* Cap card width for single-card layout (design §2.3) */
-  max-width: 650px;
-  width: 100%;
+  height: 100%;
+}
+
+/* Collapse to single column on tablet and mobile */
+@media (max-width: 768px) {
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Decorative open-quote mark — uses steel-blue (#7a9bb5) to tie into
@@ -92,5 +101,3 @@
   font-size: 0.82rem;
   color: var(--gray-600);
 }
-
-/* Grid breakpoints removed — flex handles single-card layout at all viewports */

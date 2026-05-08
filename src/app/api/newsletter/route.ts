@@ -133,9 +133,10 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
  * The email address that receives newsletter subscription notifications.
- * Updated to the project owner's preferred inbox — matches the contact form recipient.
+ * Temporarily set to the test inbox for QA verification — swap back to
+ * the production address (keanu@thewealthroom.com) before going live.
  */
-const RECIPIENT_EMAIL = 'keanu@thewealthroom.com';
+const RECIPIENT_EMAIL = 'emiliochanderdutt9@gmail.com';
 
 /* ================================================================
  * POST Handler

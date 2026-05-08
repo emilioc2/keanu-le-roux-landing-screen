@@ -170,9 +170,10 @@ function validateFormData(data: ContactFormData): string | null {
 
 /**
  * The email address that receives contact form submissions.
- * Updated to the project owner's preferred inbox for lead notifications.
+ * Temporarily set to the test inbox for QA verification — swap back to
+ * the production address (keanu@thewealthroom.com) before going live.
  */
-const RECIPIENT_EMAIL = 'keanu@thewealthroom.com';
+const RECIPIENT_EMAIL = 'emiliochanderdutt9@gmail.com';
 
 /* ================================================================
  * POST Handler

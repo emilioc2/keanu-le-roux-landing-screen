@@ -63,6 +63,21 @@ const testimonials: Testimonial[] = [
     name: 'Wikus Venter',
     role: '',
   },
+  {
+    // Second testimonial — added to provide social proof from a second client.
+    // Role is intentionally empty; the clientRole span is conditionally hidden (design §2.2).
+    quote:
+      'I have had a really positive experience with the financial planning support I received ' +
+      'from Keanu. Everything was explained clearly and in a way that actually made sense, which ' +
+      'made it much easier to feel confident in my decisions. The level of care and attention to ' +
+      'detail really stood out. What impressed me most was the willingness to go the extra mile. ' +
+      'Every question was handled with patience, and nothing ever felt rushed or overlooked. Keanu ' +
+      'is always professional, reliable, and genuinely focused on finding the best solutions for my ' +
+      'needs. I would highly recommend his services to anyone looking for trustworthy guidance and ' +
+      'a personalised approach to financial planning.',
+    name: 'Dane',
+    role: '',
+  },
 ];
 
 /**

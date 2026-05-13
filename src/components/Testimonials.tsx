@@ -75,7 +75,7 @@ const testimonials: Testimonial[] = [
       'is always professional, reliable, and genuinely focused on finding the best solutions for my ' +
       'needs. I would highly recommend his services to anyone looking for trustworthy guidance and ' +
       'a personalised approach to financial planning.',
-    name: 'Dane',
+    name: 'Dané Coetzee',
     role: '',
   },
 ];
